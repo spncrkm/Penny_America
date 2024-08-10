@@ -1,25 +1,26 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
+import Login from "./Login";
+import RegisterUser from "./RegisterUser";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
-  useEffect(() => {
-    if (user) {
-      navigate("/dashboard");
-    }
-  }, [user]);
+  const handleRegister = () => {
+    navigate('/register')
+  }
   return (
-    <>
       <div className="homepage">
-        <div className="layover"></div>
         <Link to="/dashboard" className="btn btn-lg view-dashboard">
           View Dashboard
         </Link>
+        <Login />
+        <button onClick={handleRegister}>
+          Register
+        </button>
+        
       </div>
-    </>
+    
   );
 };
 

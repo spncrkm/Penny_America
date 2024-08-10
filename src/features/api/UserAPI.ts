@@ -3,25 +3,18 @@ import { User, ErrorResponse } from "../../interface/Users";
 
 export const UserApi = createApi({
     reducerPath: 'UserApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://fakestoreapi.com' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://127.0.0.1:8000' }),
 
     endpoints: (builder) => ({
-        getAllUsers: builder.query<User[], void>({
-            query: () => '/user'
-        }),
-
-        getOneUser: builder.query<User, number>({
-            query: (id) => `/user/${id}`
-        }),
 
         addUser: builder.mutation<User, Partial<User>>({
-            query: (newProduct) =>  {
-                console.log(newProduct)
+            query: (addUser) =>  {
+                console.log(addUser)
                 return {
-                    url: '/user',
+                    url: '/api/v0/accounts/register',
                     method: 'POST',
                     header: {'Content-Type': 'application/json'},
-                    body: newProduct
+                    body: addUser
                 }
             } 
         }), 
@@ -43,4 +36,4 @@ export const UserApi = createApi({
     })
 })
 
-export const { useGetAllUsersQuery, useGetOneUserQuery, useAddUserMutation, useUpdateUserMutation, useDeleteUserMutation } = UserApi
+export const { useAddUserMutation, useUpdateUserMutation, useDeleteUserMutation } = UserApi
