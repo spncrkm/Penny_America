@@ -1,25 +1,28 @@
 
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 import { UserState } from "../interface/Users";
-import { deleteUser } from "../features/userSlice";
 import { useState } from "react";
+import { clearTokens } from "../features/authSlice";
 
 const Logout = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const removeUser = useSelector((state: {user: UserState}) => state.user.user)
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
 
   const handleLogout = () => {
-    if (isLoggedIn){
-      sessionStorage.removeItem('token');
-      sessionStorage.removeItem('refresh')
-      localStorage.removeItem('user')
+    dispatch(clearTokens());
+    navigate('/')
+    // if (isLoggedIn){
+    //   sessionStorage.removeItem('token');
+    //   sessionStorage.removeItem('refresh')
+    //   localStorage.removeItem('user')
+    //   setIsLoggedIn(false)
       
-      navigate('/')
-    }
+    //   navigate('/')
+    
     }
   
 

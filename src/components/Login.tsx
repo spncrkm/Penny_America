@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../features/userSlice";
 import { User, UserState } from "../interface/Users";
+import { setTokens } from "../features/authSlice";
+import axiosInstance from "../features/api/axiosInstance";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -30,18 +32,21 @@ const Login = () => {
       e.preventDefault();
 
       try {
-        const response = await axios.post('http://127.0.0.1:8000/api/v0/accounts/login', {
+        const response = await axiosInstance.post('login', {
           username: userName,
           password: password,
         })
-        dispatch(addUser(newUser))
-        console.log(sessionStorage.setItem('token', response.data.access))
-        console.log(response.data)
-        sessionStorage.setItem('refresh', response.data.refresh)
+        dispatch(setTokens({ token: response.data.access, refreshToken: response.data.refresh}))
+        // dispatch(addUser(newUser))
+      
+        // console.log(sessionStorage.setItem('token', response.data.access))
+        // console.log(sessionStorage.setItem('refresh', response.data.refresh))
       } catch (error) {
-        console.error('Could not login', error)
+        console.error('Login failed', error);
+      } finally {
+        navigate('/dashboard')
+
       }
-      navigate('/dashboard')
       }
     
 
