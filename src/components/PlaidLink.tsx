@@ -1,13 +1,13 @@
 
 import React, { useEffect, useState } from 'react'
-import { PlaidLinkOnSuccess, PlaidLinkOptions, usePlaidLink } from 'react-plaid-link'
+import { usePlaidLink } from 'react-plaid-link'
 
 
 const PlaidLink = () => {
 
     const [linkToken, setLinkToken] = useState(null);
     const accessToken = sessionStorage.getItem('token') as string
-    console.log(accessToken)
+    console.log("accessToken:", accessToken)
     useEffect(() => {
         const getLinkToken = async () => {
             const response  = await fetch('http://127.0.0.1:8000/api/v0/plaid/create_link_token', {
@@ -18,12 +18,12 @@ const PlaidLink = () => {
             });
             const data = await response.json()
             setLinkToken(data?.link_token);
-            console.log(data)
+            // console.log(data)
         }
 
         getLinkToken();
     }, [])
-    console.log(linkToken)
+    console.log('linkToken:', linkToken)
 
   return (
     linkToken != null ? <Link linkToken={linkToken} /> : <></>
@@ -44,8 +44,8 @@ const Link: React.FC<LinkProps> = (props: LinkProps) => {
               'Authorization': `Bearer ${accessToken}`,
           },
           body: JSON.stringify({token: public_token}),
-      });
-      console.log("hello:", public_token)
+        });
+          console.log("hello:", public_token)
 
   }, [])
   const config: Parameters<typeof usePlaidLink>[0] = {

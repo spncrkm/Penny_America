@@ -1,0 +1,53 @@
+
+
+.dashboard_container {
+    
+    height: 100%;
+    display: flex;
+    width: 100%;
+    position: relative;
+    
+}
+
+.main__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 2fr;
+    grid-template-rows: 200px 500px 400px;
+    height: 100dvh;
+    width: 100%;
+    gap: 32px;
+    background-color: var(--Neutral-100);
+    align-items: center;
+    justify-items: center;
+}
+
+.balance {
+    width: 224px;
+    height: 150px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.income {
+    width: 224px;
+    height: 150px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.expenses {
+    width: 224px;
+    height: 150px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.saving__plan {
+    background-color: white;
+    grid-column-start: 4;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    width: 478px;
+    box-sizing: border-box;
+    border-radius: 10px;
+}

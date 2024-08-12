@@ -15,7 +15,7 @@ const Transactions = () => {
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
-            console.log("hi where am i ",response.data)
+            console.log("Accounts: ",response.data)
         }
         transaction();
     }, [])

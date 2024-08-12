@@ -1,11 +1,9 @@
-import { useAuth0 } from "@auth0/auth0-react"
-import axios from "axios";
+
 import { FormEvent, useState } from "react"
 import { Form } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../features/userSlice";
-import { User, UserState } from "../interface/Users";
 import { setTokens } from "../features/authSlice";
 import axiosInstance from "../features/api/axiosInstance";
 
