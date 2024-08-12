@@ -1,93 +1,158 @@
+import axios from "axios";
+import React, { FormEvent, useState } from "react";
 
-import axios from 'axios'
-import React, { FormEvent, useState } from 'react'
-
-import { Form, Button } from 'react-bootstrap'
-import { useDispatch } from 'react-redux'
-import { addUser } from '../features/userSlice'
-import { useNavigate } from 'react-router-dom'
+import { Form, Button, Row, Col } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { addUser } from "../features/userSlice";
+import { useNavigate } from "react-router-dom";
+import { googlelogo, group, piglogo, ratings } from "../assets";
 
 const RegisterUser = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [userName, setUserName] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
+    setEmail(e.target.value);
+  };
 
   const handleFirstName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFirstName(e.target.value)
-  }
+    setFirstName(e.target.value);
+  };
 
   const handleLastName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLastName(e.target.value)
-  }
+    setLastName(e.target.value);
+  };
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
   const handleUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value)
-  }
+    setUserName(e.target.value);
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/v0/accounts/', {
-        username: userName,
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        password: password,
-      });
-      dispatch(addUser(response.data))
-      console.log('User registered:', response.data);
-      navigate('/')
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/v0/accounts/",
+        {
+          username: userName,
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          password: password,
+        }
+      );
+      dispatch(addUser(response.data));
+      console.log("User registered:", response.data);
+      navigate("/");
     } catch (error) {
-      console.error('Error registering user:', error);
+      console.error("Error registering user:", error);
     }
   };
-  console.log(userName)
-  console.log(email)
-  console.log(password)
-  
-  return (
-    <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" onChange={handleEmail}/>
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicUsername">
-        <Form.Label>Username</Form.Label>
-        <Form.Control type="username" placeholder="Enter username" onChange={handleUserName}/>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicFirstName">
-        <Form.Label>First Name</Form.Label>
-        <Form.Control type="firstname" placeholder="Enter first name" onChange={handleFirstName}/>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicLastName">
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control type="lastname" placeholder="Enter last name" onChange={handleLastName}/>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" onChange={handlePassword}/>
-      </Form.Group>
-      <Button variant="primary" type="submit" onClick={handleSubmit}>
-        Submit
-      </Button>
-    </Form>
-  )
-}
+  console.log(userName);
+  console.log(email);
+  console.log(password);
 
-export default RegisterUser
+  return (
+    <>
+      <div className='register-main'>
+        <div className='register-left '>
+          <div className='reg-left-content'>
+            <h2>
+              Each penny saved, a future made;
+              <br /> In small steps, dreams are carefully laid.
+            </h2>
+            <p>
+              PennyAM has helped over two million people in the U.S. take
+              control of their finances
+            </p>
+            <div>
+              <img src={group} alt="avatargroup" />
+            </div>
+            <div className="five_stars">
+              <img src={ratings} alt="star_rating" />
+              <p>4.9 reviews across the U.S</p>
+            </div>
+          </div>
+        </div>
+        <div className='reg-form'>
+          <div className='logo'>
+            <img src={piglogo} />
+          </div>
+          <h2>Sign up to continue</h2>
+          <p>Let us help you save so can build your dream</p>
+          <div className="btn-container">
+            <div className="btn__position">
+          <button className="google-signin">
+            <img src={googlelogo}/>
+          Sign up with Google
+          </button>
+          </div>
+          </div>
+          <div className="divider">
+           Or 
+          </div>
+          <div className="form--container">
+          <Form >
+            <Form.Group className='mb-3' controlId='formBasicEmail'>
+              <Form.Control
+                type='email'
+                placeholder='Enter email'
+                onChange={handleEmail}
+              />
+            </Form.Group>
+            <Form.Group className='mb-3' controlId='formBasicUsername'>
+              <Form.Control
+                type='username'
+                placeholder='Username'
+                onChange={handleUserName}
+              />
+            </Form.Group>
+            <Row>
+            <Form.Group as={Col} className='mb-3' controlId='formBasicFirstName'>
+              <Form.Control
+                type='firstname'
+                placeholder='First name'
+                onChange={handleFirstName}
+              />
+            </Form.Group>
+            <Form.Group as={Col} className='mb-3' controlId='formBasicLastName'>
+              <Form.Control
+                type='lastname'
+                placeholder='Last name'
+                onChange={handleLastName}
+              />
+            </Form.Group>
+            </Row>
+            <Form.Group className='mb-3' controlId='formBasicPassword'>
+              <Form.Control
+                type='password'
+                placeholder='Password'
+                onChange={handlePassword}
+              />
+            </Form.Group>
+            <button className="form__button" type='submit' onClick={handleSubmit}>
+              Create an account
+            </button>
+            <p className="login-link">Already have an account? <a href="/">Login</a></p>
+          </Form>
+          </div>
+          <div className='reg__right_footer'>
+            <p>&copy; PennyAmerica 2024</p>
+            <p>Privacy Policy</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default RegisterUser;

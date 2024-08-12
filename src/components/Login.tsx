@@ -37,7 +37,7 @@ const Login = () => {
           password: password,
         })
         dispatch(setTokens({ token: response.data.access, refreshToken: response.data.refresh}))
-        // dispatch(addUser(newUser))
+        dispatch(addUser(newUser))
       
         // console.log(sessionStorage.setItem('token', response.data.access))
         // console.log(sessionStorage.setItem('refresh', response.data.refresh))
