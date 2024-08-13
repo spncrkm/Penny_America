@@ -1,24 +1,28 @@
-
-
-.dashboard_container {
-    
-    height: 100%;
-    display: flex;
-    width: 100%;
-    position: relative;
-    
+.container {
+    box-sizing: inherit;
 }
 
 .main__container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 2fr;
-    grid-template-rows: 200px 500px 400px;
-    height: 100dvh;
+    display:flex;
+    flex-direction: column;
+    /* grid-template-columns: repeat(3, 300px) 1fr;
+    grid-template-rows: 200px 400px 400px; */
+    height: 100%;
     width: 100%;
     gap: 32px;
     background-color: var(--Neutral-100);
-    align-items: center;
-    justify-items: center;
+    /* align-items: center;
+    justify-items: center; */
+    justify-content: space-around;
+}
+
+.row_1 {
+    display: flex;
+    justify-content: start;
+    align-content: center;
+    padding-top: 20px;
+    padding-left: 20px;
+    position: relative;
 }
 
 .balance {
@@ -26,6 +30,7 @@
     height: 150px;
     background-color: white;
     border-radius: 10px;
+    margin: 0 16px;
 }
 
 .income {
@@ -33,6 +38,7 @@
     height: 150px;
     background-color: white;
     border-radius: 10px;
+    margin: 0 16px;
 }
 
 .expenses {
@@ -40,14 +46,64 @@
     height: 150px;
     background-color: white;
     border-radius: 10px;
+    margin: 0 16px;
 }
 
 .saving__plan {
+    position: absolute;
     background-color: white;
-    grid-column-start: 4;
-    grid-row-start: 1;
-    grid-row-end: 2;
     width: 478px;
+    height: 600px;
     box-sizing: border-box;
     border-radius: 10px;
+    margin: 0 16px;
+    left: 900px;
+}
+
+.row_2 {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+}
+
+.budget_chart {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    border-radius: 10px;
+    background-color: white;
+    width: 736px;
+    height: 431px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    margin: 0 16px;
+}
+
+.row_3 {
+    display: flex;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.accounts {
+    background-color: white;
+    border-radius: 10px;
+    width: 352px;
+    height: 392px;
+    padding-left: 20px;
+    margin: 0 16px;
+}
+
+.transactions {
+    background-color: white;
+    border-radius: 10px;
+    width: 608px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 20px;
+    margin: 0 16px;
+    max-height: 392px;
+    overflow-y: scroll;
 }

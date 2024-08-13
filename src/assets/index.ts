@@ -3,7 +3,8 @@ import piglogo from './PAlogo.png'
 import googlelogo from './web_light_rd_na.svg'
 import group from './Group.png'
 import ratings from './Ratings.png'
+import invoice from './Invoices.png'
 
 
 
-export { logo, piglogo, googlelogo, group, ratings }
+export { logo, piglogo, googlelogo, group, ratings, invoice }

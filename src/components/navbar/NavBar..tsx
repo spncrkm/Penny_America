@@ -14,7 +14,6 @@ const NavBar = () => {
   console.log("user", user[0]);
 
   return (
-    <>
       <div className={Style.container}>
         <div className={Style.sidebar}>
           <div className={Style.brand}>
@@ -39,7 +38,6 @@ const NavBar = () => {
           <Dashboard />
         </div>
       </div>
-    </>
   );
 };
 

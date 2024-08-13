@@ -3,8 +3,7 @@
 .container {
   display:grid;
   width: 100%;
-  float: left;
-  height: 100%;
+  height: 100dvh;
   grid-template-columns: 180px 1fr;
   gap: 32px;
 }
@@ -74,11 +73,10 @@
   }
   
   .dashboard_main_container {
-    position:relative;
     /* margin-left: 180px; */
-    margin-right: auto;
     width: 100%;
-    height: 100%;
+    height: 100dvh;
     float:right;
     grid-column: 2;
+    background-color: var(--Neutral-100);
   }
