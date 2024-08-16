@@ -1,15 +1,19 @@
 
 import { FormEvent, useState } from "react"
 import { Form } from "react-bootstrap"
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addUser } from "../features/userSlice";
+import { loginUser } from "../features/userSlice";
 import { setTokens } from "../features/authSlice";
-import axiosInstance from "../features/api/axiosInstance";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../store";
+import { PennyApi } from "../features/api/pennyApi";
+
+// import { useAppDispatch } from "../features/hooks";
 
 const Login = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -30,15 +34,13 @@ const Login = () => {
       e.preventDefault();
 
       try {
-        const response = await axiosInstance.post('login', {
+        const response = await axios.post('http://127.0.0.1:8000/api/v0/accounts/login', {
           username: userName,
           password: password,
         })
-        dispatch(setTokens({ token: response.data.access, refreshToken: response.data.refresh}))
-        dispatch(addUser(newUser))
-      
-        // console.log(sessionStorage.setItem('token', response.data.access))
-        // console.log(sessionStorage.setItem('refresh', response.data.refresh))
+        dispatch(setTokens({ access: response.data.access, refresh: response.data.refresh}))
+        dispatch(loginUser({ username: userName, password: password }))
+        console.log(newUser)
       } catch (error) {
         console.error('Login failed', error);
       } finally {

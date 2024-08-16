@@ -1,14 +1,16 @@
 export interface User {
-    id?: number | string | undefined;
+    id: number;
     username: string;
-    email?: string;
-    password?: string;
-    first_name?: string;
-    last_name?: string;
+    email: string;
+    password: string;
+    first_name: string;
+    last_name: string;
 }
 
 export interface UserState {
-    user: User[]
+    user: User | null;
+    isLoggedIn: boolean;
+    
 }
 
 export interface ErrorResponse {

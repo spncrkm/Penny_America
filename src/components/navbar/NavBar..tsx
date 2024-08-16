@@ -1,41 +1,44 @@
 import Logout from "../Logout";
-import { logo } from "../../assets";
+import { navcellphone, piglogo } from "../../assets";
 import Style from "./NavBar.module.css";
 import PlaidLink from "../PlaidLink";
-import Dashboard from "../dashboard/Dashboard";
-// import { useSelector } from "react-redux";
-// import { User } from "../../interface/Users";
+import { useAppSelector } from "../../features/hooks";
 
 const NavBar = () => {
-  // const loggedInUser = useSelector((state: {user: User}) => state.user.username)
+  const username = localStorage.getItem('username') as string;
 
-  const userString = sessionStorage.getItem("user") as string;
-  const user = JSON.parse(userString);
-  console.log("user", user[0]);
+  // const user = username.filter((u) => u.)
+  console.log("user", username);
 
   return (
       <div className={Style.container}>
         <div className={Style.sidebar}>
           <div className={Style.brand}>
-            <img src={logo} />
+            <img src={piglogo} /> PennyAM
           </div>
           <div className={Style.member}>
             <Logout />
-            <h3>Hi, {user[0].username}</h3>
+            <h3>Hi, {username}</h3>
             <p>Premium Member</p>
             <PlaidLink />
             <a href='#'>Dashboard</a>
-            <a href='#'>Recurring</a>
-            <a href='#'>Spending</a>
-            <a href='#'>Net Worth</a>
+            <a href='#'>Budget Management</a>
+            <a href='#'>Savings Plan</a>
+            <a href='#'>Account</a>
+            <a href='#'>Transactions</a>
+            <hr/>
+            <a href="#">Setting</a>
+            <a href="#">Help Center</a>
+            <a href="#">Security and Privacy</a>
+            <div className={Style.navimg}>
+              <img src={navcellphone} />
+            </div>
           </div>
 
           <div className={Style.chatSupport}>
-            <p>Chat with us</p>
+            <p>Welcome back</p>
+            <h3>{username}</h3>
           </div>
-        </div>
-        <div className={Style.dashboard_main_container}>
-          <Dashboard />
         </div>
       </div>
   );

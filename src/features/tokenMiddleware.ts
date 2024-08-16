@@ -1,34 +1,29 @@
-import { Action, Middleware } from "@reduxjs/toolkit";
-import axios from "axios";
-import { setTokens, clearTokens } from "./authSlice";
+import { Middleware } from "@reduxjs/toolkit";
+import { refreshToken as refreshTokenThunk, setTokens, clearTokens } from "./authSlice";
+import { AppDispatch, RootState } from "../store";
 
-interface MyAction extends Action {
-    error?: {
-        status: number;
-    }
+interface KnownAction {
+    type: string;
 }
 
+export const tokenMiddleware: Middleware<{}, RootState, AppDispatch> = (store) => (next) => async (action: unknown) => {
+    if (typeof action === 'object' && action !== null && 'type' in action && action.type === refreshTokenThunk.pending.type) {
+        const state = store.getState();
+        const refreshToken = state.auth.refresh;
 
-export const tokenMiddleware: Middleware = ({ dispatch, getState }) => (next) => async (action: Action) => {
-    const state = getState();
-    const token = state.auth.token;
-    const refreshToken = state.auth.refreshToken;
+        if (refreshToken) {
+            try {
+                const response = await store.dispatch(refreshTokenThunk(refreshToken)).unwrap();
 
-    if (typeof action.type === 'string' && action.type.endsWith('/start')) {
-        if (token) {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-        }
-    }
-
-    if (typeof action.type === 'string' && action.type.endsWith('/failed') && (action as MyAction).error?.status === 401 && refreshToken) {
-        try {
-            const response = await axios.post('http://127.0.0.1:8000/api/v0/accounts/refresh', {
-                refresh: refreshToken,
-            });
-            dispatch(setTokens({ token: response.data.access, refreshToken }));
-            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.access}`;
-        } catch (error) {
-            dispatch(clearTokens());
+                if (response) {
+                    store.dispatch(setTokens({ access: response.access, refresh: response.refresh }));
+                }
+            } catch (error) {
+                store.dispatch(clearTokens());
+                console.log('Token refresh failed:', error);
+            }
+        } else {
+            console.error('No refresh token available')
         }
     }
     return next(action)

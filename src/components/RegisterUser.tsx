@@ -6,15 +6,30 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 import { googlelogo, group, piglogo, ratings } from "../assets";
+import axiosInstance from "../features/api/axiosInstance";
+import { AppDispatch } from "../store";
+import { User } from "../interface/Users";
+
+
+interface CreateUserPayload {
+  first_name: string;
+  last_name: string;
+  username: string;
+  email: string;
+  password: string;
+}
 
 const RegisterUser = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userId, setUserId] = useState<number | null>(null);
+ 
+
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -40,26 +55,35 @@ const RegisterUser = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/v0/accounts/",
-        {
-          username: userName,
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          password: password,
-        }
-      );
-      dispatch(addUser(response.data));
-      console.log("User registered:", response.data);
-      navigate("/");
+      const response = await axios.post('http://127.0.0.1:8000/api/v0/accounts/', {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        username: userName,
+        password: password,
+      })
+
+      const userId = response.data.id
+      setUserId(userId)
+
+      const newUser: User = {
+        id: userId,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        username: userName,
+        password: password,
+      }
+
+      dispatch(addUser(newUser))
+      console.log(userId)
+      navigate('/')
+      
     } catch (error) {
-      console.error("Error registering user:", error);
+      console.error('Failed to create user', error);
     }
+    
   };
-  console.log(userName);
-  console.log(email);
-  console.log(password);
 
   return (
     <>

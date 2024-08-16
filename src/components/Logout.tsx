@@ -10,7 +10,6 @@ const Logout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const removeUser = useSelector((state: {user: UserState}) => state.user.user)
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
 
   const handleLogout = () => {
     dispatch(clearTokens());

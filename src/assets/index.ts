@@ -4,7 +4,8 @@ import googlelogo from './web_light_rd_na.svg'
 import group from './Group.png'
 import ratings from './Ratings.png'
 import invoice from './Invoices.png'
+import navcellphone from './Payment.png'
 
 
 
-export { logo, piglogo, googlelogo, group, ratings, invoice }
+export { logo, piglogo, googlelogo, group, ratings, invoice, navcellphone }
