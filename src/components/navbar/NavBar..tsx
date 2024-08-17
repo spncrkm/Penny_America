@@ -14,7 +14,8 @@ const NavBar = () => {
       <div className={Style.container}>
         <div className={Style.sidebar}>
           <div className={Style.brand}>
-            <img src={piglogo} /> PennyAM
+            {/* <link href="/dashboard"><img src={piglogo} />  PennyAM</link> */}
+            <img src={piglogo} />  PennyAM
           </div>
           <div className={Style.member}>
             <Logout />

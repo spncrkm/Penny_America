@@ -8,7 +8,7 @@
   box-sizing: inherit;
   font-family: Poppins, sans-serif;
 
-  /* color-scheme: light dark; */
+  color-scheme: light dark;
   background-color: white;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -267,4 +267,18 @@
 
 .login-link {
   padding-top: 1em;
+}
+
+/* logout button */
+
+.logout-btn {
+  border-radius: 10px;
+  background-color: #10215F;
+  margin-left: 8em;
+}
+
+.logout-btn:hover {
+  transform: translateY(15%);
+  background-color: #4F46E5;
+  box-shadow: 0 0 1em var(--Neutral-800);
 }

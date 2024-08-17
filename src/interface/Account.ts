@@ -8,6 +8,10 @@
 //     unofficial_currency_code: string | null;
 // }
 
+export interface Auth {
+    accounts: string;
+}
+
 export interface Account {
     account_id: string;
     balances: {
@@ -27,8 +31,15 @@ export interface Account {
 
 export interface AccountGroup {
     accounts: Account[];
+    item_id: string;
 }
 
 export interface Data {
+        available: number;
+        current: number;
+        limit: number | null;
+        iso_currency_code: string;
+        unofficial_currency_code: string | null;
+    
     auths: AccountGroup[];
 }

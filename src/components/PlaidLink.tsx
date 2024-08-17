@@ -7,7 +7,8 @@ import { useAppDispatch, useAppSelector } from '../features/hooks';
 
 const PlaidLink = () => {
     const [linkToken, setLinkToken] = useState(null);
-    const accessToken = useAppSelector(state => state.auth.access)
+    // const accessToken = useAppSelector(state => state.auth.access)
+    const accessToken = localStorage.getItem('access')
     console.log("accessToken:", accessToken)
 
     useEffect(() => {

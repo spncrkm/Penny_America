@@ -7,7 +7,8 @@ export const PennyApi = createApi({
     reducerPath: "PennyApi",
     baseQuery: async (args, api, extraOptions) => {
         const state = api.getState() as RootState;
-        const accessToken = state.auth.access;
+        // const accessToken = state.auth.access;
+        const accessToken = localStorage.getItem('access')
         const baseQuery = fetchBaseQuery({
             baseUrl: "http://127.0.0.1:8000",
             prepareHeaders: (headers) => {
@@ -21,7 +22,7 @@ export const PennyApi = createApi({
         let result = await baseQuery(args, api, extraOptions);
 
         if (result.error?.status === 401) {
-            const refreshToken = state.auth.refresh;
+            const refreshToken = localStorage.getItem('refresh');
             if (refreshToken) {
                 try {
                 const refreshResult = await api.dispatch(
