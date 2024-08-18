@@ -2,7 +2,6 @@ import axios, { InternalAxiosRequestConfig } from "axios";
 import { clearTokens, setTokens } from "../authSlice";
 import { AppDispatch, RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { User } from "../../interface/Users";
 
 const axiosInstance = axios.create({
   baseURL: "http://127.0.0.1:8000/api/v0/",

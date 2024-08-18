@@ -7,7 +7,6 @@ import { setTokens } from "../features/authSlice";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store";
-import { PennyApi } from "../features/api/pennyApi";
 
 // import { useAppDispatch } from "../features/hooks";
 

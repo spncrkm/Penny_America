@@ -2,7 +2,6 @@ import Logout from "../Logout";
 import { navcellphone, piglogo } from "../../assets";
 import Style from "./NavBar.module.css";
 import PlaidLink from "../PlaidLink";
-import { useAppSelector } from "../../features/hooks";
 
 const NavBar = () => {
   const username = localStorage.getItem('username') as string;

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PennyApi } from "./api/pennyApi";
-import { useNavigate } from "react-router-dom";
 
 
 export const refreshToken = createAsyncThunk(
