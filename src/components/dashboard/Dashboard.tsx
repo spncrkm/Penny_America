@@ -1,23 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NavBar from "../navbar/NavBar.";
 import Transactions from "../Transactions";
 import style from "./Dashboard.module.css";
 import { invoice } from "../../assets";
-import useTokenRefresh from "../../features/TokenRefresher";
 import { Transaction } from "../../interface/Transaction";
 import { useAppSelector } from "../../features/hooks";
 import { PennyApi } from "../../features/api/pennyApi";
-import axios from "axios";
-import PlaidLink from "../PlaidLink";
 import Accounts from "../accounts/Accounts";
-import TokenRefresher from "../../features/TokenRefresher";
 
 const Dashboard: React.FC = () => {
   const accessToken = localStorage.getItem("access");
   const userAccessToken = useAppSelector((state) => state.auth.access);
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const { data, isLoading, isError } =
-    PennyApi.useGetTransactionsQuery(userAccessToken);
+  const { data, isLoading, isError } = PennyApi.useGetTransactionsQuery(userAccessToken);
   console.log("transaction data", data);
 
 

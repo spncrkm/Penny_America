@@ -8,7 +8,7 @@ export interface User {
 }
 
 export interface UserState {
-    user: User | null;
+    user: User;
     isLoggedIn: boolean;
     
 }
