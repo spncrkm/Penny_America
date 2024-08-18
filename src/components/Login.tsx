@@ -33,7 +33,7 @@ const Login = () => {
       e.preventDefault();
 
       try {
-        const response = await axios.post('http://127.0.0.1:8000/api/v0/accounts/login', {
+        const response = await axios.post(import.meta.env.VITE_API_URL + '/api/v0/accounts/login', {
           username: userName,
           password: password,
         })

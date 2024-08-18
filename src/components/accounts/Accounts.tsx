@@ -41,7 +41,7 @@ const Accounts: React.FC = () => {
     useEffect(() => {
         const fetchInstitutions = async () => {
             const instiutionId = "ins_35"
-            const response = await axios.get(`http://127.0.0.1:8000/api/v0/plaid/institutions/${instiutionId}`, {
+            const response = await axios.get(import.meta.env.VITE_API_URL + `/api/v0/plaid/institutions/${instiutionId}`, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 }

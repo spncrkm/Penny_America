@@ -14,7 +14,7 @@ const PlaidLink = () => {
               if (linkToken === null) {
                 try {
                   
-                  const response  = await fetch('http://127.0.0.1:8000/api/v0/plaid/create_link_token', {
+                  const response  = await fetch(import.meta.env.VITE_API_URL + '/api/v0/plaid/create_link_token', {
                       method: 'POST',
                       headers: {
                         'Authorization': `Bearer ${accessToken}`
@@ -44,7 +44,7 @@ const Link: React.FC<LinkProps> = ({ linkToken }) => {
   const accessToken = localStorage.getItem('access') as string
 
   const onSuccess = React.useCallback((public_token: any) => {
-      fetch('http://127.0.0.1:8000/api/v0/plaid/gen_access_token', {
+      fetch(import.meta.env.VITE_API_URL + '/api/v0/plaid/gen_access_token', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
