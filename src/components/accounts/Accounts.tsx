@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 // import axios from "axios";
 import { useGetAuthQuery } from "../../features/api/pennyApi";
-import { Data, Account, AccountGroup } from "../../interface/Account";
+import { Data, AccountGroup } from "../../interface/Account";
 import axios from "axios";
 
 
 const Accounts: React.FC = () => {
     const accessToken = localStorage.getItem('access');
-    const { data, error, isLoading, refetch, isSuccess } = useGetAuthQuery();
+    const { data, isLoading, refetch, isSuccess } = useGetAuthQuery(0);
     // const [filteredData, setFilteredData] = useState<Data | undefined>();
 
     const filteredData = data as Data | undefined;
@@ -15,16 +15,16 @@ const Accounts: React.FC = () => {
     console.log("filter:", filteredData?.auths.flatMap((accountGroup: AccountGroup) => accountGroup))
 
     
-
+    // change the way interval is set
     useEffect(() => {
         let interval: number | undefined;
         if (isSuccess && !isLoading) {
-            const interval = setInterval(() => {
+            interval = setInterval(() => {
 
                 if (!isLoading) {
                     refetch();
                 }
-            }, 180000);
+            }, 240000);
         
         }
         return () => {

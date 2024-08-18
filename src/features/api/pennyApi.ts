@@ -1,12 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { clearTokens, setTokens } from "../authSlice";
-import { RootState } from "../../store";
-import { Data } from "../../interface/Account";
+// import { RootState } from "../../store";
 
 export const PennyApi = createApi({
     reducerPath: "PennyApi",
     baseQuery: async (args, api, extraOptions) => {
-        const state = api.getState() as RootState;
+        // const state = api.getState() as RootState;
         // const accessToken = state.auth.access;
         const accessToken = localStorage.getItem('access')
         const baseQuery = fetchBaseQuery({

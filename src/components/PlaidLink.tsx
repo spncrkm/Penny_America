@@ -1,13 +1,11 @@
 
 import React, { useEffect, useState } from 'react'
 import { usePlaidLink } from 'react-plaid-link'
-import { useAppDispatch, useAppSelector } from '../features/hooks';
 
 
 
 const PlaidLink = () => {
     const [linkToken, setLinkToken] = useState(null);
-    // const accessToken = useAppSelector(state => state.auth.access)
     const accessToken = localStorage.getItem('access')
     console.log("accessToken:", accessToken)
 
@@ -45,7 +43,7 @@ interface LinkProps {
 const Link: React.FC<LinkProps> = ({ linkToken }) => {
   const accessToken = localStorage.getItem('access') as string
 
-  const onSuccess = React.useCallback((public_token: any, metadata: any) => {
+  const onSuccess = React.useCallback((public_token: any) => {
       fetch('http://127.0.0.1:8000/api/v0/plaid/gen_access_token', {
           method: 'POST',
           headers: {

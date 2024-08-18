@@ -1,45 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import NavBar from "../navbar/NavBar.";
 import Transactions from "../Transactions";
 import style from "./Dashboard.module.css";
 import { invoice } from "../../assets";
-import { Transaction } from "../../interface/Transaction";
-import { useAppSelector } from "../../features/hooks";
-import { PennyApi } from "../../features/api/pennyApi";
 import Accounts from "../accounts/Accounts";
+import useTokenRefresh from "../../features/TokenRefresher";
 
 const Dashboard: React.FC = () => {
-  const accessToken = localStorage.getItem("access");
-  const userAccessToken = useAppSelector((state) => state.auth.access);
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const { data, isLoading, isError } = PennyApi.useGetTransactionsQuery(userAccessToken);
-  console.log("transaction data", data);
+  // const accessToken = localStorage.getItem("access");
+  // const userAccessToken = useAppSelector((state) => state.auth.access);
+  // const [transactions, setTransactions] = useState<Transaction[]>([]);
+  // const { data, isLoading, isError } = PennyApi.useGetTransactionsQuery(userAccessToken);
+  // console.log("transaction data", data);
 
+  useTokenRefresh();
 
-  // useEffect(() => {
-  //   const fetchAccounts = async () => {
-  //     const response = await axios.get(
-  //       "http://127.0.0.1:8000/api/v0/plaid/auth",
-  //       {
-  //         method: "GET",
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //         },
-  //       }
-  //     );
-  //     console.log("accounts:", response.data);
-  //   };
-  //   fetchAccounts();
-  // }, [accessToken]);
-  // useTokenRefresh();
+  // const formatAmount = (amount: number) => {
+  //   return Number.isInteger(amount) ? amount.toString() : amount.toFixed(2);
+  // };
 
-  const formatAmount = (amount: number) => {
-    return Number.isInteger(amount) ? amount.toString() : amount.toFixed(2);
-  };
-
-  const changeAmount = (amount: number | any) => {
-    return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toFixed(2);
-  };
+  // const changeAmount = (amount: number | any) => {
+  //   return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toFixed(2);
+  // };
 
   return (
     <div className={style.dashboard}>

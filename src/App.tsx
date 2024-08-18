@@ -2,11 +2,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "./components/Homepage";
 import Dashboard from "./components/dashboard/Dashboard";
 import RegisterUser from "./components/RegisterUser";
-import { useState } from "react";
-import useTokenRefresh from "./features/TokenRefresher";
 
 function App() {
-  useTokenRefresh()
+  
 
   return (
       <BrowserRouter>

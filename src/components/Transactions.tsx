@@ -1,15 +1,11 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import style from './transactions.module.css'
-import { PennyApi } from "../features/api/pennyApi"
-import { Transaction, TransactionProp } from "../interface/Transaction"
-import { useAppSelector } from "../features/hooks"
+import { Transaction } from "../interface/Transaction"
 
 const Transactions = () => {
   const accessToken = localStorage.getItem('access')
-  const userAccessToken = useAppSelector((state) => state.auth.access)
     const [transactions, setTransactions] = useState<Transaction[]>([]);
-    const publicToken = localStorage.getItem('public_token');
     // const { data, isLoading, isError } = PennyApi.useGetTransactionsQuery(userAccessToken)
     // console.log("transaction data", data)
 
@@ -44,17 +40,22 @@ const Transactions = () => {
       
 
     // for (let index = 0; index < transactions.length; index++) {
-    //   const accountId = transactions[index].account_id;
+    //   const accountId = transactions[index]
     //   console.log("accountId:", accountId)
-    // }
+          
+    //   };
+    //   if (accountId) {
+    //     accountId.filter((account) => account === account.account_id)
+    //   }
+    
     // console.log(transactions.transactions.filter((transaction) => transaction.index))
     // const accountId = transactions[0].account_id
     // const filteredTransactions = transactions.filter((transaction) => transaction.index === 0);
     // console.log("filteredTransactions:",filteredTransactions)
 
-    const formatAmount = (amount: number) => {
-        return Number.isInteger(amount) ? amount.toString() : amount.toFixed(2);
-    }
+    // const formatAmount = (amount: number) => {
+    //     return Number.isInteger(amount) ? amount.toString() : amount.toFixed(2);
+    // }
 
     const changeAmount = (amount: number | any ) => {
       return (amount < 0 ? '-' : '') + "$" + Math.abs(amount).toFixed(2);

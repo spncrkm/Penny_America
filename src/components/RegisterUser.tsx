@@ -6,18 +6,11 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 import { googlelogo, group, piglogo, ratings } from "../assets";
-import axiosInstance from "../features/api/axiosInstance";
 import { AppDispatch } from "../store";
 import { User } from "../interface/Users";
 
 
-interface CreateUserPayload {
-  first_name: string;
-  last_name: string;
-  username: string;
-  email: string;
-  password: string;
-}
+
 
 const RegisterUser = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,7 +20,7 @@ const RegisterUser = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [userId, setUserId] = useState<number | null>(null);
+  const [userId, setUserId] = useState<number>(0);
  
 
 
@@ -63,8 +56,7 @@ const RegisterUser = () => {
         password: password,
       })
 
-      const userId = response.data.id
-      setUserId(userId)
+      setUserId(response.data.id)
 
       const newUser: User = {
         id: userId,

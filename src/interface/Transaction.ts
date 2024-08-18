@@ -36,6 +36,7 @@ interface CounterParties {
 }
 
 export interface Transaction {
+  [x: string]: any;
   account_id: string | null;
   account_owner: string | null;
   amount: number | null;

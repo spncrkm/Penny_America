@@ -1,11 +1,14 @@
 import { useEffect } from "react";
 import { setTokens } from "./authSlice";
 import { useAccountRefreshMutation } from "./api/pennyApi";
-import { useAppDispatch, useAppSelector } from "./hooks";
+import { useAppDispatch } from "./hooks";
+import { useNavigate } from "react-router-dom";
 
 const useTokenRefresh = (interval: number = 10 * 60 * 1000) => {
     const dispatch = useAppDispatch();
-    const refreshToken = useAppSelector((state) => state.auth.refresh);
+    // const refreshToken = useAppSelector((state) => state.auth.refresh);
+    const refreshToken = localStorage.getItem('refresh');
+    const navigate = useNavigate();
 
     const [accountRefresh ] = useAccountRefreshMutation();
 
@@ -18,9 +21,11 @@ const useTokenRefresh = (interval: number = 10 * 60 * 1000) => {
                     if (result) {
                         dispatch(setTokens(result));
                         console.log('Tokens refreshed successfully:', result);
+                    
                     }
                 } catch (error) {
                     console.log('Token refresh failed:', error)
+                    navigate('/')
                 }
             }
         };

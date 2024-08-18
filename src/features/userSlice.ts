@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User, UserState } from "../interface/Users";
 
-const storedUser = sessionStorage.getItem('user');
+// const storedUser = sessionStorage.getItem('user');
 const initialState: UserState = {
     user: {
         id: 0,
