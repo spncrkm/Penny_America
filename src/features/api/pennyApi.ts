@@ -9,7 +9,7 @@ export const PennyApi = createApi({
         // const accessToken = state.auth.access;
         const accessToken = localStorage.getItem('access')
         const baseQuery = fetchBaseQuery({
-            baseUrl: "http://127.0.0.1:8000",
+            baseUrl: import.meta.env.VITE_API_URL,
             prepareHeaders: (headers) => {
                 if (accessToken) {
                     headers.set('Authorization', `Bearer ${accessToken}`);

@@ -217,6 +217,7 @@
   box-shadow: 0px 2px 6px 0px rgba(16, 24, 40, 0.06);
   height: 35px;
   font-weight: bold;
+  color: black;
 }
 
 .google-signin img {

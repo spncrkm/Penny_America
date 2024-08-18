@@ -48,7 +48,7 @@ const RegisterUser = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/v0/accounts/', {
+      const response = await axios.post(import.meta.env.VITE_API_URL + '/api/v0/accounts/register', {
         first_name: firstName,
         last_name: lastName,
         email: email,

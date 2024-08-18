@@ -13,7 +13,7 @@ const Transactions = () => {
     useEffect(() => {
 
       const fetchTransaction = async () => {
-          const response = await axios.get('http://127.0.0.1:8000/api/v0/plaid/transactions', {
+          const response = await axios.get(import.meta.env.VITE_API_URL + `/api/v0/plaid/transactions`, {
               method: 'GET',
               headers: {
                   Authorization: `Bearer ${accessToken}`,
