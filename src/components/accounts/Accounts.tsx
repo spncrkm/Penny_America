@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 // import axios from "axios";
 import { useGetAuthQuery } from "../../features/api/pennyApi";
 import { Data, AccountGroup } from "../../interface/Account";
 import axios from "axios";
 
 
-const Accounts: React.FC = ({ transactions }) => {
+const Accounts: React.FC = () => {
     const accessToken = localStorage.getItem('access');
     const { data, isLoading, refetch, isSuccess } = useGetAuthQuery(0);
     // const [selectedAccountId, setSelectedAccountId] = useState<string | undefined>(uniqueAccountId[0]);
