@@ -2,6 +2,24 @@
     padding: 20px;
     background-color: #f5f7fa;
     text-align: center;
+    font-family: Poppins, sans-serif;
+    background: #DBEAFD;
+    display: block;
+  }
+
+  .logo {
+    color: #10215F;
+    font-weight: 600;
+    font-size: 18px;
+    display: flex;
+    margin-top: 50px;
+    max-width: 25%;
+  }
+
+  .logo img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
   }
   
   .nav a {
@@ -12,6 +30,9 @@
   
   .subscribe {
     margin-top: 20px;
+    display: block;
+    float: right;
+    align-items: start;
   }
   
   .subscribe input {
@@ -35,3 +56,8 @@
     font-size: 14px;
   }
   
+  .nav {
+    display: flex;
+    max-width: 300px;
+    padding-top: 20px;
+  }

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NavBar from "../navbar/NavBar.";
 import Transactions from "../Transactions";
 import style from "./Dashboard.module.css";
-import { invoice } from "../../assets";
+import { budgetheader, chart, invoice, savings } from "../../assets";
 import Accounts from "../accounts/Accounts";
 import useTokenRefresh from "../../features/TokenRefresher";
 
@@ -31,9 +31,12 @@ const Dashboard: React.FC = () => {
           <div className={style.balance}>balance</div>
           <div className={style.income}>income</div>
           <div className={style.expenses}>expenses</div>
-          <section className={style.saving__plan}>Savings Plan</section>
+          <section className={style.saving__plan}><img src={savings}/></section>
         </div>
-        <section className={style.budget_chart}>Budget</section>
+        <section className={style.budget_chart}>
+          <img src={budgetheader} className={style.budg_header}/>
+          <img src={chart} className={style.chart_image}/>
+          </section>
         <div className={style.account_wrapper}>
           <div className={style.accounts}>
             <Accounts onAccountSelect={handleAccountSelect} />

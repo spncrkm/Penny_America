@@ -1,10 +1,10 @@
-import { workimg } from '../../../assets';
-import '../styles/HowItWorks.module.css'
+import { working } from '../../../assets';
+import styles from '../styles/HowItWorks.module.css'
 
 const HowItWorks = () => {
   return (
-    <section className="how-it-works-container">
-    <div className="how-it-works-text">
+    <section className={styles.how_it_works_container}>
+    <div className={styles.how_it_works_text}>
       <h2>How it works</h2>
       <ol>
         <li>
@@ -20,11 +20,13 @@ const HowItWorks = () => {
           <p>Inputting detailed expenses and income is the next step to effectively manage your budget.</p>
         </li>
       </ol>
-      <button className="get-started">Getting Started</button>
+      <button className={styles.get_started}>
+        <a href='/register'>Getting Started</a>
+        </button>
     </div>
 
-    <div className="how-it-works-image">
-      <img src={workimg} alt="How it works illustration" />
+    <div className={styles.how_it_works_image}>
+      <img src={working} alt="How it works illustration" />
     </div>
   </section>
   );

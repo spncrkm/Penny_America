@@ -1,10 +1,12 @@
 
+import { piglogo } from '../../../assets';
 import styles from '../styles/Footer.module.css';
 
 const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.logo}>
+        <img src={piglogo}/>
         <span>PennyAM</span>
       </div>
       <nav className={styles.nav}>

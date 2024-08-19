@@ -1,9 +1,20 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
     background-color: #fff;
+    padding-left: 100px;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+  }
+
+  .logo {
+    color: #10215F;
+    font-weight: 600;
+    font-size: 18px;
   }
   
   .logo img {
@@ -29,4 +40,12 @@
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
+  }
+
+  .login {
+    text-decoration: none;
+    border: 1px solid var(--Neutral-200, #E5E7EB);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.04), 0px 1px 2px 0px rgba(16, 24, 40, 0.04);
   }

@@ -8,7 +8,7 @@ const Hero = () => {
       <div className={styles.content}>
         <h1>Empower Your Future with Smart Budgeting</h1>
         <p>Revolutionizing the pocket in the digital age</p>
-        <a href="#get-started" className={styles.cta}>Getting Started</a>
+        <a href="/register" className={styles.cta}>Getting Started</a>
       </div>
       <div className={styles.image}>
         <img src={macbook} alt="App Screenshot" />

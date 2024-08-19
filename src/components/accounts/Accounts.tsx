@@ -5,19 +5,18 @@ import style from './Accounts.module.css'
 import axios from "axios";
 
 
-interface AccountsProps {
-    selectedAccountId: string | undefined;
-    setSelectedAccountId: (id: string) => void;
-}
+// interface AccountsProps {
+//     selectedAccountId: string | undefined;
+//     setSelectedAccountId: (id: string) => void;
+// }
 
 const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ onAccountSelect }) => {
     const accessToken = localStorage.getItem('access');
-    const { data, isLoading, refetch, isSuccess } = useGetAuthQuery(0);
+    const { data, isLoading, isSuccess } = useGetAuthQuery(0);
     const [selectedAccountId, setSelectedAccountId] = useState<string | undefined>(undefined)
     const [accountGroups, setAccountGroups] = useState<AccountGroup[]>([]);
 
     console.log("data:", data)
-    // console.log("ins_id_main:", data.auths.item.institution_id)
 
 
     useEffect(() => {
@@ -85,19 +84,6 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
     //         }
     //     }
     // }, [isSuccess, isLoading, refetch])
-
-    // useEffect(() => {
-    //     const fetchInstitutions = async () => {
-    //         // const instiutionId = "ins_20"
-    //         const response = await axios.get(import.meta.env.VITE_API_URL + `/api/v0/plaid/institutions/${ins_id}`, {
-    //             headers: {
-    //                 Authorization: `Bearer ${accessToken}`,
-    //             }
-    //         })
-    //         console.log(response.data)
-    //     }
-    //     fetchInstitutions();
-    // },[])
 
 
   return (

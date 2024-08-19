@@ -14,8 +14,8 @@ const Header = () => {
         <a href="#how-it-works">How it works</a>
       </nav>
       <div className={styles.actions}>
-        <a href="#login" className={styles.login}>Login / Sign up</a>
-        <a href="#get-started" className={styles.getStarted}>Get Started</a>
+        <a href="/login" className={styles.login}>Login / Sign up</a>
+        <a href="/register" className={styles.getStarted}>Get Started</a>
       </div>
     </header>
   );

@@ -1,14 +1,5 @@
 
-
-// export interface Balances {
-//     available: number;
-//     current: number;
-//     limit: number | null;
-//     iso_currency_code: string;
-//     unofficial_currency_code: string | null;
-// }
-
-import { Key, ReactNode } from "react";
+import { ReactNode } from "react";
 
 export interface Auth {
     accounts: string;

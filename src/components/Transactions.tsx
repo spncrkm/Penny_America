@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import style from "./transactions.module.css";
 import { Transaction } from "../interface/Transaction";
-import { Data } from "../interface/Account";
 
 interface TransactionsProps {
   selectedAccountId: string | undefined;
@@ -30,9 +29,9 @@ const Transactions: React.FC<TransactionsProps> = ({ selectedAccountId, filter }
     fetchTransaction();
   }, [accessToken]);
 
-  const filteredAccounts = selectedAccountId
-    ? transactions.filter((tx) => tx.account_id === selectedAccountId)
-    : transactions;
+  // const filteredAccounts = selectedAccountId
+  //   ? transactions.filter((tx) => tx.account_id === selectedAccountId)
+  //   : transactions;
 
   const changeAmount = (amount: number | any) => {
     return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toFixed(2);
