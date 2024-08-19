@@ -22,6 +22,12 @@
     justify-content: space-between;
 }
 
+@media screen and (max-width: 1056px) {
+    .sidebar {
+        display: none;
+    }
+}
+
 .summary_cards {
     grid-column: span 12;
     display: flex;
@@ -72,6 +78,20 @@
     box-sizing: border-box;
 }
 
+@media screen and (max-width: 1400px) {
+    .saving__plan {
+        width: 350px;
+        height: 500px;
+    }
+}
+
+@media screen and (max-width: 1250px) {
+    .saving__plan {
+        width: 250px;
+        height: 500px;
+    }
+}
+
 .budget_chart {
     border-radius: 10px;
     width: 736px;
@@ -84,14 +104,25 @@
 
 .budg_header {
     position: relative;
-    width: 725px;
-    z-index: 100;
+    width: 100%;
 }
 
 .chart_image {
-    width: 750px;
+    width: 100%;
     top: 0;
     height: 350px;
+}
+
+@media screen and (max-width: 1550px) {
+    .budget_chart {
+        width: 650px;
+    }
+}
+
+@media screen and (max-width: 1450px) {
+    .budget_chart {
+        width: 550px;
+    }
 }
 
 .account_wrapper {
