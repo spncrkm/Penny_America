@@ -14,8 +14,9 @@ const HomePage = () => {
   }
   return (
       <div className={styles.homepage}>
+        <h3>Welcome to PennyAM</h3>
         <Link to="/dashboard" className="btn btn-lg view-dashboard">
-          View Dashboard
+          
         </Link>
         <Login />
         <button onClick={handleRegister} className={styles.btn}>

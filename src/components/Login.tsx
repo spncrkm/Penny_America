@@ -52,10 +52,10 @@ const Login = () => {
   return (
     <Form>
       <Form.Group>
-        <Form.Control type="username" onChange={handleUsername} />
+        <Form.Control type="username" onChange={handleUsername} placeholder="username" />
       </Form.Group>
       <Form.Group>
-        <Form.Control type="password" onChange={handlePassword} />
+        <Form.Control type="password" onChange={handlePassword} placeholder="password" />
       </Form.Group>
     <button className="btn btn-light" onClick={handleSubmit}>
         Log In
