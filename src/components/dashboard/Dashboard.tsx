@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar from "../navbar/NavBar.";
 import Transactions from "../Transactions";
 import style from "./Dashboard.module.css";
@@ -7,21 +7,19 @@ import Accounts from "../accounts/Accounts";
 import useTokenRefresh from "../../features/TokenRefresher";
 
 const Dashboard: React.FC = () => {
-  // const accessToken = localStorage.getItem("access");
-  // const userAccessToken = useAppSelector((state) => state.auth.access);
-  // const [transactions, setTransactions] = useState<Transaction[]>([]);
-  // const { data, isLoading, isError } = PennyApi.useGetTransactionsQuery(userAccessToken);
-  // console.log("transaction data", data);
 
   useTokenRefresh();
 
-  // const formatAmount = (amount: number) => {
-  //   return Number.isInteger(amount) ? amount.toString() : amount.toFixed(2);
-  // };
+  const [selectedAccountId, setSelectedAccountId] = useState<string | undefined>(undefined);
+  const [filter, setFilter] = useState<string>("week");
 
-  // const changeAmount = (amount: number | any) => {
-  //   return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toFixed(2);
-  // };
+  const handleAccountSelect = (accountId: string) => {
+    setSelectedAccountId(accountId)
+  }
+
+  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFilter(e.target.value);
+  }
 
   return (
     <div className={style.dashboard}>
@@ -38,11 +36,18 @@ const Dashboard: React.FC = () => {
         <section className={style.budget_chart}>Budget</section>
         <div className={style.account_wrapper}>
           <div className={style.accounts}>
-            <Accounts />
+            <Accounts onAccountSelect={handleAccountSelect} />
             </div>
           <div className={style.transactions}>
-            <div className={style.taheader}>Transactions</div>
-            <Transactions />
+            <div className={style.taheader}>
+              <h3>Transactions</h3>
+              <select value={filter} onChange={handleFilterChange}>
+                <option value="week">Past Week</option>
+                <option value="month">Past Month</option>
+                <option value="year">Past Year</option>
+              </select>
+              </div>
+            <Transactions selectedAccountId={selectedAccountId} filter={filter} />
           </div>
           <div className={style.imgcontainer}>
             <img src={invoice} />

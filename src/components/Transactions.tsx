@@ -1,78 +1,75 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import style from './transactions.module.css'
-import { Transaction } from "../interface/Transaction"
+import axios from "axios";
+import { useEffect, useMemo, useState } from "react";
+import style from "./transactions.module.css";
+import { Transaction } from "../interface/Transaction";
+import { Data } from "../interface/Account";
 
-const Transactions = () => {
-  const accessToken = localStorage.getItem('access')
-    const [transactions, setTransactions] = useState<Transaction[]>([]);
-    // const { data, isLoading, isError } = PennyApi.useGetTransactionsQuery(userAccessToken)
-    // console.log("transaction data", data)
+interface TransactionsProps {
+  selectedAccountId: string | undefined;
+  filter: string;
+}
 
- 
-    useEffect(() => {
+const Transactions: React.FC<TransactionsProps> = ({ selectedAccountId, filter }) => {
+  const accessToken = localStorage.getItem("access");
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
 
-      const fetchTransaction = async () => {
-          const response = await axios.get(import.meta.env.VITE_API_URL + `/api/v0/plaid/transactions`, {
-              method: 'GET',
-              headers: {
-                  Authorization: `Bearer ${accessToken}`,
-              },
-          });
-          console.log("transactions:", response.data.transactions)
-          setTransactions(response.data.transactions)
-      }
-      fetchTransaction();
+  useEffect(() => {
+    const fetchTransaction = async () => {
+      const response = await axios.get(
+        import.meta.env.VITE_API_URL + `/api/v0/plaid/transactions`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      console.log("transactions:", response.data.transactions);
+      setTransactions(response.data.transactions);
+    };
+    fetchTransaction();
   }, [accessToken]);
 
-      // useEffect(() => {
-      //   const fetchAccounts = async () => {
-      //     const response = await axios.get('http://127.0.0.1:8000/api/v0/plaid/auth', {
-      //       method: 'GET',
-      //       headers: {
-      //         Authorization: `Bearer ${accessToken}`,
-      //       },
-      //     })
-      //     console.log("accounts:", response.data.auths[0].accounts)
-      //   }
-      //   fetchAccounts();
-      // },[accessToken])
-      
+  const filteredAccounts = selectedAccountId
+    ? transactions.filter((tx) => tx.account_id === selectedAccountId)
+    : transactions;
 
-    // for (let index = 0; index < transactions.length; index++) {
-    //   const accountId = transactions[index]
-    //   console.log("accountId:", accountId)
-          
-    //   };
-    //   if (accountId) {
-    //     accountId.filter((account) => account === account.account_id)
-    //   }
-    
-    // console.log(transactions.transactions.filter((transaction) => transaction.index))
-    // const accountId = transactions[0].account_id
-    // const filteredTransactions = transactions.filter((transaction) => transaction.index === 0);
-    // console.log("filteredTransactions:",filteredTransactions)
+  const changeAmount = (amount: number | any) => {
+    return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toFixed(2);
+  };
 
-    // const formatAmount = (amount: number) => {
-    //     return Number.isInteger(amount) ? amount.toString() : amount.toFixed(2);
-    // }
+  const filteredTransactions = useMemo(() => {
+    const now = new Date();
+    return transactions
+      .filter((tx) => !selectedAccountId || tx.account_id === selectedAccountId)
+      .filter((tx) => {
+        const transactionDate = new Date(tx.date);
+        switch (filter) {
+          case "week":
+            return transactionDate >= new Date(new Date().setDate(now.getDate() - 7))
+          case "month":
+            return transactionDate >= new Date(new Date().setMonth(now.getMonth() - 1))
+          case "year":
+            return transactionDate >= new Date(new Date().setFullYear(now.getFullYear() - 1))
+          default:
+            return true;
+        }
+      });
+  }, [transactions, selectedAccountId, filter])
 
-    const changeAmount = (amount: number | any ) => {
-      return (amount < 0 ? '-' : '') + "$" + Math.abs(amount).toFixed(2);
-    }
-
- 
-      return (
-        <div>
-          {transactions?.map((item: Transaction, idx: number) => (
-            <div key={idx} className={style.transactions}>
-            <p>date: {item.date} &nbsp; <img src={item.logo_url}/> {item.name} &nbsp;
-            {changeAmount(item.amount)} &nbsp;</p>
-            </div>
-          ))}
+  return (
+    <div className={style.transaction_container}>
+      {filteredTransactions.map((item: Transaction, idx: number) => (
+        <div key={idx} className={style.transactions}>
+          <p className={style.date}>{item.date} &nbsp;</p>{" "}
+          <p className={style.name}>
+            <img src={item.logo_url} alt={`${item.name} logo`}/> {item.name} &nbsp;
+          </p>
+          <p className={style.amount}>{changeAmount(item.amount)} &nbsp;</p>
         </div>
-      )
-    
-    }
+      ))}
+    </div>
+  );
+};
 
-export default Transactions
+export default Transactions;

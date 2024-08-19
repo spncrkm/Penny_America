@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 const useTokenRefresh = (interval: number = 10 * 60 * 1000) => {
     const dispatch = useAppDispatch();
-    // const refreshToken = useAppSelector((state) => state.auth.refresh);
     const refreshToken = localStorage.getItem('refresh');
     const navigate = useNavigate();
 

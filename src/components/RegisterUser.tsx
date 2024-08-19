@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { FormEvent, useState } from "react";
-
 import { Form, Row, Col } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addUser } from "../features/userSlice";

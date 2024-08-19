@@ -1,0 +1,37 @@
+.footer {
+    padding: 20px;
+    background-color: #f5f7fa;
+    text-align: center;
+  }
+  
+  .nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .subscribe {
+    margin-top: 20px;
+  }
+  
+  .subscribe input {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  .subscribe button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #6A63E1;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .terms {
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  

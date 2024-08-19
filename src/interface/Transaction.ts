@@ -45,7 +45,7 @@ export interface Transaction {
   category: string[] | null;
   category_id: string | null;
   counterparties: CounterParties[];
-  date: string | null;
+  date: string;
   datetime: string | null;
   iso_currency_code: string;
   location: Location;

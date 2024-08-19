@@ -1,0 +1,26 @@
+.how-it-works-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .how-it-works-text {
+    flex: 1;
+    min-width: 300px;
+  }
+  
+  .how-it-works-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 300px;
+  }
+  
+  .how-it-works-image img {
+    max-width: 100%;
+    height: auto;
+  }
+  

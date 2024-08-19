@@ -8,7 +8,6 @@ import { useAppSelector } from "../features/hooks";
 const Logout = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // const user = useAppSelector((state: {user: UserState}) => state.user.user)
   const accessToken = useAppSelector((state) => state.auth.access);
 
   const handleLogout = () => {

@@ -8,6 +8,8 @@
 //     unofficial_currency_code: string | null;
 // }
 
+import { Key, ReactNode } from "react";
+
 export interface Auth {
     accounts: string;
 }
@@ -30,6 +32,11 @@ export interface Account {
 }
 
 export interface AccountGroup {
+    item: any;
+    ins_id: any;
+    name: ReactNode;
+    institution_id: any;
+    institution_name: string;
     accounts: Account[];
     item_id: string;
 }
@@ -40,6 +47,5 @@ export interface Data {
         limit: number | null;
         iso_currency_code: string;
         unofficial_currency_code: string | null;
-    
-    auths: AccountGroup[];
+        auths: AccountGroup[];
 }
