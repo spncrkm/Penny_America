@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import style from "./transactions.module.css";
 import { Transaction } from "../interface/Transaction";
+import { plaidlogo } from "../assets";
 
 interface TransactionsProps {
   selectedAccountId: string | undefined;
@@ -62,7 +63,7 @@ const Transactions: React.FC<TransactionsProps> = ({ selectedAccountId, filter }
         <div key={idx} className={style.transactions}>
           <p className={style.date}>{item.date} &nbsp;</p>{" "}
           <p className={style.name}>
-            <img src={item.logo_url} alt={`${item.name} logo`}/> {item.name} &nbsp;
+            <img src={item.logo_url ? item.logo_url : plaidlogo}/> {item.name} &nbsp;
           </p>
           <p className={style.amount}>{changeAmount(item.amount)} &nbsp;</p>
         </div>

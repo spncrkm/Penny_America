@@ -176,9 +176,19 @@
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
     font-family: Poppins, sans-serif;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 22px;
     padding: 12px;
+}
+
+.dropdown_date {
+    background-color: #888;
+    border-radius: 8px;
+}
+
+.taheader h3 {
+    font-weight: 500;
+    font-family: Poppins, sans-serif;
 }
 
 .transactions img {

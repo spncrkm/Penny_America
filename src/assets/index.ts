@@ -13,6 +13,7 @@ import working from "./people-with-smartphones-using-mobile-banking-app 1.png";
 import chart from "./budget_chart.png";
 import budgetheader from "./budget_header.png";
 import savings from './savings.png'
+import plaidlogo from './plaid_logo.png'
 
 export {
   logo,
@@ -29,5 +30,6 @@ export {
   working,
   chart,
   budgetheader,
-  savings
+  savings,
+  plaidlogo
 };

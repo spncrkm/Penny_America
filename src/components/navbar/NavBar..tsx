@@ -17,8 +17,10 @@ const NavBar = () => {
             <img src={piglogo} />  PennyAM
           </div>
           <div className={Style.member}>
+            <div className={Style.name_logout}>
             <Logout />
             <h3>Hi, {username}</h3>
+            </div>
             <p>Premium Member</p>
             <PlaidLink />
             <a href='#'>Dashboard</a>

@@ -275,11 +275,17 @@
 .logout-btn {
   border-radius: 10px;
   background-color: #10215F;
-  margin-left: 8em;
+  margin-left: 1em;
 }
 
 .logout-btn:hover {
   transform: translateY(15%);
   background-color: #4F46E5;
   box-shadow: 0 0 1em var(--Neutral-800);
+}
+
+.plaid-link-btn {
+  border-radius: 8px;
+  padding: 5px 10px;
+  background-color: #4F46E5;
 }

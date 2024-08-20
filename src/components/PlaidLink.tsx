@@ -32,7 +32,7 @@ const PlaidLink = () => {
         // console.log('Successful link_token:', linkToken)
 
           return (
-            linkToken != null ? <Link linkToken={linkToken} /> : <div>Loading...</div>
+            linkToken != null ? <Link linkToken={linkToken}/> : <div>Loading...</div>
           )
 }
 
@@ -71,7 +71,7 @@ const Link: React.FC<LinkProps> = ({ linkToken }) => {
   
   
 return (
-  <button onClick={() => open()} disabled={!ready}>
+  <button className='plaid-link-btn' onClick={() => open()} disabled={!ready}>
       Link account
   </button>
 )

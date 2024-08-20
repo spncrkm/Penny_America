@@ -30,7 +30,7 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
                             Authorization: `Bearer ${accessToken}`
                                 }
                             });
-                            console.log(response.data)
+                            console.log("response:", response.data)
                             return {
                                 ...accountGroup,
                                 institution_name: response.data.institution.name
@@ -42,6 +42,7 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
                 }));
                 setAccountGroups(updatedAccountGroups);
                 console.log("accountGroups:",accountGroups)
+                
             };
             fetchInstitutionNames();
         }
@@ -90,7 +91,7 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
     <div>
         {accountGroups.map((accountGroup: AccountGroup) => (
             <div key={accountGroup.item_id} className={style.institution}>
-                <h4>{accountGroup.institution_name}</h4>
+                <h4 className={style.ins_name}>{accountGroup.institution_name}</h4>
                 <ul>
                     {accountGroup.accounts.map((account: Account) => (
                         <li

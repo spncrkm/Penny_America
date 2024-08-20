@@ -42,6 +42,18 @@
   .navimg {
     padding-top: 80%;
   }
+
+  .name_logout {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+  }
+
+  .name_logout h3 {
+    margin: 0;
+  }
   
   .brand {
     display: flex;

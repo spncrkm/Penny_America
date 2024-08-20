@@ -44,7 +44,7 @@ const Dashboard: React.FC = () => {
           <div className={style.transactions}>
             <div className={style.taheader}>
               <h3>Transactions</h3>
-              <select value={filter} onChange={handleFilterChange}>
+              <select value={filter} onChange={handleFilterChange} className={style.dropdown_date}>
                 <option value="week">Past Week</option>
                 <option value="month">Past Month</option>
                 <option value="year">Past Year</option>
