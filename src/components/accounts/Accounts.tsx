@@ -51,7 +51,7 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
 
     const result = data as Data | undefined;
     console.log("result:", result)
-    console.log("ins_id:", result?.auths[0].item.institution_id)
+    // console.log("ins_id:", result?.auths[0].item.institution_id)
     
     const handleAccountClick = (accountId: string) => {
         setSelectedAccountId(accountId);
@@ -86,16 +86,16 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
     //     }
     // }, [isSuccess, isLoading, refetch])
 
-
+    
   return (
-    <div>
+    <>
         {accountGroups.map((accountGroup: AccountGroup) => (
-            <div key={accountGroup.item_id} className={style.institution}>
+            <div key={accountGroup.item.item_id} className={style.institution}>
                 <h4 className={style.ins_name}>{accountGroup.institution_name}</h4>
                 <ul>
                     {accountGroup.accounts.map((account: Account) => (
                         <li
-                            key={account.account_id}
+                            key={account.persistent_account_id}
                             className={selectedAccountId === account.account_id ? style.selectedAccount : style.account}
                             onClick={() => handleAccountClick(account.account_id)}
                             >
@@ -105,7 +105,7 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
                 </ul>
             </div>
         ))}
-    </div>
+    </>
   )
 }
 

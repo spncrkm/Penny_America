@@ -23,13 +23,23 @@ export interface Account {
 }
 
 export interface AccountGroup {
-    item: any;
+    item: {
+        available_products: [];
+        billed_products: [];
+        consent_expiration_time: string | null;
+        error: string | null;
+        institution_id: string;
+        item_id: string;
+        products: [];
+        update_type: string;
+        webhook: string;
+    }
     ins_id: any;
     name: ReactNode;
     institution_id: any;
     institution_name: string;
     accounts: Account[];
-    item_id: string;
+    
 }
 
 export interface Data {

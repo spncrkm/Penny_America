@@ -25,6 +25,7 @@
 .account:hover {
     color: blueviolet;
     text-shadow: 0.5px 0.5px 0.5px rgb(107, 151, 202), 0 0 0 blue, 0 0 0.2em blue;
+    cursor: pointer;
 }
 
 .account {
