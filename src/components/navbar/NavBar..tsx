@@ -6,9 +6,6 @@ import PlaidLink from "../PlaidLink";
 const NavBar = () => {
   const username = localStorage.getItem('username') as string;
 
-  // const user = username.filter((u) => u.)
-  console.log("user", username);
-
   return (
       <div className={Style.container}>
         <div className={Style.sidebar}>

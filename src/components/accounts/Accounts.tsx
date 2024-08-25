@@ -1,6 +1,6 @@
 import { useEffect, useState} from "react"
 import { useGetAuthQuery } from "../../features/api/pennyApi";
-import { Data, AccountGroup, Account } from "../../interface/Account";
+import { AccountGroup, Account } from "../../interface/Account";
 import style from './Accounts.module.css'
 import axios from "axios";
 
@@ -16,11 +16,8 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
     const [selectedAccountId, setSelectedAccountId] = useState<string | undefined>(undefined)
     const [accountGroups, setAccountGroups] = useState<AccountGroup[]>([]);
 
-    console.log("data:", data)
-
 
     useEffect(() => {
-        if (isSuccess && data) {
             const fetchInstitutionNames = async () => {
                 const updatedAccountGroups = await Promise.all(data.auths.map(async (accountGroup: AccountGroup) => {
                     const institutionId = accountGroup.item.institution_id as string
@@ -45,12 +42,12 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
                 
             };
             fetchInstitutionNames();
-        }
+        
     }, [data, isSuccess])
 
 
-    const result = data as Data | undefined;
-    console.log("result:", result)
+    // const result = data as Data | undefined;
+    // console.log("result:", result)
     // console.log("ins_id:", result?.auths[0].item.institution_id)
     
     const handleAccountClick = (accountId: string) => {
@@ -95,11 +92,11 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
                 <ul>
                     {accountGroup.accounts.map((account: Account) => (
                         <li
-                            key={account.persistent_account_id}
+                            key={account.account_id}
                             className={selectedAccountId === account.account_id ? style.selectedAccount : style.account}
                             onClick={() => handleAccountClick(account.account_id)}
                             >
-                                {account.official_name}
+                                {account.name}
                             </li>
                     ))}
                 </ul>

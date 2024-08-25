@@ -3,6 +3,7 @@ import HomePage from "./components/Homepage";
 import Dashboard from "./components/dashboard/Dashboard";
 import RegisterUser from "./components/RegisterUser";
 import LandingPage from "./components/landing/LandingPage";
+import Doughnut from "./components/charts/Doughnut";
 
 function App() {
   
@@ -14,6 +15,7 @@ function App() {
           <Route path='/login' element={<HomePage />} />
           <Route path='/register' element={<RegisterUser />} />
           <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/doughnut' element={<Doughnut />} />
           {/* <Route path='/profile' element={<ProfilePage />} /> */}
         </Routes>
       </BrowserRouter>

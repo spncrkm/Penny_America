@@ -7,13 +7,10 @@ import { usePlaidLink } from 'react-plaid-link'
 const PlaidLink = () => {
     const [linkToken, setLinkToken] = useState(null);
     const accessToken = localStorage.getItem('access')
-    console.log("accessToken:", accessToken)
 
     useEffect(() => {
             const getLinkToken = async () => {
-              if (linkToken === null) {
                 try {
-                  
                   const response  = await fetch(import.meta.env.VITE_API_URL + '/api/v0/plaid/create_link_token', {
                       method: 'POST',
                       headers: {
@@ -25,7 +22,6 @@ const PlaidLink = () => {
               } catch (error) {
                 console.log("Failed to create link token:", error)
             } 
-          }
           }
             getLinkToken();
           }, [accessToken])
@@ -55,7 +51,8 @@ const Link: React.FC<LinkProps> = ({ linkToken }) => {
         .then(response => response.json())
         .then(data => {
           localStorage.setItem('public_token', public_token)
-          console.log("Successfully generated access token:", data);
+          localStorage.setItem('gen_access', data.item_id)
+          console.log("Successfully generated access token:", data.item_id);
         });
 
   }, [accessToken])

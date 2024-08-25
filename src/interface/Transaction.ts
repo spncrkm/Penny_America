@@ -37,13 +37,13 @@ interface CounterParties {
 
 export interface Transaction {
   [x: string]: any;
-  account_id: string | null;
+  account_id: string;
   account_owner: string | null;
-  amount: number | null;
+  amount: number;
   authorized_date: string | null;
   authorized_datetime: string | null;
-  category: string[] | null;
-  category_id: string | null;
+  category: string[];
+  category_id: string;
   counterparties: CounterParties[];
   date: string;
   datetime: string | null;

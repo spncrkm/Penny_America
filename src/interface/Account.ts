@@ -39,7 +39,7 @@ export interface AccountGroup {
     institution_id: any;
     institution_name: string;
     accounts: Account[];
-    
+    numbers: Number[];
 }
 
 export interface Data {
@@ -49,4 +49,19 @@ export interface Data {
         iso_currency_code: string;
         unofficial_currency_code: string | null;
         auths: AccountGroup[];
+}
+
+export interface Number {
+    numbers: {
+        ach: [{
+            account_id: string;
+            account: string;
+            routing: string;
+            wire_routing: string;
+        }],
+        bacs: [];
+        eft: [];
+        international: [];
+        request_id: string;
+    }
 }

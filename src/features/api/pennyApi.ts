@@ -6,7 +6,6 @@ export const PennyApi = createApi({
     reducerPath: "PennyApi",
     baseQuery: async (args, api, extraOptions) => {
         // const state = api.getState() as RootState;
-        // const accessToken = state.auth.access;
         const accessToken = localStorage.getItem('access')
         const baseQuery = fetchBaseQuery({
             baseUrl: import.meta.env.VITE_API_URL,
@@ -27,14 +26,16 @@ export const PennyApi = createApi({
                 const refreshResult = await api.dispatch(
                     PennyApi.endpoints.accountRefresh.initiate({ refreshToken })
                 ).unwrap();
-                    api.dispatch(setTokens(refreshResult.data));
+                    api.dispatch(setTokens(refreshResult)); //.data
                     result = await baseQuery(args, api, extraOptions);
                 } catch (error) {
                     api.dispatch(clearTokens());
                     console.error('Token refresh failed:', error);
                 }
+            } else {
+                api.dispatch(clearTokens());
             }
-        }
+        } 
         return result;
     },
     endpoints: (builder) => ({
@@ -58,6 +59,7 @@ export const PennyApi = createApi({
         }),
         getTransactions: builder.query({
             query: () => "/api/v0/plaid/transactions",
+            
         }),
         getAuth: builder.query({
             query: () => "/api/v0/plaid/auth"

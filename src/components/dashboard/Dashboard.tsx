@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import NavBar from "../navbar/NavBar.";
 import Transactions from "../Transactions";
 import style from "./Dashboard.module.css";
-import { budgetheader, chart, invoice, savings } from "../../assets";
+import { invoice, savings } from "../../assets";
 import Accounts from "../accounts/Accounts";
 import useTokenRefresh from "../../features/TokenRefresher";
+import DoughnutChart from "../charts/Doughnut";
 
 const Dashboard: React.FC = () => {
 
@@ -34,8 +35,9 @@ const Dashboard: React.FC = () => {
           <section className={style.saving__plan}><img src={savings}/></section>
         </div>
         <section className={style.budget_chart}>
-          <img src={budgetheader} className={style.budg_header}/>
-          <img src={chart} className={style.chart_image}/>
+          {/* <img src={budgetheader} className={style.budg_header}/>
+          <img src={chart} className={style.chart_image}/> */}
+          <DoughnutChart selectedAccountId={selectedAccountId} filter={filter}/>
           </section>
         <div className={style.account_wrapper}>
           <div className={style.accounts}>
