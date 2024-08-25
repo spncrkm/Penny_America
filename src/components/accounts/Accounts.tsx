@@ -46,7 +46,7 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
         }
     }, [data, isSuccess, accessToken])
 
-
+    console.log("account data:", data)
     // const result = data as Data | undefined;
     // console.log("result:", result)
     // console.log("ins_id:", result?.auths[0].item.institution_id)

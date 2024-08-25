@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react'
 import { Transaction } from '../../interface/Transaction'
 import { Doughnut } from 'react-chartjs-2'
-import { Chart, ArcElement, TooltipItem, Tooltip } from 'chart.js'
+import { Chart, ArcElement, TooltipItem, Tooltip, Legend } from 'chart.js'
 import { TransactionsProps } from '../Transactions';
 import { useAppSelector } from '../../features/hooks';
 
-Chart.register(ArcElement, Tooltip);
+Chart.register(ArcElement, Tooltip, Legend);
 
 
 type CategoryTotals = Record<string, number>;
@@ -75,7 +75,7 @@ const DoughnutChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter 
                     '#FF9F40'
                 ],
                 borderRadius: 5,
-                hoverOffset: 4,
+                hoverOffset: 8,
             }
         ]
     };
@@ -95,18 +95,24 @@ const DoughnutChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter 
                         const label = context.label || 'Unknown';
                         const value = context.raw as number;
                         return `${label}: ${changeAmount(value)}`;
-                    }
+                    },
                 }
-            }
+            },
+            legend: {
+                display: true,
+                position: 'bottom' as const,
+                labels: {
+                    color: 'black',
+                    boxWidth: 20,
+                }
+            },
         }
     }
 
   return (
     <div className='chart-container'>
-    <div style={{ width: '50%', height: '50%' }}>
-        <h2>Spending by Category</h2>
+        <h3>Spending by Category</h3>
       <Doughnut data={chartData} options={options}/>
-    </div>
     </div>
   )
 }
