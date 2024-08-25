@@ -87,7 +87,7 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
 
     
   return (
-    <>
+    <div className={style.account_container}>
         {accountGroups.map((accountGroup: AccountGroup) => (
             <div key={accountGroup.item.item_id} className={style.institution}>
                 <h4 className={style.ins_name}>{accountGroup.institution_name}</h4>
@@ -104,7 +104,7 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
                 </ul>
             </div>
         ))}
-    </>
+    </div>
   )
 }
 

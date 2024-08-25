@@ -294,9 +294,34 @@
 /* Chart CSS */
 
 .chart-container {
-  display: block;
-  height: 350px;
-  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  height: 380px;
   color: black;
-  width: 70%;
+  width: 75%;
+  padding-top: 20px;
+  font-family: Poppins, sans-serif;
+}
+
+.barchart-container {
+  display: flex;
+  width: 75%;
+  padding: 20px;
+  font-family: Poppins, sans-serif;
+}
+
+.linechart-container {
+  display: flex;
+  width: 75%;
+  padding: 20px;
+  font-family: Poppins, sans-serif;
+}
+
+.piechart-container {
+  display: flex;
+  width: 75%;
+  padding: 20px;
+  flex-direction: column;
+  height: 380px;
+  font-family: Poppins, sans-serif;
 }

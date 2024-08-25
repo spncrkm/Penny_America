@@ -37,10 +37,10 @@ const DoughnutChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter 
           });
     },[storedData, selectedAccountId, filter])
 
-    filteredTransactions.forEach((transaction: { category: any[]; amount: any; }) => {
+    filteredTransactions.forEach((transaction: { category: any[]; amount: number; }) => {
         const category = transaction.category && transaction.category[0];
         const amount = transaction.amount;
-
+        
         if (category) {
         if (!categoryTotals[category]) {
             categoryTotals[category] = amount;
@@ -49,6 +49,7 @@ const DoughnutChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter 
         }
     }
     })
+
 
     console.log('Category Totals:', categoryTotals);
 

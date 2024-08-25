@@ -7,9 +7,9 @@
 .ins_name {
     font-weight: 600;
     font-size: 20px;
-    background-color: rgb(230, 52, 126);
+    background-color: var(--Primary-200, #C7D2FE);
     border-radius:8px;
-    color: white;
+    color: #4F46E5;
     padding: 5px;
     width: 70%;
 }
@@ -33,3 +33,25 @@
     font-family: Poppins, sans-serif;
     font-weight: 500;
 }
+
+.account_container {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    overflow-y: scroll;
+    max-height: 292px;
+}
+
+.account_container::-webkit-scrollbar {
+    width: 6px;
+}
+.account_container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+}
+.account_container::-webkit-scrollbar-thumb:hover {
+    background-color: #9a81c9;
+}
+.account_container::-webkit-scrollbar-track {
+    background-color: #ab9cdf; 
+  }

@@ -6,6 +6,10 @@ import { invoice, savings } from "../../assets";
 import Accounts from "../accounts/Accounts";
 import useTokenRefresh from "../../features/TokenRefresher";
 import DoughnutChart from "../charts/Doughnut";
+import BarChart from "../charts/BarChart";
+import PieChart from "../charts/PieChart";
+import LineChart from "../charts/LineChart";
+import { Account } from "../../interface/Account";
 
 const Dashboard: React.FC = () => {
 
@@ -13,6 +17,10 @@ const Dashboard: React.FC = () => {
 
   const [selectedAccountId, setSelectedAccountId] = useState<string | undefined>(undefined);
   const [filter, setFilter] = useState<string>("week");
+  const [chartFilter, setChartFilter] = useState<string>("doughnut");
+  const [totalBalance, setTotalBalance] = useState<number>(0);
+  const [accounts, setAccounts] = useState<Account[]>([]);
+  
 
   const handleAccountSelect = (accountId: string) => {
     setSelectedAccountId(accountId)
@@ -20,6 +28,19 @@ const Dashboard: React.FC = () => {
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter(e.target.value);
+  }
+
+  const renderChart = () => {
+    switch (chartFilter) {
+      case "doughnut":
+        return <DoughnutChart selectedAccountId={selectedAccountId} filter={filter} />;
+      case "bar":
+        return <BarChart selectedAccountId={selectedAccountId} filter={filter} />;
+      case "pie":
+        return <PieChart selectedAccountId={selectedAccountId} filter={filter} />;
+      case "line":
+        return <LineChart selectedAccountId={selectedAccountId} filter={filter} />;
+    }
   }
 
   return (
@@ -35,12 +56,21 @@ const Dashboard: React.FC = () => {
           <section className={style.saving__plan}><img src={savings}/></section>
         </div>
         <section className={style.budget_chart}>
-          {/* <img src={budgetheader} className={style.budg_header}/>
-          <img src={chart} className={style.chart_image}/> */}
-          <DoughnutChart selectedAccountId={selectedAccountId} filter={filter}/>
+          <div className={style.dropdown_container}>
+          <select value={chartFilter} onChange={(event) => setChartFilter(event.target.value)} className={style.dropdown_chart}>
+            <option value="doughnut">Doughnut</option>
+            <option value="bar">Bar</option>
+            <option value="pie">Pie</option>
+            <option value="line">Line</option>
+          </select>
+          </div>
+          {renderChart()}
           </section>
         <div className={style.account_wrapper}>
           <div className={style.accounts}>
+            <div className={style.account_header}>
+              <h3>Accounts</h3>
+            </div>
             <Accounts onAccountSelect={handleAccountSelect} />
             </div>
           <div className={style.transactions}>
