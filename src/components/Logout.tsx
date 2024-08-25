@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { clearTokens } from "../features/authSlice";
 import { useAppSelector } from "../features/hooks";
+import { logoutUser } from "../features/userSlice";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -12,12 +13,14 @@ const Logout = () => {
 
   const handleLogout = () => {
     dispatch(clearTokens());
-    navigate('/')
+    dispatch(logoutUser());
+    navigate('/login')
     }
 
   if (accessToken === null || undefined) {
     dispatch(clearTokens());
-    navigate('/')
+    dispatch(logoutUser());
+    navigate('/login')
   }
   
 

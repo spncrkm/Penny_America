@@ -5,7 +5,7 @@ import { usePlaidLink } from 'react-plaid-link'
 
 
 const PlaidLink = () => {
-    const [linkToken, setLinkToken] = useState(null);
+    const [linkToken, setLinkToken] = useState<string | null>(null);
     const accessToken = localStorage.getItem('access')
 
     useEffect(() => {
@@ -39,21 +39,24 @@ interface LinkProps {
 const Link: React.FC<LinkProps> = ({ linkToken }) => {
   const accessToken = localStorage.getItem('access') as string
 
-  const onSuccess = React.useCallback((public_token: any) => {
-      fetch(import.meta.env.VITE_API_URL + '/api/v0/plaid/gen_access_token', {
+  const onSuccess = React.useCallback(async (public_token: string) => {
+    try {
+      const response = await fetch(import.meta.env.VITE_API_URL + '/api/v0/plaid/gen_access_token', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${accessToken}`,
           },
           body: JSON.stringify({ token: public_token }),
-        })
-        .then(response => response.json())
-        .then(data => {
+        });
+        const data = await response.json()
           localStorage.setItem('public_token', public_token)
           localStorage.setItem('gen_access', data.item_id)
           console.log("Successfully generated access token:", data.item_id);
-        });
+          window.location.reload()
+        } catch (error) {
+          console.error("Failed to generate access token:", error)
+        }
 
   }, [accessToken])
 

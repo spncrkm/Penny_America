@@ -17,7 +17,7 @@ const plaidSlice = createSlice({
     reducers: {
         setTransactions: (state, action: PayloadAction<Transaction[]>) => {
             state.transactions = action.payload
-            localStorage.setItem('transactions', JSON.stringify(action.payload))
+            localStorage.setItem('transactions', JSON.stringify(state.transactions))
         },
 
         setAccounts: (state, action: PayloadAction<AccountGroup>) => {

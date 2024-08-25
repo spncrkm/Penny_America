@@ -1,11 +1,11 @@
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import style from "./transactions.module.css";
 import { Transaction } from "../interface/Transaction";
 import { plaidlogo } from "../assets";
-import { useDispatch } from "react-redux";
 import { setTransactions } from "../features/plaidSlice";
 import { useGetTransactionsQuery } from "../features/api/pennyApi";
+import { useAppDispatch, useAppSelector } from "../features/hooks";
 
 export interface TransactionsProps {
   selectedAccountId: string | undefined;
@@ -16,19 +16,15 @@ const Transactions: React.FC<TransactionsProps> = ({ selectedAccountId, filter }
   const { data } = useGetTransactionsQuery(0);
   const accessToken = localStorage.getItem("access");
   const plaidAccess = localStorage.getItem('gen_access');
-  const [transactions, setTransaction] = useState<Transaction[]>([]);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+
+  const transactions: Transaction[] = useAppSelector((state) => state.plaid.transactions)
 
   useEffect(() => {
-    const fetchTransaction = () => {
       if (data) {
-        dispatch(setTransactions(data))
-        setTransaction(data.transactions)
+        dispatch(setTransactions(data.transactions))
         console.log("transactionquery:", data)
       }
-
-    }
-    fetchTransaction();
    },[data, accessToken, plaidAccess])
 
   const changeAmount = (amount: number | any) => {

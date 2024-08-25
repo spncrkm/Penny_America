@@ -3,6 +3,7 @@ import { Transaction } from '../../interface/Transaction'
 import { Doughnut } from 'react-chartjs-2'
 import { Chart, ArcElement, TooltipItem, Tooltip } from 'chart.js'
 import { TransactionsProps } from '../Transactions';
+import { useAppSelector } from '../../features/hooks';
 
 Chart.register(ArcElement, Tooltip);
 
@@ -11,16 +12,16 @@ type CategoryTotals = Record<string, number>;
 
 
 const DoughnutChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter }) => {
-    const storedData = localStorage.getItem('transactions') as string
-    const parseData = JSON.parse(storedData)
-    const transactionData: Transaction[] = parseData.transactions
-    console.log("doughnut:",transactionData)
+    const storedData: Transaction[] = useAppSelector((state) => state.plaid.transactions)
+
+            console.log("doughnut:",storedData)
 
     const categoryTotals: CategoryTotals = {};
     
+    
     const filteredTransactions = useMemo(() => {
         const now = new Date();
-        return transactionData.filter((td) => !selectedAccountId || td.account_id === selectedAccountId)
+        return storedData.filter((td) => !selectedAccountId || td.account_id === selectedAccountId)
         .filter((tx) => {
             const transactionDate = new Date(tx.date);
             switch (filter) {
@@ -34,17 +35,19 @@ const DoughnutChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter 
                 return true;
             }
           });
-    },[transactionData, selectedAccountId])
+    },[storedData, selectedAccountId, filter])
 
-    filteredTransactions.forEach((transaction) => {
-        const category = transaction.category[0];
+    filteredTransactions.forEach((transaction: { category: any[]; amount: any; }) => {
+        const category = transaction.category && transaction.category[0];
         const amount = transaction.amount;
 
+        if (category) {
         if (!categoryTotals[category]) {
             categoryTotals[category] = amount;
         } else {
             categoryTotals[category] += amount
         }
+    }
     })
 
     console.log('Category Totals:', categoryTotals);

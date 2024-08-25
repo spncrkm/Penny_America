@@ -12,16 +12,18 @@ import axios from "axios";
 
 const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ onAccountSelect }) => {
     const accessToken = localStorage.getItem('access');
+    // const generatedToken = localStorage.getItem('gen_access')
     const { data, isLoading, isSuccess } = useGetAuthQuery(0);
     const [selectedAccountId, setSelectedAccountId] = useState<string | undefined>(undefined)
     const [accountGroups, setAccountGroups] = useState<AccountGroup[]>([]);
 
 
     useEffect(() => {
+        if (isSuccess && data) {
             const fetchInstitutionNames = async () => {
+                try {
                 const updatedAccountGroups = await Promise.all(data.auths.map(async (accountGroup: AccountGroup) => {
                     const institutionId = accountGroup.item.institution_id as string
-                try {
                     const response = await axios.get(import.meta.env.VITE_API_URL + `/api/v0/plaid/institutions/${institutionId}`, {
                         headers: {
                             Authorization: `Bearer ${accessToken}`
@@ -32,18 +34,17 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
                                 ...accountGroup,
                                 institution_name: response.data.institution.name
                         };
+                    }));
+                    setAccountGroups(updatedAccountGroups);
+                    
                     } catch (error) {
-                        console.error(`Failed to fetch institution name for ${accountGroup.institution_id}`)
-                        return accountGroup;
+                        console.error(`Failed to fetch institution name for:`, error)
                     }
-                }));
-                setAccountGroups(updatedAccountGroups);
-                console.log("accountGroups:",accountGroups)
-                
             };
+
             fetchInstitutionNames();
-        
-    }, [data, isSuccess])
+        }
+    }, [data, isSuccess, accessToken])
 
 
     // const result = data as Data | undefined;
@@ -56,6 +57,7 @@ const Accounts: React.FC<{ onAccountSelect: (accountId: string) => void }> = ({ 
     };
 
     if (isLoading) return <div>Loading...</div>;
+    
 
     // const filteredData = data?.auths.flatMap((accountGroup: AccountGroup) => accountGroup.accounts) || [];
     // const uniqueAccountIds = [...new Set(filteredData.map(account => account.account_id))]

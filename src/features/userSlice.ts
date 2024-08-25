@@ -42,6 +42,10 @@ export const userSlice = createSlice({
             state.isLoggedIn = false;
             localStorage.removeItem('user')
             localStorage.removeItem('logged')
+            localStorage.removeItem('access')
+            localStorage.removeItem('refresh')
+            localStorage.removeItem('transactions')
+            console.log("logged out")
         }
     }
 })
