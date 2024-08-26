@@ -3,13 +3,13 @@ import { Chart as ChartJS, BarElement, TooltipItem, Tooltip, Legend, CategorySca
 import { Bar } from 'react-chartjs-2'
 import { useAppSelector } from '../../features/hooks'
 import { Transaction } from '../../interface/Transaction'
-import { TransactionsProps } from '../Transactions'
+import { ChartProps } from '../../interface/Chart'
 
 ChartJS.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale)
 
 type CategoryTotals = Record<string, number>;
 
-const BarChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter }) => {
+const BarChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
   const storedData: Transaction[] = useAppSelector((state) => state.plaid.transactions)
 
   const categoryTotals: CategoryTotals = {};

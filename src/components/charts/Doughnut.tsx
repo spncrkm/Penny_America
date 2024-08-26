@@ -2,8 +2,8 @@ import React, { useMemo } from 'react'
 import { Transaction } from '../../interface/Transaction'
 import { Doughnut } from 'react-chartjs-2'
 import { Chart, ArcElement, TooltipItem, Tooltip, Legend } from 'chart.js'
-import { TransactionsProps } from '../Transactions';
 import { useAppSelector } from '../../features/hooks';
+import { ChartProps } from '../../interface/Chart';
 
 Chart.register(ArcElement, Tooltip, Legend);
 
@@ -11,7 +11,7 @@ Chart.register(ArcElement, Tooltip, Legend);
 type CategoryTotals = Record<string, number>;
 
 
-const DoughnutChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter }) => {
+const DoughnutChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
     const storedData: Transaction[] = useAppSelector((state) => state.plaid.transactions)
 
             console.log("doughnut:",storedData)
@@ -57,8 +57,11 @@ const DoughnutChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter 
     const amounts: number[] = Object.values(categoryTotals);  
     console.log(categories)
 
-    const changeAmount = (amount: number | any) => {
-        return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toFixed(2);
+    const changeAmount = (amount: number) => {
+        return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toLocaleString('en-US', { 
+          minimumFractionDigits: 2, 
+          maximumFractionDigits: 2 
+        });
       };
 
     const chartData = {

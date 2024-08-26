@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { Line } from 'react-chartjs-2';
 import { useAppSelector } from '../../features/hooks';
 import { Transaction } from '../../interface/Transaction';
-import { TransactionsProps } from '../Transactions';
 import {
   ChartData,
   ChartOptions,
@@ -12,12 +11,13 @@ import {
 
 // Register the necessary components for Chart.js
 import Chart from 'chart.js/auto';
+import { ChartProps } from '../../interface/Chart';
 
 Chart.register(...registerables);
 
 type DateAmounts = Record<string, number>;
 
-const LineChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter }) => {
+const LineChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
   const storedData: Transaction[] = useAppSelector((state) => state.plaid.transactions);
 
   const dateAmounts: DateAmounts = {};
@@ -57,7 +57,10 @@ const LineChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter }) =
   const amounts: number[] = dates.map(date => dateAmounts[date]);
 
   const changeAmount = (amount: number) => {
-    return "$" + Math.abs(amount).toFixed(2);
+    return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toLocaleString('en-US', { 
+      minimumFractionDigits: 2, 
+      maximumFractionDigits: 2 
+    });
   };
 
   // Explicit typing for chartData

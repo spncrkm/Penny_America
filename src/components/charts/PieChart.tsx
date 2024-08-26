@@ -3,13 +3,13 @@ import { Chart as ChartJS, TooltipItem, Tooltip, Legend, ArcElement } from 'char
 import { Pie } from 'react-chartjs-2';
 import { useAppSelector } from '../../features/hooks';
 import { Transaction } from '../../interface/Transaction';
-import { TransactionsProps } from '../Transactions';
+import { ChartProps } from '../../interface/Chart';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 type CategoryTotals = Record<string, number>;
 
-const PieChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter }) => {
+const PieChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
   const storedData: Transaction[] = useAppSelector((state) => state.plaid.transactions);
 
   const categoryTotals: CategoryTotals = {};
@@ -49,7 +49,10 @@ const PieChart: React.FC<TransactionsProps> = ({ selectedAccountId, filter }) =>
   const amounts: number[] = Object.values(categoryTotals);
 
   const changeAmount = (amount: number) => {
-    return "$" + Math.abs(amount).toFixed(2);
+    return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toLocaleString('en-US', { 
+      minimumFractionDigits: 2, 
+      maximumFractionDigits: 2 
+    });
   };
 
   const chartData = {

@@ -1,58 +1,24 @@
 
-import { useEffect, useMemo } from "react";
 import style from "./transactions.module.css";
 import { Transaction } from "../interface/Transaction";
 import { plaidlogo } from "../assets";
-import { setTransactions } from "../features/plaidSlice";
-import { useGetTransactionsQuery } from "../features/api/pennyApi";
-import { useAppDispatch, useAppSelector } from "../features/hooks";
 
 export interface TransactionsProps {
-  selectedAccountId: string | undefined;
-  filter: string;
+  transactions: Transaction[];
 }
 
-const Transactions: React.FC<TransactionsProps> = ({ selectedAccountId, filter }) => {
-  const { data } = useGetTransactionsQuery(0);
-  const accessToken = localStorage.getItem("access");
-  const plaidAccess = localStorage.getItem('gen_access');
-  const dispatch = useAppDispatch();
-
-  const transactions: Transaction[] = useAppSelector((state) => state.plaid.transactions)
-
-  useEffect(() => {
-      if (data) {
-        dispatch(setTransactions(data.transactions))
-        console.log("transactionquery:", data)
-      }
-   },[data, accessToken, plaidAccess])
-
-  const changeAmount = (amount: number | any) => {
-    return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toFixed(2);
+const Transactions: React.FC<TransactionsProps> = ({ transactions }) => {
+  
+  const changeAmount = (amount: number) => {
+    return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toLocaleString('en-US', { 
+      minimumFractionDigits: 2, 
+      maximumFractionDigits: 2 
+    });
   };
-
-  const filteredTransactions = useMemo(() => {
-    const now = new Date();
-    return transactions
-      .filter((tx) => !selectedAccountId || tx.account_id === selectedAccountId)
-      .filter((tx) => {
-        const transactionDate = new Date(tx.date);
-        switch (filter) {
-          case "week":
-            return transactionDate >= new Date(new Date().setDate(now.getDate() - 7))
-          case "month":
-            return transactionDate >= new Date(new Date().setMonth(now.getMonth() - 1))
-          case "year":
-            return transactionDate >= new Date(new Date().setFullYear(now.getFullYear() - 1))
-          default:
-            return true;
-        }
-      });
-  }, [transactions, selectedAccountId, filter])
 
   return (
     <div className={style.transaction_container}>
-      {filteredTransactions.map((item: Transaction, idx: number) => (
+      {transactions.map((item: Transaction, idx: number) => (
         <div key={idx} className={style.transactions}>
           <p className={style.date}>{item.date} &nbsp;</p>{" "}
           <p className={style.name}>
