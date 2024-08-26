@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import NavBar from "../navbar/NavBar.";
 import Transactions from "../Transactions";
-import style from "./Dashboard.module.css";
-import { invoice, savings } from "../../assets";
+import style from "./Dashboardredo.module.css";
+import { money, moneySend, piggybank, savings, wallet } from "../../assets";
 import Accounts from "../accounts/Accounts";
 import useTokenRefresh from "../../features/TokenRefresher";
 import DoughnutChart from "../charts/Doughnut";
@@ -15,6 +15,7 @@ import axios from "axios";
 import { Transaction } from "../../interface/Transaction";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { setTransactions } from "../../features/plaidSlice";
+import PlaidLink from "../PlaidLink";
 
 const Dashboard: React.FC = () => {
 
@@ -130,14 +131,31 @@ const Dashboard: React.FC = () => {
         <NavBar />
       </aside>
       <main className={style.main__container}>
-        <div className={style.summary_cards}>
-          <div className={style.balance}>Balance: {changeAmount(selectedAccountBalance)}</div>
-          
-          <div className={style.income}>income</div>
-          <div className={style.expenses}>expenses</div>
-          <section className={style.saving__plan}><img src={savings}/></section>
+          <div className={style.balance}>
+            <div className={style.icon1}>
+            <img src={wallet} />
+            </div>
+            <div className={style.text_container}>
+            <p>Total Balance</p>
+            <p>{changeAmount(selectedAccountBalance)}</p>
+            </div>
         </div>
-        <section className={style.budget_chart}>
+          <div className={style.income}>
+          <div className={style.icon2}>
+            <img src={money} />
+            </div>
+            <p>income</p>
+            </div>
+          <div className={style.expenses}>
+          <div className={style.icon3}>
+            <img src={moneySend} />
+            </div>
+            <p>expenses</p>
+            </div>
+          <div className={style.saving__plan}><img src={savings}/></div>
+        <div className={style.budget_chart}>
+            <div className={style.budget_header}>
+                <h2>Budget $1,920.00</h2>
           <div className={style.dropdown_container}>
           <select value={chartFilter} onChange={(event) => setChartFilter(event.target.value)} className={style.dropdown_chart}>
             <option value="doughnut">Doughnut</option>
@@ -146,12 +164,21 @@ const Dashboard: React.FC = () => {
             <option value="line">Line</option>
           </select>
           </div>
+            </div>
           {renderChart()}
-          </section>
-        <div className={style.account_wrapper}>
+          </div>
+          <div className={style.bottom_container}>
+          <div className={style.imgcontainer}>
+            <div><img src={piggybank} /></div>
+            <h3>Helping You Save for the Future</h3>
+            <p>Start here, create your account, and let us help you save</p>
+            <div>
+            <PlaidLink />
+            </div>
+          </div>
           <div className={style.accounts}>
             <div className={style.account_header}>
-              <h3>Accounts</h3>
+            <h3>Accounts</h3>
               <div className={style.total_balance}> {changeAmount(totalBalance)}</div>
             </div>
             <Accounts 
@@ -170,9 +197,6 @@ const Dashboard: React.FC = () => {
               </select>
               </div>
             <Transactions transactions={filteredTransactions} />
-          </div>
-          <div className={style.imgcontainer}>
-            <img src={invoice} />
           </div>
         </div>
       </main>

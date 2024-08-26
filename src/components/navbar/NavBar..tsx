@@ -7,7 +7,7 @@ const NavBar = () => {
   const username = localStorage.getItem('username') as string;
 
   return (
-      <div className={Style.container}>
+      <div>
         <div className={Style.sidebar}>
           <div className={Style.brand}>
             {/* <link href="/dashboard"><img src={piglogo} />  PennyAM</link> */}

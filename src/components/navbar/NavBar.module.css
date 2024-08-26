@@ -14,11 +14,13 @@
     grid-template-rows: 80px 1fr 80px;
     font-family: Poppins;
     height: 100vh;
-    width: 250px;
+    width: 300px;
     z-index: 10;
     overflow-x: hidden;
+    overflow-y: hidden;
     background-color: white;
     border-radius: 10px;
+    padding: 20px;
   }
   
   .sidebar a {
@@ -40,7 +42,7 @@
   }
 
   .navimg {
-    padding-top: 80%;
+    padding-top: 100px;
   }
 
   .name_logout {
@@ -58,7 +60,7 @@
   .brand {
     display: flex;
     height: 65px;
-    box-shadow: 0em 0.2em .5em #8c92e0;
+    /* box-shadow: 0em 0.2em .5em #8c92e0; */
     text-align: center;
     align-items: center;
     font-family: Poppins, sans-serif;
@@ -85,7 +87,7 @@
     color: rgb(95, 94, 94);
   }
   
-  .chatSupport p, h3 {
+  .chatSupport p h3 {
     text-align: center;
   }
 
@@ -97,5 +99,6 @@
   
   .chatSupport {
     border-top: 1px solid var(--Neutral-100);
+    padding-top: 10px;
   }
   

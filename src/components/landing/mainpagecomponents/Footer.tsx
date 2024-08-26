@@ -5,6 +5,7 @@ import styles from '../styles/Footer.module.css';
 const Footer = () => {
   return (
     <footer className={styles.footer}>
+      <div className={styles.footer_container}>
       <div className={styles.logo}>
         <img src={piglogo}/>
         <span>PennyAM</span>
@@ -20,6 +21,7 @@ const Footer = () => {
       <p className={styles.terms}>
         <a href="#terms">Terms of Service</a> | <a href="#privacy">Privacy Policy</a>
       </p>
+      </div>
     </footer>
   );
 };

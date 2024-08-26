@@ -5,7 +5,7 @@
   font-weight: 400;
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
+  box-sizing: border-box;
   font-family: Poppins, sans-serif;
 
   color-scheme: light dark;
@@ -279,49 +279,49 @@
 }
 
 .logout-btn:hover {
-  transform: translateY(15%);
+  transform: translateY(5%);
   background-color: #4F46E5;
-  box-shadow: 0 0 1em var(--Neutral-800);
 }
 
 .plaid-link-btn {
   border-radius: 8px;
   padding: 5px 10px;
   background-color: #4F46E5;
+  cursor: pointer;
 }
 
 
 /* Chart CSS */
 
 .chart-container {
-  display: flex;
-  flex-direction: column;
-  height: 380px;
   color: black;
-  width: 75%;
-  padding-top: 20px;
+  width: 80%;
   font-family: Poppins, sans-serif;
+  box-sizing: border-box;
+  height: 80%;
 }
 
 .barchart-container {
   display: flex;
-  width: 75%;
+  width: 90%;
+  height: 80%;
   padding: 20px;
   font-family: Poppins, sans-serif;
 }
 
 .linechart-container {
   display: flex;
-  width: 75%;
-  padding: 20px;
+  width: 90%;
+  height: 100%;
+  padding-top: 20px;
+  padding-left: 20px;
   font-family: Poppins, sans-serif;
 }
 
 .piechart-container {
   display: flex;
-  width: 75%;
-  padding: 20px;
+  width: 80%;
+  height: 80%;
   flex-direction: column;
-  height: 380px;
   font-family: Poppins, sans-serif;
 }

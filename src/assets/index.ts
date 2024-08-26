@@ -14,6 +14,10 @@ import chart from "./budget_chart.png";
 import budgetheader from "./budget_header.png";
 import savings from './savings.png'
 import plaidlogo from './plaid_logo.png'
+import piggybank from './piggybank.png'
+import wallet from './empty-wallet-tick.png'
+import money from './money-recive.png'
+import moneySend from './money-send.png'
 
 export {
   logo,
@@ -31,5 +35,10 @@ export {
   chart,
   budgetheader,
   savings,
-  plaidlogo
+  plaidlogo,
+  piggybank,
+  wallet,
+  money,
+  moneySend,
+  
 };
