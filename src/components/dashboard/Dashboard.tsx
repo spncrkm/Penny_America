@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import NavBar from "../navbar/NavBar.";
 import Transactions from "../Transactions";
-import style from "./Dashboardredo.module.css";
+import style from "./Dashboard.module.css";
 import { money, moneySend, piggybank, savings, wallet } from "../../assets";
 import Accounts from "../accounts/Accounts";
 import useTokenRefresh from "../../features/TokenRefresher";

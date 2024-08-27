@@ -13,7 +13,7 @@
     display: grid;
     grid-template-rows: 80px 1fr 80px;
     font-family: Poppins;
-    height: 100vh;
+    height: 92vh;
     width: 300px;
     z-index: 10;
     overflow-x: hidden;
