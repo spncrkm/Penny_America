@@ -13,7 +13,7 @@
     display: grid;
     grid-template-rows: 80px 1fr 80px;
     font-family: Poppins;
-    height: 92vh;
+    height: 95vh;
     width: 300px;
     z-index: 10;
     overflow-x: hidden;
@@ -100,5 +100,6 @@
   .chatSupport {
     border-top: 1px solid var(--Neutral-100);
     padding-top: 10px;
+    padding-bottom: 20px;
   }
   
