@@ -10,7 +10,7 @@ import BarChart from "../charts/BarChart";
 import PieChart from "../charts/PieChart";
 import LineChart from "../charts/LineChart";
 import { AccountGroup } from "../../interface/Account";
-import { useGetAuthQuery, useGetTransactionsQuery } from "../../features/api/pennyApi";
+import { useGetAuthQuery, useGetBudgetsQuery, useGetTransactionsQuery } from "../../features/api/pennyApi";
 import axios from "axios";
 import { Transaction } from "../../interface/Transaction";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
@@ -30,6 +30,9 @@ const Dashboard: React.FC = () => {
   const { data: transactionsData } = useGetTransactionsQuery(0);
   const transactions: Transaction[] = useAppSelector((state) => state.plaid.transactions)
   const dispatch = useAppDispatch();
+  const { data: budgetData, } = useGetBudgetsQuery(0);
+
+  console.log("budget:", budgetData)
 
 
   useEffect(() => {
