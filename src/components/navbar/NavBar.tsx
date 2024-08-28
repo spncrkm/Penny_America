@@ -35,8 +35,8 @@ const NavBar = () => {
         </div>
 
         <div className={Style.chatSupport}>
-          <p>Welcome back 👋<Logout/></p>
-          <h3>{username}</h3>
+          <p>Welcome back 👋</p>
+          <h3>{username} <Logout/></h3>
         </div>
       </div>
       {isModalOpen && <BudgetModal onClose={toggleModal} />}

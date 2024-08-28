@@ -12,24 +12,38 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
     <>
     <Modal show={show} onHide={onClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>
+            <h4>Add New Budget</h4>
+          <p>Please input the data you would like to track for your budget</p>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
+            <Form.Group className="mb-3" controlId="budget.ControlInput1">
+              <Form.Label>Budget Name</Form.Label>
               <Form.Control
-                type="email"
-                placeholder="name@example.com"
+                type="text"
+                placeholder="Select category"
                 autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="amount.ControlInput2">
+              <Form.Label>Amount</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter Amount"
               />
             </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control as="textarea" rows={3} />
+              <Form.Select aria-placeholder='Frequency'>
+                <option></option>
+                <option>Monthly</option>
+                <option>Half Year</option>
+                <option>Yearly</option>
+                </Form.Select>
             </Form.Group>
           </Form>
         </Modal.Body>
