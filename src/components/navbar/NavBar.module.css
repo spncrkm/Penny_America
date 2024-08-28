@@ -11,10 +11,10 @@
 .sidebar {
     position: relative;
     display: grid;
-    grid-template-rows: 80px 1fr 80px;
+    grid-template-rows: .5fr 4fr .7fr;
     font-family: Poppins;
-    height: 95vh;
-    width: 300px;
+    height: 100vh;
+    width: 350px;
     z-index: 10;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -33,6 +33,12 @@
   
   .sidebar a:hover {
     color: #8c92e0;
+  }
+
+  .sidebar a:focus {
+    color: #4F46E5;
+    background-color: #C7D2FE;
+    border-radius: 12px;
   }
   
   @media screen and (max-width: 430px) {
@@ -104,3 +110,6 @@
     padding-bottom: 20px;
   }
   
+  #icon:focus {
+    color: #4F46E5;
+  }

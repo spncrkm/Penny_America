@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
-import NavBar from "../navbar/NavBar.";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import NavBar from "../navbar/NavBar";
 import Transactions from "../Transactions";
 import style from "./Dashboard.module.css";
 import { money, moneySend, piggybank, savings, wallet } from "../../assets";
@@ -30,6 +30,7 @@ const Dashboard: React.FC = () => {
   const { data: transactionsData } = useGetTransactionsQuery(0);
   const transactions: Transaction[] = useAppSelector((state) => state.plaid.transactions)
   const dispatch = useAppDispatch();
+
 
   useEffect(() => {
     if (isSuccess && authData) {
@@ -68,17 +69,18 @@ const Dashboard: React.FC = () => {
     }
   }, [transactionsData, dispatch]);
 
-  console.log("authData:",authData)
-
-  const handleAccountSelect = (accountId: string) => {
+  const handleAccountSelect = useCallback((accountId: string) => {
     setSelectedAccountId(accountId)
-  }
+  }, [])
 
   const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setFilter(e.target.value);
   }
 
   const filteredTransactions = useMemo(() => {
+    if (!selectedAccountId) return [];
+
+
     const now = new Date();
     return transactions
       .filter((tx) => !selectedAccountId || tx.account_id === selectedAccountId)
@@ -97,10 +99,10 @@ const Dashboard: React.FC = () => {
       });
   }, [transactions, selectedAccountId, filter]);
 
-  const renderChart = () => {
+  const renderChart = useMemo(() => {
     switch (chartFilter) {
       case "doughnut":
-        return <DoughnutChart selectedAccountId={selectedAccountId} filter={filter} />;
+        return <DoughnutChart key={selectedAccountId + filter} selectedAccountId={selectedAccountId} filter={filter} />;
       case "bar":
         return <BarChart selectedAccountId={selectedAccountId} filter={filter} />;
       case "pie":
@@ -110,7 +112,7 @@ const Dashboard: React.FC = () => {
       default:
         return null;
     }
-  }
+  }, [chartFilter, selectedAccountId, filter])
 
   const selectedAccount = accountGroups.flatMap(group => group.accounts).find(account => account.account_id === selectedAccountId);
   const selectedAccountBalance = selectedAccount ? selectedAccount.balances.current : 0;
@@ -165,7 +167,7 @@ const Dashboard: React.FC = () => {
           </select>
           </div>
             </div>
-          {renderChart()}
+          {renderChart}
           </div>
           <div className={style.bottom_container}>
           <div className={style.imgcontainer}>
@@ -196,7 +198,13 @@ const Dashboard: React.FC = () => {
                 <option value="year">Past Year</option>
               </select>
               </div>
-            <Transactions transactions={filteredTransactions} />
+              {selectedAccountId ? (
+                <Transactions transactions={filteredTransactions} />
+              ) : (
+                <div className={style.no_transactions_message}>
+                  Please select an account to view transactions
+                </div>
+              )}
           </div>
         </div>
       </main>
