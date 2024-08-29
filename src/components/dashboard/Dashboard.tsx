@@ -36,7 +36,6 @@ const Dashboard: React.FC = () => {
   console.log("budget:", budgetData)
   console.log("categoryData:", categoryData)
 
-
   useEffect(() => {
     if (isSuccess && authData) {
       const fetchInstitutionNames = async () => {
