@@ -14,48 +14,44 @@ type CategoryTotals = Record<string, number>;
 const DoughnutChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
     const storedData: Transaction[] = useAppSelector((state) => state.plaid.transactions)
 
-            console.log("doughnut:",storedData)
 
-    const categoryTotals: CategoryTotals = {};
-    
-    
-    const filteredTransactions = useMemo(() => {
-        const now = new Date();
-        return storedData.filter((td) => !selectedAccountId || td.account_id === selectedAccountId)
-        .filter((tx) => {
-            const transactionDate = new Date(tx.date);
-            switch (filter) {
-              case "week":
-                return transactionDate >= new Date(new Date().setDate(now.getDate() - 7))
-              case "month":
-                return transactionDate >= new Date(new Date().setMonth(now.getMonth() - 1))
-              case "year":
-                return transactionDate >= new Date(new Date().setFullYear(now.getFullYear() - 1))
-              default:
-                return true;
+    const { categories, amounts } = useMemo(() => {
+      const totals: CategoryTotals = {};
+      const now = new Date();
+
+      const filteredTransactions =  storedData
+          .filter((td) => td.account_id === selectedAccountId)
+          .filter((tx) => {
+              const transactionDate = new Date(tx.date);
+              switch (filter) {
+                case "week":
+                  return transactionDate >= new Date(new Date().setDate(now.getDate() - 7))
+                case "month":
+                  return transactionDate >= new Date(new Date().setMonth(now.getMonth() - 1))
+                case "year":
+                  return transactionDate >= new Date(new Date().setFullYear(now.getFullYear() - 1))
+                default:
+                  return true;
+              }
+            });
+
+            filteredTransactions.forEach((transaction: { category: any[]; amount: number; }) => {
+                const category = transaction.category && transaction.category[0];
+                const amount = transaction.amount;
+                
+                if (category) {
+                if (!totals[category]) {
+                    totals[category] = amount;
+                } else {
+                    totals[category] += amount
+                }
             }
-          });
-    },[storedData, selectedAccountId, filter])
-
-    filteredTransactions.forEach((transaction: { category: any[]; amount: number; }) => {
-        const category = transaction.category && transaction.category[0];
-        const amount = transaction.amount;
-        
-        if (category) {
-        if (!categoryTotals[category]) {
-            categoryTotals[category] = amount;
-        } else {
-            categoryTotals[category] += amount
-        }
-    }
-    })
-
-
-    console.log('Category Totals:', categoryTotals);
-
-    const categories: string[] = Object.keys(categoryTotals);
-    const amounts: number[] = Object.values(categoryTotals);  
-    console.log(categories)
+            })
+            return {
+              categories: Object.keys(totals),
+              amounts: Object.values(totals)
+            }
+    }, [storedData, selectedAccountId, filter]);
 
     const changeAmount = (amount: number) => {
         return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toLocaleString('en-US', { 
@@ -111,6 +107,10 @@ const DoughnutChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
                 }
             },
         }
+    };
+
+    if (!selectedAccountId || categories.length === 0) {
+      return <h2 className='chart-placeholder'>PennyAM</h2>
     }
 
   return (

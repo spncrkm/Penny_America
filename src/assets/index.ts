@@ -18,6 +18,14 @@ import piggybank from './piggybank.png'
 import wallet from './empty-wallet-tick.png'
 import money from './money-recive.png'
 import moneySend from './money-send.png'
+import navicon1 from './account_balance.png'
+import accbalwal from './account_balance_wallet.png'
+import support from './contact_support.png'
+import encrypt from './encrypted.png'
+import icon from './Icon.png'
+import savepig from './savingpiggy.png'
+import cart from './shopping_cart.png'
+import tune from './tune.png'
 
 export {
   logo,
@@ -40,5 +48,13 @@ export {
   wallet,
   money,
   moneySend,
-  
+  navicon1,
+  accbalwal,
+  support,
+  encrypt,
+  icon,
+  savepig,
+  cart,
+  tune,
+
 };

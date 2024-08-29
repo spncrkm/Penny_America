@@ -325,3 +325,13 @@
   flex-direction: column;
   font-family: Poppins, sans-serif;
 }
+
+.chart-placeholder {
+    font-family: Poppins, sans-serif;
+    font-weight: bold;
+    color: #10215F;
+    font-size: 38px;
+    display: flex;
+    place-content: center;
+    padding-top: 2.5em;
+}

@@ -20,6 +20,7 @@
 
 .sidebar {
     margin-right: 20px;
+    height: 100%;
 }
 
 .budget_chart {
@@ -84,6 +85,7 @@
     border-radius: 8px;
     width: 8em;
     height: min-content;
+    cursor: pointer;
 }
 
 .dropdown_date {
@@ -92,6 +94,7 @@
     border-radius: 8px;
     width: 8em;
     height: min-content;
+    cursor: pointer;
 }
 
 .balance {
@@ -209,6 +212,12 @@
     width: 44px;
     border-radius: 100%;
     padding: .5em;
+}
+
+.no_transactions_message {
+    font-family: Poppins, sans-serif;
+    padding: 20px;
+    font-weight: 500;
 }
 
 @media screen and (max-width: 1056px) {
