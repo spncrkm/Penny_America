@@ -26,6 +26,7 @@ import icon from './Icon.png'
 import savepig from './savingpiggy.png'
 import cart from './shopping_cart.png'
 import tune from './tune.png'
+import banker from './banker_taking_client.png'
 
 export {
   logo,
@@ -56,5 +57,6 @@ export {
   savepig,
   cart,
   tune,
-
+  banker,
+  
 };

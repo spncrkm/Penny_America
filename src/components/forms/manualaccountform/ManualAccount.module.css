@@ -1,0 +1,79 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+
+.main {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex: 1 0 0;
+    align-self: center;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, #B598DB 0%, rgba(219, 234, 253, 0.56) 100%);
+}
+
+.form_container {
+    display: flex;
+    width: 992px;
+    height: 790px;
+    padding: 40px 100px 60px 80px;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+    flex-shrink: 0;
+    background-color: white;
+}
+
+.form_input1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.input {
+    border-radius: 8px;
+    background-color: white;
+    height: 40px;
+    padding: 8px 12px;
+    align-items: center;
+    gap: 12px;
+    align-self: stretch;
+    border: 1px solid var(--Neutral-200, #E5E7EB);
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.04), 0px 1px 2px 0px rgba(16, 24, 40, 0.04);
+}
+
+.form_input2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    align-self: stretch;
+}
+
+.form_input3 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 50px 50px;
+    column-gap: 40px;
+
+}
+
+.form_label3 {
+    height: 30px;
+}
+
+.form_label4 {
+    grid-column: 2;
+    grid-row: 1;
+}
+.input3 {
+    grid-column: 1;
+}
+
+.input4 {
+    grid-column: 2;
+}

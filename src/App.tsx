@@ -3,6 +3,7 @@ import HomePage from "./components/Homepage";
 import Dashboard from "./components/dashboard/Dashboard";
 import RegisterUser from "./components/RegisterUser";
 import LandingPage from "./components/landing/LandingPage";
+import ManualAccounts from "./components/forms/manualaccountform/ManualAccounts";
 
 function App() {
   
@@ -14,7 +15,7 @@ function App() {
           <Route path='/login' element={<HomePage />} />
           <Route path='/register' element={<RegisterUser />} />
           <Route path='/dashboard' element={<Dashboard />} />
-          {/* <Route path='/profile' element={<ProfilePage />} /> */}
+          <Route path='/form' element={<ManualAccounts />} />
         </Routes>
       </BrowserRouter>
   );
