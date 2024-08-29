@@ -1,27 +1,30 @@
-import { useState } from 'react'
+import { useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 
-interface BudgetModalProps {
+interface SavingModalProps {
     onClose: () => void;
 }
 
-const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
+
+const SavingPlan: React.FC<SavingModalProps> = ({ onClose }) => {
     const [show] = useState<boolean>(true);
+
 
   return (
     <>
+    
     <Modal show={show} onHide={onClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>
-            <h4>Add New Budget</h4>
-          <p>Please input the data you would like to track for your budget</p>
+            <h4>Add New Savings Plan</h4>
+          <p>Please input your savings plan so we can help you achieve your goals</p>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="budget.ControlInput1">
-              <Form.Label>Budget Name</Form.Label>
-              <Form.Select aria-placeholder='Frequency'>
+              <Form.Label>Saving Plan</Form.Label>
+              <Form.Select aria-placeholder='Saving plan'>
                 <option></option>
                 <option>Monthly</option>
                 <option>Half Year</option>
@@ -39,13 +42,8 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-            <Form.Label>Frequency</Form.Label>
-              <Form.Select aria-placeholder='Frequency'>
-                <option></option>
-                <option>Monthly</option>
-                <option>Half Year</option>
-                <option>Yearly</option>
-                </Form.Select>
+            <Form.Label>Input Target Date</Form.Label>
+              <Form.Control type='date' />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -59,7 +57,8 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
         </Modal.Footer>
       </Modal>
     </>
+    
   )
 }
 
-export default BudgetModal
+export default SavingPlan

@@ -15,7 +15,7 @@ export interface CreateBudgetResponse {
 
 export interface PatchBudgetRequest {
     category_id: number;
-    subcategory_id: number;
+    subcategory_id?: number;
     amount: number;
     recurring: string;
 }
@@ -29,5 +29,5 @@ export interface PatchBudgetResponse {
     amount: number;
     recurring: string;
     category: number;
-    subcategory: number;
+    subcategory?: number;
 }

@@ -3,6 +3,7 @@ import { accbalwal, cart, encrypt, icon, navcellphone, navicon1, piglogo, savepi
 import Style from "./NavBar.module.css";
 import BudgetModal from "../modals/BudgetModal";
 import { useState } from "react";
+import SavingPlan from "../modals/SavingPlan";
 
 const NavBar = () => {
   const username = localStorage.getItem("username") as string;
@@ -22,7 +23,7 @@ const NavBar = () => {
         <div className={Style.member}>
           <a href="#"><img src={icon} id="icon"/> Dashboard</a>
           <a href="#" onClick={toggleModal}><img src={accbalwal} id="accbalwal"/> Budget</a>
-          <a href="#"><img src={savepig} id="savepig"/> Savings Plan</a>
+          <a href="#" onClick={toggleModal}><img src={savepig} id="savepig"/> Savings Plan</a>
           <a href="#"><img src={navicon1} id="navicon1"/> Account</a>
           <a href="#"><img src={cart} id="cart"/> Transactions</a>
           <hr />
@@ -40,6 +41,7 @@ const NavBar = () => {
         </div>
       </div>
       {isModalOpen && <BudgetModal onClose={toggleModal} />}
+      {isModalOpen && <SavingPlan onClose={toggleModal} />}
     </>
   );
 };
