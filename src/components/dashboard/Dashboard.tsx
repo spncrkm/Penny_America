@@ -38,6 +38,8 @@ const Dashboard: React.FC = () => {
   console.log("transactionData:", transactionsData)
   console.log("accountData:", authData)
 
+  // console.log(transactionsData.transactions.map(u => u.category))
+
   useEffect(() => {
     if (isSuccess && authData) {
       const fetchInstitutionNames = async () => {
@@ -148,6 +150,8 @@ const Dashboard: React.FC = () => {
   };
 
   if (isLoading) return <div>Loading...</div>
+
+  console.log("hey:", transactionsData.transactions.map((transaction: any) => transaction.category))
 
 
   return (

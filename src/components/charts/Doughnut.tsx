@@ -35,8 +35,8 @@ const DoughnutChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
               }
             });
 
-            filteredTransactions.forEach((transaction: { category: any[]; amount: number; }) => {
-                const category = transaction.category && transaction.category[0];
+            filteredTransactions.forEach((transaction: { personal_finance_category: { primary: string }; amount: number; }) => {
+                const category = transaction.personal_finance_category && transaction.personal_finance_category.primary;
                 const amount = transaction.amount;
                 
                 if (category) {
