@@ -151,8 +151,6 @@ const Dashboard: React.FC = () => {
 
   if (isLoading) return <div>Loading...</div>
 
-  console.log("hey:", transactionsData.transactions.map((transaction: any) => transaction.category))
-
 
   return (
     <div className={style.dashboard}>
