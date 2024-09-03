@@ -16,15 +16,11 @@ const useTokenRefresh = (interval: number = 10 * 60 * 1000) => {
             if (refreshToken) {
                 try {
                     const result = await accountRefresh({ refreshToken }).unwrap();
-
-                    if (result) {
                         dispatch(setTokens(result));
                         console.log('Tokens refreshed successfully:', result);
-                    
-                    }
                 } catch (error) {
                     console.log('Token refresh failed:', error)
-                    navigate('/')
+                    navigate('/login')
                 }
             }
         };

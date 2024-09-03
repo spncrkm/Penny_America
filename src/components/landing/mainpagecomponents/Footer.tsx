@@ -15,7 +15,7 @@ const Footer = () => {
         <a href="#how-it-works">How it works</a>
       </nav>
       <form className={styles.subscribe}>
-        <input type="email" placeholder="Enter Email address" />
+        <input type="email" placeholder="Enter Email address" id={styles.form_input}/>
         <button type="submit">Subscribe</button>
       </form>
       <p className={styles.terms}>

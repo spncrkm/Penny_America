@@ -294,6 +294,8 @@
 /* Chart CSS */
 
 .chart-container {
+  display: flex;
+  flex-direction: column;
   color: black;
   width: 80%;
   font-family: Poppins, sans-serif;
@@ -304,7 +306,7 @@
 .barchart-container {
   display: flex;
   width: 90%;
-  height: 80%;
+  height: 100%;
   padding: 20px;
   font-family: Poppins, sans-serif;
 }
@@ -334,4 +336,14 @@
     display: flex;
     place-content: center;
     padding-top: 2.5em;
+}
+
+@media screen and (max-width: 430px) {
+  .landing-page {
+    display: flex;
+    width: 100vw;
+    margin: 0;
+    flex-direction: column;
+    padding: 0;
+  }
 }

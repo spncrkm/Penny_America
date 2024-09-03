@@ -4,6 +4,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import RegisterUser from "./components/RegisterUser";
 import LandingPage from "./components/landing/LandingPage";
 import ManualAccounts from "./components/forms/manualaccountform/ManualAccounts";
+import SavingsPlanForm from "./components/forms/savingplanform/SavingsPlanForm";
 
 function App() {
   
@@ -16,6 +17,7 @@ function App() {
           <Route path='/register' element={<RegisterUser />} />
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/form' element={<ManualAccounts />} />
+          <Route path="/savings" element={<SavingsPlanForm />} />
         </Routes>
       </BrowserRouter>
   );

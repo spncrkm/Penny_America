@@ -68,7 +68,7 @@ const RegisterUser = () => {
 
       dispatch(addUser(newUser))
       console.log(userId)
-      navigate('/')
+      navigate('/login')
       
     } catch (error) {
       console.error('Failed to create user', error);

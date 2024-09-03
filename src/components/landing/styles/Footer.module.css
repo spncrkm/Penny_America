@@ -61,3 +61,59 @@
     max-width: 300px;
     padding-top: 20px;
   }
+
+  @media (max-width: 768px) {
+    .footer_container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .logo {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .nav {
+      justify-content: end;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .footer_container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .logo {
+      grid-column: 1;
+      justify-content: center;
+      align-items: center;
+      max-width: 100%;
+      padding: 0;
+      width: 200px;
+    }
+
+    .terms {
+      display: flex;
+    }
+
+    #form_input {
+      width: 160px;
+      font-size: 14px;
+      padding: 4px 4px;
+    }
+
+    .subscribe button {
+      padding: 4px;
+      font-size: 14px;
+    }
+
+    .subscribe {
+      margin: 0;
+      display: flex;
+      width: 200px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }

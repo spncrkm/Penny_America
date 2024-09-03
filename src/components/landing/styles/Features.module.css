@@ -39,3 +39,9 @@
     font-size: 16px;
   }
   
+  @media (max-width: 430px) {
+    .cards {
+      display: grid;
+      
+    }
+  }

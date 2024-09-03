@@ -4,14 +4,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 20px 100px;
     background-color: #fff;
-    padding-left: 100px;
-    font-family: Poppins, sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: 500;
   }
 
   .logo {
+    display: flex;
+    align-items: center;
     color: #10215F;
     font-weight: 600;
     font-size: 18px;
@@ -29,12 +30,17 @@
     color: #333;
   }
   
-  .actions .login {
+  .login {
     margin-right: 15px;
     color: #333;
+    text-decoration: none;
+    border: 1px solid var(--Neutral-200, #E5E7EB);
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.04), 0px 1px 2px 0px rgba(16, 24, 40, 0.04);
   }
   
-  .actions .getStarted {
+  a.getStarted {
     background-color: #6A63E1;
     color: #fff;
     padding: 10px 20px;
@@ -42,10 +48,55 @@
     border-radius: 5px;
   }
 
-  .login {
-    text-decoration: none;
-    border: 1px solid var(--Neutral-200, #E5E7EB);
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.04), 0px 1px 2px 0px rgba(16, 24, 40, 0.04);
+  .icon {
+    display: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px){
+    .header {
+      box-sizing: border-box;
+      padding: 30px 50px;
+    }
+    
+    .nav {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      z-index: 100;
+      border-radius: 8px;
+    }
+
+    .nav.show {
+      display: flex;
+      padding: 10px;
+      justify-content: center;
+    }
+
+    .nav.show a {
+      padding: .3em 0;
+    }
+
+    .login {
+      border: none;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    a.getStarted {
+      background-color: #6A63E1;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .icon {
+      display: block;
+    }
   }

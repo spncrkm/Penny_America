@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Modal, Form, Button } from 'react-bootstrap';
+import { useCreateBudgetMutation, useGetCategoriesQuery } from '../../features/api/pennyApi';
+import { Category, CreateBudgetRequest, SubCategory } from '../../interface/Budget';
 
 interface BudgetModalProps {
     onClose: () => void;
@@ -7,6 +9,58 @@ interface BudgetModalProps {
 
 const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
     const [show] = useState<boolean>(true);
+    const [categoryId, setCategoryId] = useState<number>(0);
+    const [subcategoryId, setSubcategoryId] = useState<number | undefined>(0);
+    const [amount, setAmount] = useState<number>(0);
+    const [recurring, setRecurring] = useState<string>("");
+    const [filteredSubcategories, setFilteredSubcategories] = useState<SubCategory[]>([])
+    const { data: categoryData = [] } = useGetCategoriesQuery();
+    const [createBudget] = useCreateBudgetMutation();
+
+    function formatString(input: string): string {
+      return input
+        .toLowerCase()
+        .split('_')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    }
+
+    const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const selectedCategoryId = Number(e.target.value);
+      setCategoryId(selectedCategoryId)
+
+      const selectedCategory = categoryData.find((category: Category) => category.id === selectedCategoryId)
+      setFilteredSubcategories(selectedCategory ? selectedCategory.subcategories : []);
+    };
+
+    const handleSubcategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setSubcategoryId(Number(e.target.value))
+    };
+
+    const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setAmount(Number(e.target.value))
+    }
+
+    const handleRecurringChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setRecurring(e.target.value)
+    }
+
+  const handleSubmit = async () => {
+    const newBudget: CreateBudgetRequest = {
+      category_id: categoryId,
+      subcategory_id: subcategoryId,
+      amount: amount,
+      recurring: recurring,
+    };
+
+    try {
+      await createBudget(newBudget).unwrap();
+      onClose();
+    } catch (error) {
+      console.error("Failed to create budget", error);
+    }
+  };
+
 
   return (
     <>
@@ -20,12 +74,21 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="budget.ControlInput1">
-              <Form.Label>Budget Name</Form.Label>
-              <Form.Select aria-placeholder='Frequency'>
-                <option></option>
-                <option>Monthly</option>
-                <option>Half Year</option>
-                <option>Yearly</option>
+              <Form.Label>Category</Form.Label>
+              <Form.Select value={categoryId} onChange={handleCategoryChange}>
+                <option value={0}></option>
+                {categoryData.map((category: Category) => (
+                  <option value={category.id} key={category.id}>{formatString(category.name)}</option>
+                ))}
+                </Form.Select>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="amount.ControlInput2">
+              <Form.Label>Sub-Category Name (optional)</Form.Label>
+              <Form.Select value={subcategoryId} onChange={handleSubcategoryChange}>
+                <option value={0}></option>
+                {filteredSubcategories.map((subcategory: SubCategory) => (
+                  <option key={subcategory.id} value={subcategory.id}>{formatString(subcategory.name)}</option>
+                ))}
                 </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="amount.ControlInput2">
@@ -33,6 +96,7 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
               <Form.Control
                 type="text"
                 placeholder="Enter Amount"
+                onChange={handleAmountChange}
               />
             </Form.Group>
             <Form.Group
@@ -40,11 +104,12 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
               controlId="exampleForm.ControlTextarea1"
             >
             <Form.Label>Frequency</Form.Label>
-              <Form.Select aria-placeholder='Frequency'>
-                <option></option>
-                <option>Monthly</option>
-                <option>Half Year</option>
-                <option>Yearly</option>
+              <Form.Select value={recurring} onChange={handleRecurringChange}>
+                <option value=""></option>
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Biweekly">Bi-weekly</option>
+                <option value="Monthly">Monthly</option>
                 </Form.Select>
             </Form.Group>
           </Form>
@@ -53,7 +118,7 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
           <Button variant="secondary" onClick={onClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={onClose}>
+          <Button variant="primary" onClick={handleSubmit}>
             Save Changes
           </Button>
         </Modal.Footer>

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import NavBar from "../navbar/NavBar";
 import Transactions from "../Transactions";
 import style from "./Dashboard.module.css";
-import { money, moneySend, piggybank, savings, wallet } from "../../assets";
+import { money, moneySend, piggybank, wallet } from "../../assets";
 import Accounts from "../accounts/Accounts";
 import useTokenRefresh from "../../features/TokenRefresher";
 import DoughnutChart from "../charts/Doughnut";
@@ -23,18 +23,20 @@ const Dashboard: React.FC = () => {
 
   const [selectedAccountId, setSelectedAccountId] = useState<string | undefined>(undefined);
   const [filter, setFilter] = useState<string>("week");
-  const [chartFilter, setChartFilter] = useState<string>("doughnut");
+  const [chartFilter, setChartFilter] = useState<string>("bar");
   const [totalBalance, setTotalBalance] = useState<number>(0);
   const [accountGroups, setAccountGroups] = useState<AccountGroup[]>([]);
   const { data: authData, isLoading, isSuccess } = useGetAuthQuery(0);
   const { data: transactionsData } = useGetTransactionsQuery(0);
   const transactions: Transaction[] = useAppSelector((state) => state.plaid.transactions)
   const dispatch = useAppDispatch();
-  const { data: budgetData, } = useGetBudgetsQuery(0);
-  const { data: categoryData } = useGetCategoriesQuery(0);
+  const { data: budgetData, } = useGetBudgetsQuery();
+  const { data: categoryData } = useGetCategoriesQuery();
 
   console.log("budget:", budgetData)
   console.log("categoryData:", categoryData)
+  console.log("transactionData:", transactionsData)
+  console.log("accountData:", authData)
 
   useEffect(() => {
     if (isSuccess && authData) {
@@ -84,8 +86,15 @@ const Dashboard: React.FC = () => {
   const filteredTransactions = useMemo(() => {
     if (!selectedAccountId) return [];
 
+  console.log("selectedID:", selectedAccountId)
 
     const now = new Date();
+    const selectedAccount = accountGroups.flatMap(group => group.accounts).find(account => account.account_id === selectedAccountId);
+
+    if (selectedAccount && selectedAccount.subtype === "cd") {
+      return []
+    }
+
     return transactions
       .filter((tx) => !selectedAccountId || tx.account_id === selectedAccountId)
       .filter((tx) => {
@@ -100,23 +109,33 @@ const Dashboard: React.FC = () => {
           default:
             return true;
         }
-      });
-  }, [transactions, selectedAccountId, filter]);
+      })
+      .filter((tx) => {
+        if (selectedAccount) {
+          if (selectedAccount.subtype === "savings") {
+            return tx.category.includes("Payment");
+          } else if (selectedAccount.subtype === "credit card") {
+            return !tx.category.includes("Payment");
+          }
+        }
+        return true;
+      })
+  }, [transactions, selectedAccountId, filter, accountGroups]);
 
-  const renderChart = useMemo(() => {
+  const renderChart = () => {
     switch (chartFilter) {
-      case "doughnut":
-        return <DoughnutChart key={selectedAccountId + filter} selectedAccountId={selectedAccountId} filter={filter} />;
+      case "line":
+        return <LineChart key={selectedAccountId + filter} selectedAccountId={selectedAccountId} filter={filter} />;
       case "bar":
         return <BarChart selectedAccountId={selectedAccountId} filter={filter} />;
       case "pie":
         return <PieChart selectedAccountId={selectedAccountId} filter={filter} />;
-      case "line":
-        return <LineChart selectedAccountId={selectedAccountId} filter={filter} />;
+      case "doughnut":
+        return <DoughnutChart selectedAccountId={selectedAccountId} filter={filter} />;
       default:
         return null;
     }
-  }, [chartFilter, selectedAccountId, filter])
+  }
 
   const selectedAccount = accountGroups.flatMap(group => group.accounts).find(account => account.account_id === selectedAccountId);
   const selectedAccountBalance = selectedAccount ? selectedAccount.balances.current : 0;
@@ -158,20 +177,22 @@ const Dashboard: React.FC = () => {
             </div>
             <p>expenses</p>
             </div>
-          <div className={style.saving__plan}><img src={savings}/></div>
+          <div className={style.saving__plan}>
+
+          </div>
         <div className={style.budget_chart}>
             <div className={style.budget_header}>
                 <h2>Budget $1,920.00</h2>
           <div className={style.dropdown_container}>
           <select value={chartFilter} onChange={(event) => setChartFilter(event.target.value)} className={style.dropdown_chart}>
-            <option value="doughnut">Doughnut</option>
-            <option value="bar">Bar</option>
-            <option value="pie">Pie</option>
             <option value="line">Line</option>
+            <option value="bar">Bar</option>
+            <option value="doughnut">Doughnut</option>
+            <option value="pie">Pie</option>
           </select>
           </div>
             </div>
-          {renderChart}
+          {renderChart()}
           </div>
           <div className={style.bottom_container}>
           <div className={style.imgcontainer}>
@@ -203,8 +224,16 @@ const Dashboard: React.FC = () => {
               </select>
               </div>
               {selectedAccountId ? (
+                selectedAccount?.subtype === "cd" ? (
+                  <div className={style.no_transactions_message}>No payments are made from this account</div>
+                ) : filteredTransactions.length > 0 ? (
                 <Transactions transactions={filteredTransactions} />
               ) : (
+                <div className={style.no_transactions_message}>
+                  No transactions found for the selected account.
+                  </div>
+              )
+            ) : (
                 <div className={style.no_transactions_message}>
                   Please select an account to view transactions
                 </div>

@@ -12,6 +12,8 @@ import {
   PatchExpenseRequest,
   PatchExpenseResponse,
 } from "../../interface/Expense";
+import { Budget } from "../../components/charts/BarChart";
+import { Category } from "../../interface/Categories";
 
 export const PennyApi = createApi({
   reducerPath: "PennyApi",
@@ -53,7 +55,7 @@ export const PennyApi = createApi({
   },
   endpoints: (builder) => ({
     createUser: builder.mutation({
-      query: (userInfo) => ({
+      query: (userInfo: any) => ({
         url: `/api/v0/accounts/`,
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -62,7 +64,7 @@ export const PennyApi = createApi({
     }),
 
     accountRefresh: builder.mutation({
-      query: ({ refreshToken }) => ({
+      query: ({ refreshToken }: { refreshToken: string }) => ({
         url: "/api/v0/accounts/refresh",
         method: "POST",
         headers: {
@@ -88,21 +90,21 @@ export const PennyApi = createApi({
     }),
 
     deleteItems: builder.mutation({
-      query: (item_id) => ({
+      query: (item_id: number) => ({
         url: `/api/v0/plaid/items`,
         method: "DELETE",
         body: item_id,
       }),
     }),
 
-    getCategories: builder.query({
+    getCategories: builder.query<Category[], void>({
       query: () => ({
         url: "/api/v0/categories/all",
         method: "GET",
       }),
     }),
 
-    getBudgets: builder.query({
+    getBudgets: builder.query<Budget[], void>({
       query: () => "api/v0/budgets/",
     }),
 
@@ -132,7 +134,7 @@ export const PennyApi = createApi({
     }),
 
     deleteBudget: builder.mutation({
-      query: (budget_id) => ({
+      query: (budget_id: number) => ({
         url: `/api/v0/budgets/${budget_id}`,
         method: "DELETE",
       }),
@@ -167,7 +169,7 @@ export const PennyApi = createApi({
     }),
 
     deleteExpense: builder.mutation({
-      query: (expense_id) => ({
+      query: (expense_id: number) => ({
         url: `/api/v0/expenses/${expense_id}`,
         method: "DELETE",
       }),

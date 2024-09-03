@@ -35,3 +35,32 @@
     max-width: 100%;
     height: auto;
   }
+
+  @media (max-width: 430px) {
+    .hero {
+      padding-left: 12px;
+      justify-content: center;
+      height: 380px;
+    }
+
+    .content {
+      padding-right: 20px;
+      max-width: 70%;
+      z-index: 20;
+      position: relative;
+    }
+
+    .image {
+      z-index: 10;
+      position: absolute;
+      top: 160px;
+    }
+
+    .cta {
+      background-color: #6A63E1;
+      color: #fff;
+      padding: 6px 14px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+  }
