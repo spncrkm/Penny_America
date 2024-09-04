@@ -16,6 +16,7 @@ import { Transaction } from "../../interface/Transaction";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { setTransactions } from "../../features/plaidSlice";
 import PlaidLink from "../PlaidLink";
+import BudgetListDisplay from "../budgetList/BudgetListDisplay";
 
 const Dashboard: React.FC = () => {
 
@@ -30,7 +31,7 @@ const Dashboard: React.FC = () => {
   const { data: transactionsData } = useGetTransactionsQuery(0);
   const transactions: Transaction[] = useAppSelector((state) => state.plaid.transactions)
   const dispatch = useAppDispatch();
-  const { data: budgetData, } = useGetBudgetsQuery();
+  const { data: budgetData, refetch } = useGetBudgetsQuery();
   const { data: categoryData } = useGetCategoriesQuery();
 
   console.log("budget:", budgetData)
@@ -38,7 +39,7 @@ const Dashboard: React.FC = () => {
   console.log("transactionData:", transactionsData)
   console.log("accountData:", authData)
 
-  // console.log(transactionsData.transactions.map(u => u.category))
+
 
   useEffect(() => {
     if (isSuccess && authData) {
@@ -151,7 +152,6 @@ const Dashboard: React.FC = () => {
 
   if (isLoading) return <div>Loading...</div>
 
-
   return (
     <div className={style.dashboard}>
       <aside className={style.sidebar}>
@@ -180,7 +180,7 @@ const Dashboard: React.FC = () => {
             <p>expenses</p>
             </div>
           <div className={style.saving__plan}>
-
+            <BudgetListDisplay budgetData={budgetData} categoryData={categoryData} refetchBudget={refetch} />
           </div>
         <div className={style.budget_chart}>
             <div className={style.budget_header}>
@@ -248,3 +248,12 @@ const Dashboard: React.FC = () => {
 };
 
 export default Dashboard;
+
+
+export function formatString(input: string): string {
+  return input
+    .toLowerCase()
+    .split('_')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}

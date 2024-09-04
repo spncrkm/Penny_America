@@ -1,27 +1,29 @@
 
 import { Link, useNavigate } from "react-router-dom";
-import Login from "./Login";
+import Login from "./login/Login";
 import styles from './Homepage.module.css'
 
 
 
 const HomePage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   
 
-  const handleRegister = () => {
-    navigate('/register')
-  }
+  // const handleRegister = () => {
+  //   navigate('/register')
+  // }
   return (
+    
       <div className={styles.homepage}>
+        <div className={styles.text_container}>
         <h3>Welcome to PennyAM</h3>
-        <Link to="/dashboard" className="btn btn-lg view-dashboard">
-          
-        </Link>
+        </div>
+        <div className={styles.login_container}>
         <Login />
-        <button onClick={handleRegister} className={styles.btn}>
+        </div>
+        {/* <button onClick={handleRegister} className={styles.btn}>
           Register
-        </button>
+        </button> */}
       </div>
     
   );

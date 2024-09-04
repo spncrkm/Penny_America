@@ -1,11 +1,65 @@
-
+@keyframes button-click {
+    0% {
+      transform: scale(1);
+    }
+    10% {
+      transform: scale(0.9);
+    }
+    20% {
+      transform: scale(0.8);
+    }
+    35% {
+      transform: scale(0.75);
+    }
+    45% {
+      transform: scale(0.7);
+    }
+    50% {
+      transform: scale(0.6);
+    }
+    60% {
+      transform: scale(0.65);
+    }
+    70% {
+      transform: scale(0.7);
+    }
+    80% {
+      transform: scale(0.8);
+    }
+    90% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 
 .homepage {
     background-color: var(--Neutral-100);
     justify-content: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
     height: 100vh;
+    background: linear-gradient(135deg, #B598DB 0%, rgba(219, 234, 253, 0.56) 100%);
+    /* background-image: url(../assets/PAlogo.png);
+    background-repeat: no-repeat; */
+}
+
+.text_container {
+    height: 160px;
+    place-content: center;
+}
+
+.text_container > h3 {
+    font-family: Poppins, sans-serif;
+    font-size: 3em;
+    font-weight: 600;
+}
+
+.login_container {
+    display: flex;
+
 }
 
 .btn {
@@ -15,6 +69,10 @@
     text-decoration: none;
     border-radius: 10px;
     margin-left: 10px;
+}
+
+.btn:active {
+    animation: button-click 0.2s forwards;
 }
 
 .btn:hover {

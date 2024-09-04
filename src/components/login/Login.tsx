@@ -2,12 +2,13 @@
 import { FormEvent, useState } from "react"
 import { Form } from "react-bootstrap"
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../features/userSlice";
-import { setTokens } from "../features/authSlice";
+import { loginUser } from "../../features/userSlice";
+import { setTokens } from "../../features/authSlice";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../store";
+import { AppDispatch } from "../../store";
 
+import style from './Login.module.css'
 // import { useAppDispatch } from "../features/hooks";
 
 const Login = () => {
@@ -44,22 +45,24 @@ const Login = () => {
         console.error('Login failed', error);
       } finally {
         navigate('/dashboard')
-
       }
-      }
+    }
     
 
   return (
-    <Form>
-      <Form.Group>
+    <Form className={style.form_container}>
+      <Form.Group className={style.input_container}>
         <Form.Control type="username" onChange={handleUsername} placeholder="username" />
       </Form.Group>
-      <Form.Group>
+      <Form.Group className={style.input_container}>
         <Form.Control type="password" onChange={handlePassword} placeholder="password" />
       </Form.Group>
-    <button className="btn btn-light" onClick={handleSubmit}>
-        Log In
-    </button>
+      <div className={style.btn_container}>
+        <button className={style.login} onClick={handleSubmit}>
+            Log In
+        </button>
+
+      </div>
     </Form>
   )
 }

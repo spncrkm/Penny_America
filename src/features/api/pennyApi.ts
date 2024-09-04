@@ -13,7 +13,7 @@ import {
   PatchExpenseResponse,
 } from "../../interface/Expense";
 import { Budget } from "../../components/charts/BarChart";
-import { Category } from "../../interface/Categories";
+import { Category } from "../../interface/Budget";
 
 export const PennyApi = createApi({
   reducerPath: "PennyApi",
@@ -133,10 +133,10 @@ export const PennyApi = createApi({
       }),
     }),
 
-    deleteBudget: builder.mutation({
-      query: (budget_id: number) => ({
-        url: `/api/v0/budgets/${budget_id}`,
-        method: "DELETE",
+    deleteBudget: builder.mutation<void, number>({
+      query: (budget_id) => ({
+          url: `/api/v0/budgets/${budget_id}`,
+          method: "DELETE",
       }),
     }),
 

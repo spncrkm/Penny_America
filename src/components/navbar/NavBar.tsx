@@ -4,11 +4,13 @@ import Style from "./NavBar.module.css";
 import BudgetModal from "../modals/BudgetModal";
 import { useState } from "react";
 import SavingPlan from "../modals/SavingPlanModal";
+import { useGetBudgetsQuery } from "../../features/api/pennyApi";
 
 const NavBar = () => {
   const username = localStorage.getItem("username") as string;
   const [isBudgetModalOpen, setBudgetModalOpen] = useState<boolean>(false);
   const [isSavingPlanModalOpen, setSavingPlanModalOpen] = useState<boolean>(false);
+  const { refetch } = useGetBudgetsQuery();
 
   const toggleBudgetModal = () => {
     setBudgetModalOpen(!isBudgetModalOpen);
@@ -45,7 +47,7 @@ const NavBar = () => {
           <h3>{username} <Logout/></h3>
         </div>
       </div>
-      {isBudgetModalOpen && <BudgetModal onClose={toggleBudgetModal} />}
+      {isBudgetModalOpen && <BudgetModal onClose={toggleBudgetModal} refetchBudgets={refetch}/>}
       {isSavingPlanModalOpen && <SavingPlan onClose={toggleSavingPlanModal} />}
     </>
   );

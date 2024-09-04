@@ -39,7 +39,12 @@ export interface SubCategory {
 }
 
 export interface Category {
+    reduce: any;
     id: number;
     name: string;
     subcategories: SubCategory[];
+}
+  
+export interface CategoryResponse {
+categories: Category[];
 }

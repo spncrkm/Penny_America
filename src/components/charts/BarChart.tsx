@@ -3,7 +3,7 @@ import { Chart as ChartJS, BarElement, Tooltip, Legend, CategoryScale, LinearSca
 import { Bar } from 'react-chartjs-2'
 import { ChartProps } from '../../interface/Chart'
 import { useGetBudgetsQuery, useGetCategoriesQuery } from '../../features/api/pennyApi'
-import { Category } from '../../interface/Categories'
+import { Category } from '../../interface/Budget'
 
 ChartJS.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale)
 
@@ -42,13 +42,21 @@ const BarChart: React.FC<ChartProps> = () => {
   const labels = budgetArray.map(budget => categoryMapping[budget.category] || `Category ${budget.category}`)
   const dataValues = budgetArray.map(budget => parseFloat(budget.amount));
 
+  console.log(labels)
+
   const chartData = {
     labels,
     datasets: [
       {
         label: 'Budget Amount',
         data: dataValues,
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        backgroundColor: [
+          'rgba(75, 192, 192, 0.6)',
+          'rgba(235, 107, 52, 0.6)',
+          'rgba(52, 162, 235, 0.6)',
+          'rgba(162, 52, 235, 0.6)',
+          'rgba(201, 235, 52, 0.6)',
+        ],
         axis: 'y',
       },
     ],

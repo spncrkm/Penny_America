@@ -5,9 +5,10 @@ import { Category, CreateBudgetRequest, SubCategory } from '../../interface/Budg
 
 interface BudgetModalProps {
     onClose: () => void;
+    refetchBudgets: () => void;
 }
 
-const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
+const BudgetModal: React.FC<BudgetModalProps> = ({ onClose, refetchBudgets }) => {
     const [show] = useState<boolean>(true);
     const [categoryId, setCategoryId] = useState<number>(0);
     const [subcategoryId, setSubcategoryId] = useState<number | undefined>(0);
@@ -25,11 +26,13 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
         .join(' ');
     }
 
+    const excludedCategoryIds = [1,2,6,11];
+
     const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
       const selectedCategoryId = Number(e.target.value);
       setCategoryId(selectedCategoryId)
 
-      const selectedCategory = categoryData.find((category: Category) => category.id === selectedCategoryId)
+    const selectedCategory = categoryData.find((category: Category) => category.id === selectedCategoryId)
       setFilteredSubcategories(selectedCategory ? selectedCategory.subcategories : []);
     };
 
@@ -55,11 +58,14 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
 
     try {
       await createBudget(newBudget).unwrap();
+      refetchBudgets();
       onClose();
     } catch (error) {
       console.error("Failed to create budget", error);
     }
   };
+
+  const filteredCategoryData = categoryData.filter((category: Category) => !excludedCategoryIds.includes(category.id));
 
 
   return (
@@ -77,7 +83,7 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose }) => {
               <Form.Label>Category</Form.Label>
               <Form.Select value={categoryId} onChange={handleCategoryChange}>
                 <option value={0}></option>
-                {categoryData.map((category: Category) => (
+                {filteredCategoryData.map((category: Category) => (
                   <option value={category.id} key={category.id}>{formatString(category.name)}</option>
                 ))}
                 </Form.Select>

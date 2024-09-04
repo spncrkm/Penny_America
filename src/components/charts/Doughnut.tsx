@@ -60,6 +60,8 @@ const DoughnutChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
         });
       };
 
+    // const formatedCategories = formatString(categories)
+
     const chartData = {
         labels: categories,
         datasets: [
