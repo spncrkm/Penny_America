@@ -29,8 +29,13 @@ const BudgetListDisplay: React.FC<BudgetDisplayProps> = ({ budgetData, categoryD
 
     const getCategoryName = (categoryId: number) => {
         const category = categoryData?.find(cat => cat.id === categoryId);
-        return category ? formatString(category.name) : 'Unknown Category';
+        return category ? formatString(category.name) : "unknown";
     };
+
+    const getSubcategoryName = (subCategoryId: number) => {
+        const subcategory = categoryData?.flatMap(cat => cat.subcategories).find(c => c.id === subCategoryId)
+        return subcategory ? formatString(subcategory.name) : "unknown";
+    }
 
     const handleDelete = async (budgetId: number) => {
         try {
@@ -46,7 +51,7 @@ const BudgetListDisplay: React.FC<BudgetDisplayProps> = ({ budgetData, categoryD
             {budgetData?.map((budget, index) => (
                 <Accordion.Item eventKey={String(index)} key={budget.id}>
                     <Accordion.Header>
-                        {getCategoryName(budget.category)}
+                        <strong>{budget.subcategory ? getSubcategoryName(budget.subcategory) : getCategoryName(budget.category)}</strong>
                     </Accordion.Header>
                     <Accordion.Body>
                         <p><strong>Amount:</strong> ${budget.amount}</p>

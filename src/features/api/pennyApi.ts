@@ -14,6 +14,7 @@ import {
 } from "../../interface/Expense";
 import { Budget } from "../../components/charts/BarChart";
 import { Category } from "../../interface/Budget";
+import { TransactionProp } from "../../interface/Transaction";
 
 export const PennyApi = createApi({
   reducerPath: "PennyApi",
@@ -74,7 +75,7 @@ export const PennyApi = createApi({
       }),
     }),
 
-    getTransactions: builder.query({
+    getTransactions: builder.query<TransactionProp, void>({
       query: () => "/api/v0/plaid/transactions",
     }),
 

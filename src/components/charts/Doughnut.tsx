@@ -4,6 +4,7 @@ import { Doughnut } from 'react-chartjs-2'
 import { Chart, ArcElement, TooltipItem, Tooltip, Legend } from 'chart.js'
 import { useAppSelector } from '../../features/hooks';
 import { ChartProps } from '../../interface/Chart';
+import { formatString } from '../dashboard/Dashboard';
 
 Chart.register(ArcElement, Tooltip, Legend);
 
@@ -36,7 +37,7 @@ const DoughnutChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
             });
 
             filteredTransactions.forEach((transaction: { personal_finance_category: { primary: string }; amount: number; }) => {
-                const category = transaction.personal_finance_category && transaction.personal_finance_category.primary;
+                const category = formatString(transaction.personal_finance_category.primary);
                 const amount = transaction.amount;
                 
                 if (category) {

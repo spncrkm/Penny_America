@@ -1,6 +1,6 @@
 export interface CreateBudgetRequest {
     category_id: number;
-    subcategory_id?: number;
+    subcategory_id?: number | null;
     amount: number;
     recurring: string;
 }
@@ -8,7 +8,7 @@ export interface CreateBudgetRequest {
 export interface CreateBudgetResponse {
     id: number;
     category_id: number;
-    subcategory_id: number;
+    subcategory_id?: number;
     amount: number;
     recurring: string;
 }

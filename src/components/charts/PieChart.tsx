@@ -4,6 +4,7 @@ import { Pie } from 'react-chartjs-2';
 import { useAppSelector } from '../../features/hooks';
 import { Transaction } from '../../interface/Transaction';
 import { ChartProps } from '../../interface/Chart';
+import { formatString } from '../dashboard/Dashboard';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -33,7 +34,7 @@ const PieChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
   }, [storedData, selectedAccountId, filter]);
 
   filteredTransactions.forEach((transaction) => {
-    const category = transaction.category && transaction.category[0];
+    const category = formatString(transaction.personal_finance_category.primary);
     const amount = Math.abs(transaction.amount);
 
     if (category) {

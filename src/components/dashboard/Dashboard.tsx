@@ -23,12 +23,12 @@ const Dashboard: React.FC = () => {
   useTokenRefresh();
 
   const [selectedAccountId, setSelectedAccountId] = useState<string | undefined>(undefined);
-  const [filter, setFilter] = useState<string>("week");
+  const [filter, setFilter] = useState<string>("year");
   const [chartFilter, setChartFilter] = useState<string>("bar");
   const [totalBalance, setTotalBalance] = useState<number>(0);
   const [accountGroups, setAccountGroups] = useState<AccountGroup[]>([]);
-  const { data: authData, isLoading, isSuccess } = useGetAuthQuery(0);
-  const { data: transactionsData } = useGetTransactionsQuery(0);
+  const { data: authData, isLoading, isSuccess } = useGetAuthQuery({});
+  const { data: transactionsData } = useGetTransactionsQuery();
   const transactions: Transaction[] = useAppSelector((state) => state.plaid.transactions)
   const dispatch = useAppDispatch();
   const { data: budgetData, refetch } = useGetBudgetsQuery();
@@ -88,9 +88,6 @@ const Dashboard: React.FC = () => {
 
   const filteredTransactions = useMemo(() => {
     if (!selectedAccountId) return [];
-
-  console.log("selectedID:", selectedAccountId)
-
     const now = new Date();
     const selectedAccount = accountGroups.flatMap(group => group.accounts).find(account => account.account_id === selectedAccountId);
 
@@ -141,7 +138,16 @@ const Dashboard: React.FC = () => {
   }
 
   const selectedAccount = accountGroups.flatMap(group => group.accounts).find(account => account.account_id === selectedAccountId);
-  const selectedAccountBalance = selectedAccount ? selectedAccount.balances.current : 0;
+  const selectedAccountBalance = selectedAccount ? selectedAccount.balances.available : 0;
+  const selectedAccountCurrent = selectedAccount ? selectedAccount.balances.current : 0;
+
+  const displayBalanceLabel = selectedAccount?.subtype === "cd" || selectedAccount?.subtype === "credit card"
+    ? "Current Balance"
+    : "Available Balance";
+
+  const displayBalance = selectedAccount?.subtype === "cd" || selectedAccount?.subtype === "credit card"
+    ? selectedAccountCurrent
+    : selectedAccountBalance;
 
   const changeAmount = (amount: number) => {
     return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toLocaleString('en-US', { 
@@ -164,7 +170,7 @@ const Dashboard: React.FC = () => {
             </div>
             <div className={style.text_container}>
             <p>Total Balance</p>
-            <p>{changeAmount(selectedAccountBalance)}</p>
+            <p>{changeAmount(totalBalance)}</p>
             </div>
         </div>
           <div className={style.income}>
@@ -183,8 +189,7 @@ const Dashboard: React.FC = () => {
             <BudgetListDisplay budgetData={budgetData} categoryData={categoryData} refetchBudget={refetch} />
           </div>
         <div className={style.budget_chart}>
-            <div className={style.budget_header}>
-                <h2>Budget $1,920.00</h2>
+            {/* <div className={style.budget_header}> */}
           <div className={style.dropdown_container}>
           <select value={chartFilter} onChange={(event) => setChartFilter(event.target.value)} className={style.dropdown_chart}>
             <option value="line">Line</option>
@@ -192,9 +197,12 @@ const Dashboard: React.FC = () => {
             <option value="doughnut">Doughnut</option>
             <option value="pie">Pie</option>
           </select>
-          </div>
+          {/* </div> */}
             </div>
+          <div className={style.chart__container}>
           {renderChart()}
+
+          </div>
           </div>
           <div className={style.bottom_container}>
           <div className={style.imgcontainer}>
@@ -208,7 +216,10 @@ const Dashboard: React.FC = () => {
           <div className={style.accounts}>
             <div className={style.account_header}>
             <h3>Accounts</h3>
-              <div className={style.total_balance}> {changeAmount(totalBalance)}</div>
+              <div className={style.total_balance}>
+                <p>{displayBalanceLabel}: {changeAmount(displayBalance)}</p>
+                {/* Available Balance: {changeAmount(selectedAccountBalance)} */}
+              </div>
             </div>
             <Accounts 
             onAccountSelect={handleAccountSelect} 

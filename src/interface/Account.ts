@@ -1,10 +1,6 @@
 
 import { ReactNode } from "react";
 
-export interface Auth {
-    accounts: string;
-}
-
 export interface Account {
     account_id: string;
     balances: {
@@ -40,6 +36,10 @@ export interface AccountGroup {
     institution_name: string;
     accounts: Account[];
     numbers: Number[];
+}
+
+export interface AccountProps {
+    account: Account[];
 }
 
 export interface Data {

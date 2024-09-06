@@ -11,7 +11,7 @@ interface BudgetModalProps {
 const BudgetModal: React.FC<BudgetModalProps> = ({ onClose, refetchBudgets }) => {
     const [show] = useState<boolean>(true);
     const [categoryId, setCategoryId] = useState<number>(0);
-    const [subcategoryId, setSubcategoryId] = useState<number | undefined>(0);
+    const [subcategoryId, setSubcategoryId] = useState<number>(0);
     const [amount, setAmount] = useState<number>(0);
     const [recurring, setRecurring] = useState<string>("");
     const [filteredSubcategories, setFilteredSubcategories] = useState<SubCategory[]>([])
@@ -91,7 +91,7 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose, refetchBudgets }) =>
             <Form.Group className="mb-3" controlId="amount.ControlInput2">
               <Form.Label>Sub-Category Name (optional)</Form.Label>
               <Form.Select value={subcategoryId} onChange={handleSubcategoryChange}>
-                <option value={0}></option>
+                <option></option>
                 {filteredSubcategories.map((subcategory: SubCategory) => (
                   <option key={subcategory.id} value={subcategory.id}>{formatString(subcategory.name)}</option>
                 ))}
@@ -114,8 +114,8 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose, refetchBudgets }) =>
                 <option value=""></option>
                 <option value="Daily">Daily</option>
                 <option value="Weekly">Weekly</option>
-                <option value="Biweekly">Bi-weekly</option>
                 <option value="Monthly">Monthly</option>
+                <option value="Yearly">Yearly</option>
                 </Form.Select>
             </Form.Group>
           </Form>

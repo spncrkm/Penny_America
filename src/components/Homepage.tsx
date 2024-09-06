@@ -1,5 +1,4 @@
 
-import { Link, useNavigate } from "react-router-dom";
 import Login from "./login/Login";
 import styles from './Homepage.module.css'
 
@@ -21,9 +20,6 @@ const HomePage = () => {
         <div className={styles.login_container}>
         <Login />
         </div>
-        {/* <button onClick={handleRegister} className={styles.btn}>
-          Register
-        </button> */}
       </div>
     
   );
