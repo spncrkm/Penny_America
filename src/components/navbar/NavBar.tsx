@@ -23,9 +23,13 @@ const NavBar = () => {
 
   return (
     <>
-      <div className={Style.sidebar}>
+      <nav className={Style.sidebar}>
         <div className={Style.brand}>
           <img src={piglogo} /> PennyAM
+        </div>
+        <div className={Style.chatSupport}>
+          <p id={Style.p_text}>Welcome back 👋</p>
+          <h3>{username} <Logout/></h3>
         </div>
         <div className={Style.member}>
           <a href="#"><img src={icon} id="icon"/> Dashboard</a>
@@ -41,12 +45,7 @@ const NavBar = () => {
             <img src={navcellphone} />
           </div>
         </div>
-
-        <div className={Style.chatSupport}>
-          <p>Welcome back 👋</p>
-          <h3>{username} <Logout/></h3>
-        </div>
-      </div>
+      </nav>
       {isBudgetModalOpen && <BudgetModal onClose={toggleBudgetModal} refetchBudgets={refetch}/>}
       {isSavingPlanModalOpen && <SavingPlan onClose={toggleSavingPlanModal} />}
     </>

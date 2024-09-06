@@ -65,14 +65,6 @@
     grid-row: 1 / 3;
 }
 
-/* .dropdown_chart {
-    display: flex;
-    height: 2em;
-    width: 7em;
-    align-content: center;
-    background-color: #C7D2FE;
-} */
-
 .bottom_container {
     display: grid;
     grid-template-columns: 1fr 2fr 2fr;
@@ -91,8 +83,8 @@
     background-color: #C7D2FE;
     color: #4F46E5;
     border-radius: 8px;
-    width: 8em;
-    height: min-content;
+    width: 7em;
+    height: 32px;
     cursor: pointer;
 }
 
@@ -108,17 +100,68 @@
 .balance {
     display: flex;
     flex-direction: column;
+    position: relative;
     padding: 20px;
     border-radius: 12px;
-    background-color: white;
+    background:rgba(79, 70, 229, 0.20);
     box-shadow: 0px 6px 15px -2px rgba(16, 24, 40, 0.08), 0px 6px 15px -2px rgba(16, 24, 40, 0.08);
     text-align: start;
     justify-content: space-between;
     line-height: normal;
+    
+    transform-style: preserve-3d;
+    
 }
+
+.balance:hover {
+    transform: perspective(5000px) 
+        rotateY(10deg)
+        rotateX(10deg);
+    background: linear-gradient(-45deg, #605bc1, #b298d3);
+    color: #C7D2FE;
+}
+
+/* .balance::before {
+    transform: translateZ(-49px);
+    inset: .75rem;
+    background:rgba(79, 70, 229, 0.20);
+}
+.balance::after {
+    inset: -1rem;
+    background: linear-gradient(-45deg, red, blue);
+    transform: translateZ(-50px)
+} */
 
 .text_container p {
     margin: 0;
+    text-shadow: 0 0 .3em;
+}
+
+.text_container {
+    /* background: #B598DB; */
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.text_container::after {
+    content: "";
+    position: absolute;
+    inset: -1rem;
+    /* background: linear-gradient(-45deg, red, blue); */
+    transform: translateZ(-50px);
+    border-radius: inherit;
+}
+
+.balance_p {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.balance_p::after {
+    content: "";
+    position: absolute;
+    inset: 1rem;
+    transform: translateZ(100px);
 }
 
 .income {
@@ -231,5 +274,28 @@
 @media screen and (max-width: 1056px) {
     .sidebar {
         display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        padding: 10px;
+    }
+
+    .dashboard-item {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+        padding: 10px;
+    }
+
+    .dashboard-item {
+        margin-bottom: 15px;
     }
 }

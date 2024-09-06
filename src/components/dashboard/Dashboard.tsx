@@ -18,6 +18,7 @@ import { setTransactions } from "../../features/plaidSlice";
 import PlaidLink from "../PlaidLink";
 import BudgetListDisplay from "../budgetList/BudgetListDisplay";
 
+
 const Dashboard: React.FC = () => {
 
   useTokenRefresh();
@@ -158,6 +159,17 @@ const Dashboard: React.FC = () => {
 
   if (isLoading) return <div>Loading...</div>
 
+
+  // const mouseOverBalance = (e: MouseEvent) => {
+  //   e.target.style.background = "red";
+  // }
+
+  // const mouseOutBalance = (e: MouseEvent) => {
+  //   e.target.style.background = "";
+  // }
+
+  
+
   return (
     <div className={style.dashboard}>
       <aside className={style.sidebar}>
@@ -169,8 +181,8 @@ const Dashboard: React.FC = () => {
             <img src={wallet} />
             </div>
             <div className={style.text_container}>
-            <p>Total Balance</p>
-            <p>{changeAmount(totalBalance)}</p>
+            <p className={style.balance_p}>Total Balance</p>
+            <p className={style.balance_p}>{changeAmount(totalBalance)}</p>
             </div>
         </div>
           <div className={style.income}>
@@ -189,7 +201,6 @@ const Dashboard: React.FC = () => {
             <BudgetListDisplay budgetData={budgetData} categoryData={categoryData} refetchBudget={refetch} />
           </div>
         <div className={style.budget_chart}>
-            {/* <div className={style.budget_header}> */}
           <div className={style.dropdown_container}>
           <select value={chartFilter} onChange={(event) => setChartFilter(event.target.value)} className={style.dropdown_chart}>
             <option value="line">Line</option>
@@ -197,7 +208,6 @@ const Dashboard: React.FC = () => {
             <option value="doughnut">Doughnut</option>
             <option value="pie">Pie</option>
           </select>
-          {/* </div> */}
             </div>
           <div className={style.chart__container}>
           {renderChart()}
@@ -218,7 +228,6 @@ const Dashboard: React.FC = () => {
             <h3>Accounts</h3>
               <div className={style.total_balance}>
                 <p>{displayBalanceLabel}: {changeAmount(displayBalance)}</p>
-                {/* Available Balance: {changeAmount(selectedAccountBalance)} */}
               </div>
             </div>
             <Accounts 

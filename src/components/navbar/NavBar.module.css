@@ -2,16 +2,13 @@
 
 .container {
   display:flex;
-  width: 100%;
-  height: 100%;
-  grid-template-columns: 180px 1fr;
-  background-color: var(--Neutral-100);
+  flex-wrap: nowrap;
 }
 
 .sidebar {
     position: relative;
     display: grid;
-    grid-template-rows: .5fr 4fr .7fr;
+    grid-template-rows: .3fr .4fr 5fr;
     font-family: Poppins;
     height: 100vh;
     width: 350px;
@@ -49,6 +46,13 @@
 
   .navimg {
     padding-top: 100px;
+    height: 100%;
+    width: 100%;
+  }
+
+  .navimg > img {
+    height: 320px;
+    width: 100%;
   }
 
   .name_logout {
@@ -90,8 +94,14 @@
     font-weight: 600;
     font-size: 20px;
   }
+
   .member p {
     color: rgb(95, 94, 94);
+  }
+
+  #p_text {
+    font-size: 20px;
+    font-weight: 600;
   }
   
   .chatSupport p h3 {
@@ -116,4 +126,52 @@
   
   #icon:focus {
     color: #4F46E5;
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .navbar {
+      position: relative;
+    }
+  
+    .sidebar {
+      height: auto;
+      width: 100%;
+      display: none;
+    }
+  
+    .sidebar.open {
+      display: flex;
+    }
+  
+    .main-content {
+      padding: 10px;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 5px;
+    }
+  
+    .navbar h1 {
+      font-size: 1.5rem;
+    }
+  
+    .main-content {
+      padding: 5px;
+    }
+  
+    .sidebar {
+      display: none;
+    }
+  
+    .sidebar.open {
+      display: block;
+    }
   }
