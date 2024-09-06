@@ -32,7 +32,7 @@ const BarChart: React.FC<ChartProps> = () => {
   const { data: categoriesData, isLoading: categoriesLoading } = useGetCategoriesQuery();
   const { data: transactionsData, isLoading: transactionsLoading } = useGetTransactionsQuery();
 
-  const [, setCategoryMapping] = useState<{ [key: number]: string }>({});
+  const [categoryMapping, setCategoryMapping] = useState<{ [key: number]: string }>({});
   const [_, setSubcategoryMapping] = useState<{ [key: number]: string }>({})
 
   useEffect(() => {
@@ -51,8 +51,7 @@ const BarChart: React.FC<ChartProps> = () => {
   }, [categoriesData]);
 
   const getCategoryName = (categoryId: number) => {
-    const category = categoriesData?.find(cat => cat.id === categoryId);
-    return category ? formatString(category.name) : "unknown";
+    return categoryMapping[categoryId] || "unknown category";
 };
 
 const getSubcategoryName = (subCategoryId: number) => {
@@ -137,7 +136,7 @@ const chartData: ChartData[] = prepareChartData(budgetData, transactionsData, ca
   const budgetArray = Array.isArray(budgetData) ? budgetData : [];
   console.log(budgetArray)
 
-  const labels = budgetArray.map(budget => budget.subcategory ? getSubcategoryName(budget.subcategory) : getCategoryName(budget.category))
+  const labels = budgetArray.map(budget => budget.subcategory ? getSubcategoryName(budget.subcategory) : formatString(getCategoryName(budget.category)))
 
   const spentData = chartData.map(data => data.spentAmount)
 
