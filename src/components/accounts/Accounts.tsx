@@ -16,24 +16,6 @@ const Accounts: React.FC<AccountsProps> = ({ onAccountSelect, accountGroups, sel
         onAccountSelect(accountId);
     };
     
-    // change the way interval is set
-    // useEffect(() => {
-    //     let interval: number | undefined;
-    //     if (isSuccess && !isLoading) {
-    //         interval = setInterval(() => {
-
-    //             if (!isLoading) {
-    //                 refetch();
-    //             }
-    //         }, 240000);
-        
-    //     }
-    //     return () => {
-    //         if (interval) {
-    //             clearInterval(interval);
-    //         }
-    //     }
-    // }, [isSuccess, isLoading, refetch])
 
     
   return (

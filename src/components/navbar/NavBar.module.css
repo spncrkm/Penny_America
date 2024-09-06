@@ -1,9 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
 
-.container {
-  display:flex;
-  flex-wrap: nowrap;
-}
 
 .sidebar {
     position: relative;
@@ -12,7 +8,6 @@
     font-family: Poppins;
     height: 100vh;
     width: 350px;
-    z-index: 10;
     overflow-x: hidden;
     overflow-y: hidden;
     background-color: white;
@@ -128,40 +123,71 @@
     color: #4F46E5;
   }
 
-  @media (max-width: 768px) {
-    .container {
-      flex-direction: column;
-    }
-  
-    .navbar {
-      position: relative;
-    }
+  @media screen and (max-width: 768px) {
   
     .sidebar {
-      height: auto;
+      display: flex;
+      position:fixed;
+      height: 120px;
       width: 100%;
+      box-sizing: border-box;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      overflow:visible;
+      z-index: 2000;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      margin-right: 60px;
+    }
+
+    .sidebar a {
+      font-size: 16px;
+    }
+
+    .chatSupport {
+      order: 0;
+    }
+
+    .brand, img {
+      order: 1;
+    }
+
+    .member {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      z-index: 10000;
+      border-radius: 8px;
+    }
+
+    .navimg {
       display: none;
     }
-  
-    .sidebar.open {
+
+    .icon {
+      order: 2;
+      justify-content: end;
       display: flex;
     }
-  
-    .main-content {
-      padding: 10px;
+
+    .member.show {
+      display: flex;
+      justify-content: center;
     }
   }
 
   @media (max-width: 430px) {
-    .navbar {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 5px;
-    }
-  
-    .navbar h1 {
-      font-size: 1.5rem;
-    }
   
     .main-content {
       padding: 5px;

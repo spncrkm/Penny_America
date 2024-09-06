@@ -101,9 +101,12 @@ const PieChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
   };
 
   return (
-    <div className='piechart-container'>
+    <div className='chart-container'>
       <h3>Spending by Category</h3>
+      <div className='pie-chart'>
+
       <Pie data={chartData} options={options} />
+      </div>
     </div>
   );
 };

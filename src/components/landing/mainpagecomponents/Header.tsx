@@ -22,7 +22,7 @@ const Header = () => {
         <a href="/login" className={styles.login}>Login</a>
         <a href="/register" className={styles.getStarted}>Get Started</a>
       </nav>
-      <a href='/' className={styles.icon} onClick={handleShow}>
+      <a className={styles.icon} onClick={handleShow}>
       <i className='fa fa-bars'></i>
       </a>
     </header>

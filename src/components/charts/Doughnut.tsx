@@ -119,7 +119,10 @@ const DoughnutChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
   return (
     <div className='chart-container'>
         <h3>Spending by Category</h3>
+        <div className='doughnut-chart'>
       <Doughnut data={chartData} options={options}/>
+
+        </div>
     </div>
   )
 }

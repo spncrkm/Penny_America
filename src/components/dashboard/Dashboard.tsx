@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import NavBar from "../navbar/NavBar";
 import Transactions from "../Transactions";
 import style from "./Dashboard.module.css";
-import { money, moneySend, piggybank, wallet } from "../../assets";
+import { money, moneySend, piggybank, piglogo, wallet } from "../../assets";
 import Accounts from "../accounts/Accounts";
 import useTokenRefresh from "../../features/TokenRefresher";
 import DoughnutChart from "../charts/Doughnut";
@@ -172,9 +172,9 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className={style.dashboard}>
-      <aside className={style.sidebar}>
+      {/* <div className={style.sidebar}> */}
         <NavBar />
-      </aside>
+      {/* </div> */}
       <main className={style.main__container}>
           <div className={style.balance}>
             <div className={style.icon1}>
@@ -199,6 +199,8 @@ const Dashboard: React.FC = () => {
             </div>
           <div className={style.saving__plan}>
             <BudgetListDisplay budgetData={budgetData} categoryData={categoryData} refetchBudget={refetch} />
+            <img src={piglogo} className={style.pig_watermark}/>
+            
           </div>
         <div className={style.budget_chart}>
           <div className={style.dropdown_container}>

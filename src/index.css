@@ -293,6 +293,12 @@
 
 /* Chart CSS */
 
+@media screen and (max-width: 768px) {
+  .chart-container {
+    padding: 0;
+  }
+}
+
 .chart-container {
   display: flex;
   flex-direction: column;
@@ -302,6 +308,15 @@
   box-sizing: border-box;
   height: 100%;
   place-content: center;
+  padding: 40px 0;
+}
+
+.doughnut-chart {
+  height: 100%;
+}
+
+.pie-chart {
+  height: 100%;
 }
 
 .chart-container > h3 {

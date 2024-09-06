@@ -47,10 +47,10 @@ const BudgetListDisplay: React.FC<BudgetDisplayProps> = ({ budgetData, categoryD
     };
 
   return (
-    <Accordion defaultActiveKey="0">
+    <Accordion defaultActiveKey="0" className={style.accordion}>
             {budgetData?.map((budget, index) => (
                 <Accordion.Item eventKey={String(index)} key={budget.id}>
-                    <Accordion.Header>
+                    <Accordion.Header className={style.accordion_header}>
                         <strong>{budget.subcategory ? getSubcategoryName(budget.subcategory) : getCategoryName(budget.category)}</strong>
                     </Accordion.Header>
                     <Accordion.Body>

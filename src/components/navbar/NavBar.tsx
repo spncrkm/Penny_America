@@ -11,6 +11,7 @@ const NavBar = () => {
   const [isBudgetModalOpen, setBudgetModalOpen] = useState<boolean>(false);
   const [isSavingPlanModalOpen, setSavingPlanModalOpen] = useState<boolean>(false);
   const { refetch } = useGetBudgetsQuery();
+  const [show, setShow] = useState(false)
 
   const toggleBudgetModal = () => {
     setBudgetModalOpen(!isBudgetModalOpen);
@@ -18,6 +19,10 @@ const NavBar = () => {
 
   const toggleSavingPlanModal = () => {
     setSavingPlanModalOpen(!isSavingPlanModalOpen);
+  }
+
+  const handleShow = () => {
+    setShow(prev => !prev)
   }
 
 
@@ -31,7 +36,7 @@ const NavBar = () => {
           <p id={Style.p_text}>Welcome back 👋</p>
           <h3>{username} <Logout/></h3>
         </div>
-        <div className={Style.member}>
+        <div className={`${Style.member} ${show ? Style.show : '' }`}>
           <a href="#"><img src={icon} id="icon"/> Dashboard</a>
           <a href="#" onClick={toggleBudgetModal}><img src={accbalwal} id="accbalwal"/> Budget</a>
           <a href="#" onClick={toggleSavingPlanModal}><img src={savepig} id="savepig"/> Savings Plan</a>
@@ -45,6 +50,9 @@ const NavBar = () => {
             <img src={navcellphone} />
           </div>
         </div>
+        <a className={Style.icon} onClick={handleShow}>
+        <i className='fa fa-bars'></i>
+      </a>
       </nav>
       {isBudgetModalOpen && <BudgetModal onClose={toggleBudgetModal} refetchBudgets={refetch}/>}
       {isSavingPlanModalOpen && <SavingPlan onClose={toggleSavingPlanModal} />}
