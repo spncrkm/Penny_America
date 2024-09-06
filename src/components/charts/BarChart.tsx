@@ -115,9 +115,9 @@ const prepareChartData = (
         return sum + transaction.amount;
       }
     }
-      console.log('Transaction Date:', transactionDate,
-        'Start Date:', startDate, 
-        'Does it fall within the range?', transactionDate >= startDate && transactionDate <= new Date());
+      // console.log('Transaction Date:', transactionDate,
+      //   'Start Date:', startDate, 
+      //   'Does it fall within the range?', transactionDate >= startDate && transactionDate <= new Date());
       return sum;
     }, 0);
 
@@ -141,6 +141,7 @@ const chartData: ChartData[] = prepareChartData(budgetData, transactionsData, ca
   const spentData = chartData.map(data => data.spentAmount)
 
   const dataValues = budgetArray.map(budget => parseFloat(budget.amount));
+  
 
   console.log("spent:", spentData)
 
