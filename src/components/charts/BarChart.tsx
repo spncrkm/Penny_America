@@ -32,7 +32,7 @@ const BarChart: React.FC<ChartProps> = () => {
   const { data: categoriesData, isLoading: categoriesLoading } = useGetCategoriesQuery();
   const { data: transactionsData, isLoading: transactionsLoading } = useGetTransactionsQuery();
 
-  const [categoryMapping, setCategoryMapping] = useState<{ [key: number]: string }>({});
+  const [, setCategoryMapping] = useState<{ [key: number]: string }>({});
   const [_, setSubcategoryMapping] = useState<{ [key: number]: string }>({})
 
   useEffect(() => {
@@ -51,7 +51,8 @@ const BarChart: React.FC<ChartProps> = () => {
   }, [categoriesData]);
 
   const getCategoryName = (categoryId: number) => {
-    return categoryMapping[categoryId] || "unknown category";
+    const category = categoriesData?.find(cat => cat.id === categoryId);
+    return category ? formatString(category.name) : "unknown";
 };
 
 const getSubcategoryName = (subCategoryId: number) => {
