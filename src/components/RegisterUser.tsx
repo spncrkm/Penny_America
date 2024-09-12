@@ -43,6 +43,28 @@ const RegisterUser = () => {
     setUserName(e.target.value);
   };
 
+  // const isValidEmail = (email: string) => {
+  //   const emailRegex = /^\S+@\S+\.\S+$/;
+  //   return emailRegex.test(email)
+  // }
+
+  // const isValidPassword = (password: string) => {
+  //   const symbolRegex = /[!@#$%^&*(),.?":{}|<>]/;
+  //   const numberRegex = /[0-9]/;
+  //   const upperCaseRegex = /[A-Z]/;
+  //   const lowerCaseRegex = /[a-z]/;
+    
+  //   return (
+  //     password.length >= 8 &&
+  //     symbolRegex.test(password) &&
+  //     numberRegex.test(password) &&
+  //     upperCaseRegex.test(password) &&
+  //     lowerCaseRegex.test(password)
+  //   );
+  // };
+
+
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -122,6 +144,7 @@ const RegisterUser = () => {
                 type='email'
                 placeholder='Enter email'
                 onChange={handleEmail}
+                required
               />
             </Form.Group>
             <Form.Group className='mb-3' controlId='formBasicUsername'>
@@ -129,6 +152,7 @@ const RegisterUser = () => {
                 type='username'
                 placeholder='Username'
                 onChange={handleUserName}
+                required
               />
             </Form.Group>
             <Row>
@@ -137,6 +161,7 @@ const RegisterUser = () => {
                 type='firstname'
                 placeholder='First name'
                 onChange={handleFirstName}
+                required
               />
             </Form.Group>
             <Form.Group as={Col} className='mb-3' controlId='formBasicLastName'>
@@ -144,6 +169,7 @@ const RegisterUser = () => {
                 type='lastname'
                 placeholder='Last name'
                 onChange={handleLastName}
+                required
               />
             </Form.Group>
             </Row>
@@ -152,6 +178,7 @@ const RegisterUser = () => {
                 type='password'
                 placeholder='Password'
                 onChange={handlePassword}
+                required
               />
             </Form.Group>
             <button className="form__button" type='submit' onClick={handleSubmit}>

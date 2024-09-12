@@ -29,7 +29,7 @@ const SavingPlan: React.FC<SavingModalProps> = ({ onClose }) => {
 
   return (
     <>
-      <Modal show={show} onHide={onClose} centered>
+      <Modal className='modal-main' show={show} onHide={onClose} centered>
         <Modal.Header closeButton>
           <Modal.Title>
             <h4>Add New Savings Plan</h4>

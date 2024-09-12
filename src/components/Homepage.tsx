@@ -5,12 +5,6 @@ import styles from './Homepage.module.css'
 
 
 const HomePage = () => {
-  // const navigate = useNavigate();
-  
-
-  // const handleRegister = () => {
-  //   navigate('/register')
-  // }
   return (
     
       <div className={styles.homepage}>

@@ -9,7 +9,6 @@ import {
   registerables,
 } from 'chart.js';
 
-// Register the necessary components for Chart.js
 import Chart from 'chart.js/auto';
 import { ChartProps } from '../../interface/Chart';
 
@@ -63,7 +62,6 @@ const LineChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
     });
   };
 
-  // Explicit typing for chartData
   const chartData: ChartData<'line', number[], string> = {
     labels: dates,
     datasets: [
@@ -77,7 +75,6 @@ const LineChart: React.FC<ChartProps> = ({ selectedAccountId, filter }) => {
     ]
   };
 
-  // Explicit typing for options
   const options: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false,

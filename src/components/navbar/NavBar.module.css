@@ -6,7 +6,7 @@
     display: grid;
     grid-template-rows: .3fr .4fr 5fr;
     font-family: Poppins;
-    height: 100vh;
+    height: calc(100vh - 50px);
     width: 350px;
     overflow-x: hidden;
     overflow-y: hidden;
@@ -32,21 +32,14 @@
     background-color: #C7D2FE;
     border-radius: 12px;
   }
-  
-  @media screen and (max-width: 430px) {
-    .sidebar {
-      display: none;
-    }
-  }
 
   .navimg {
-    padding-top: 100px;
     height: 100%;
     width: 100%;
   }
 
   .navimg > img {
-    height: 320px;
+    height: 260px;
     width: 100%;
   }
 
@@ -111,7 +104,7 @@
   
   .chatSupport {
     border-top: 1px solid var(--Neutral-100);
-    padding-top: 10px;
+    padding-top: 40px;
     padding-bottom: 20px;
     align-items: center;
     display: flex;
@@ -119,8 +112,41 @@
     
   }
   
+  .icon {
+    display: none;
+  }
+
   #icon:focus {
     color: #4F46E5;
+  }
+
+  .hamburger_icon {
+    display: none;
+  }
+
+  @media screen and (max-width: 1056px) {
+    .sidebar {
+      width: 250px;
+    }
+    .sidebar a {
+      font-size: .7em;
+    }
+
+    #p_text {
+      font-size: 18px;
+    }
+    .chatSupport {
+      padding-top: 20px;
+    }
+    .chatSupport h3 {
+      font-size: 1em;
+    }
+    .navimg img {
+      height: 140px;
+    }
+    .brand img {
+      width: auto;
+    }
   }
 
   @media screen and (max-width: 768px) {
@@ -154,6 +180,10 @@
       order: 0;
     }
 
+    .chatSupport p {
+      display: none;
+    }
+
     .brand, img {
       order: 1;
     }
@@ -162,7 +192,7 @@
       display: none;
       flex-direction: column;
       position: absolute;
-      top: 60px;
+      top: 70px;
       right: 20px;
       padding: 10px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -185,19 +215,87 @@
       display: flex;
       justify-content: center;
     }
+
+    .hamburger_icon {
+      display: flex;
+      order: 2;
+    }
   }
 
   @media (max-width: 430px) {
   
-    .main-content {
-      padding: 5px;
-    }
-  
     .sidebar {
+      display: flex;
+      position:fixed;
+      height: 100px;
+      width: 100vw;
+      box-sizing: border-box;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      padding-right: 20px;
+      overflow:visible;
+      z-index: 2000;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      margin-right: 20px;
+    }
+
+    .sidebar a {
+      font-size: 14px;
+    }
+
+    .chatSupport {
+      order: 0;
+      width: 150px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chatSupport p {
       display: none;
     }
-  
-    .sidebar.open {
-      display: block;
+
+    .brand, img {
+      order: 1;
+    }
+
+    .member {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: white;
+      z-index: 10000;
+      border-radius: 8px;
+    }
+
+    .navimg {
+      display: none;
+    }
+
+    .icon {
+      order: 2;
+      justify-content: end;
+      display: flex;
+    }
+
+    .member.show {
+      display: flex;
+      justify-content: center;
+    }
+
+    .hamburger_icon {
+      display: flex;
+      order: 2;
+      padding-right: 20px;
     }
   }

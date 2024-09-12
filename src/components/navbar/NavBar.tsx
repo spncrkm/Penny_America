@@ -50,9 +50,11 @@ const NavBar = () => {
             <img src={navcellphone} />
           </div>
         </div>
+        <div className={Style.hamburger_icon}>
         <a className={Style.icon} onClick={handleShow}>
         <i className='fa fa-bars'></i>
       </a>
+      </div>
       </nav>
       {isBudgetModalOpen && <BudgetModal onClose={toggleBudgetModal} refetchBudgets={refetch}/>}
       {isSavingPlanModalOpen && <SavingPlan onClose={toggleSavingPlanModal} />}

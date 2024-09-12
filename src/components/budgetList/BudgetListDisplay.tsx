@@ -53,10 +53,10 @@ const BudgetListDisplay: React.FC<BudgetDisplayProps> = ({ budgetData, categoryD
                     <Accordion.Header className={style.accordion_header}>
                         <strong>{budget.subcategory ? getSubcategoryName(budget.subcategory) : getCategoryName(budget.category)}</strong>
                     </Accordion.Header>
-                    <Accordion.Body>
-                        <p><strong>Amount:</strong> ${budget.amount}</p>
-                        <p><strong>Recurring:</strong> {budget.recurring}</p>
-                        <p><strong>User:</strong> {budget.user.username}</p>
+                    <Accordion.Body className="accord-body">
+                        <p><strong>Amount:</strong> <span className={style.p_text}>&nbsp;${budget.amount}</span></p>
+                        <p><strong>Recurring:</strong> <span className={style.p_text}>&nbsp;{budget.recurring}</span></p>
+                        <p><strong>User:</strong> <span className={style.p_text}>&nbsp;{budget.user.username}</span></p>
                         <button className={style.delete_btn} onClick={() => handleDelete(budget.id)}>Delete</button>
                     </Accordion.Body>
                 </Accordion.Item>

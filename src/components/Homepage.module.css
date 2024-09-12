@@ -42,8 +42,6 @@
     align-items: center;
     height: 100vh;
     background: linear-gradient(135deg, #B598DB 0%, rgba(219, 234, 253, 0.56) 100%);
-    /* background-image: url(../assets/PAlogo.png);
-    background-repeat: no-repeat; */
 }
 
 .text_container {
@@ -77,4 +75,14 @@
 
 .btn:hover {
     background-color: rgb(162, 130, 236);
+}
+
+@media screen and (max-width: 430px) {
+  .text_container {
+    text-align: center;
+  }
+
+  .homepage {
+    padding: 0 auto;
+  }
 }

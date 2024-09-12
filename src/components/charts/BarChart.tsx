@@ -115,9 +115,6 @@ const prepareChartData = (
         return sum + transaction.amount;
       }
     }
-      // console.log('Transaction Date:', transactionDate,
-      //   'Start Date:', startDate, 
-      //   'Does it fall within the range?', transactionDate >= startDate && transactionDate <= new Date());
       return sum;
     }, 0);
 
@@ -187,12 +184,3 @@ const chartData: ChartData[] = prepareChartData(budgetData, transactionsData, ca
 }
 
 export default BarChart;
-
-
-// [
-        //   'rgba(75, 192, 192, 0.6)',
-        //   'rgba(235, 107, 52, 0.6)',
-        //   'rgba(52, 162, 235, 0.6)',
-        //   'rgba(162, 52, 235, 0.6)',
-        //   'rgba(201, 235, 52, 0.6)',
-        // ],

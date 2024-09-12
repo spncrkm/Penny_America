@@ -192,6 +192,7 @@
   border: 1px #10215F;
   box-shadow: 0px 2px 6px 0px rgba(16, 24, 40, 0.06);
   margin-top: 4em;
+  cursor: pointer;
 }
 
 .btn-container {
@@ -268,6 +269,7 @@
 
 .login-link {
   padding-top: 1em;
+  cursor: pointer;
 }
 
 /* logout button */
@@ -276,6 +278,7 @@
   border-radius: 10px;
   background-color: #10215F;
   margin-left: 1em;
+  cursor: pointer;
 }
 
 .logout-btn:hover {
@@ -290,14 +293,13 @@
   cursor: pointer;
 }
 
+.plaid-link-btn:hover {
+  background-color: #3a31df;
+}
 
 /* Chart CSS */
 
-@media screen and (max-width: 768px) {
-  .chart-container {
-    padding: 0;
-  }
-}
+
 
 .chart-container {
   display: flex;
@@ -358,6 +360,30 @@
     padding-top: 2.5em;
 }
 
+.modal-main {
+  background: linear-gradient(135deg, #B598DB 0%, rgba(219, 234, 253, 0.56) 100%);
+}
+
+.modal-main .modal-content {
+  background-color: #0a0a18aa;
+  font-family: Poppins, sans-serif;
+  font-weight: 600;
+  color: white;
+  padding: 20px;
+}
+
+
+.btn-close {
+  background-color: white !important;
+  border-radius: 100% !important;
+  padding: .5em !important;
+}
+
+.modal-text {
+  color: white;
+}
+
+
 @media screen and (max-width: 430px) {
   .landing-page {
     display: flex;
@@ -365,5 +391,30 @@
     margin: 0;
     flex-direction: column;
     padding: 0;
+  }
+
+  .logout-btn {
+    width: 60px;
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .chart-container {
+    padding: 0;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+
+  .barchart-container {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 20px;
+  }
+  
+  .logout-btn {
+    width: 5em;
+    font-size: 12px;
   }
 }

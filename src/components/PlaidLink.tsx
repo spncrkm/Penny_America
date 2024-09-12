@@ -25,7 +25,6 @@ const PlaidLink = () => {
           }
             getLinkToken();
           }, [accessToken])
-        // console.log('Successful link_token:', linkToken)
 
           return (
             linkToken != null ? <Link linkToken={linkToken}/> : <div>Loading...</div>

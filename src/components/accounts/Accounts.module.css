@@ -17,8 +17,8 @@
 .selectedAccount {
     font-family: Poppins, sans-serif;
     font-weight: 500;
-    color: blueviolet;
-    text-shadow: 0.5px 0.5px 0.5px blueviolet, 0 0 0 blue, 0 0 0.2em blue;
+    color: #4F46E5;
+    text-shadow: 0.5px 0.5px 0.5px #4F46E5, 0 0 0 #4F46E5, 0 0 0.2em #4F46E5;
     list-style: inside;
 }
 

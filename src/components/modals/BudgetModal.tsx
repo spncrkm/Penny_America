@@ -70,9 +70,9 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose, refetchBudgets }) =>
 
   return (
     <>
-    <Modal show={show} onHide={onClose} centered>
+    <Modal className='modal-main' show={show} onHide={onClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>
+          <Modal.Title className='modal-text'>
             <h4>Add New Budget</h4>
           <p>Please input the data you would like to track for your budget</p>
           </Modal.Title>
@@ -80,7 +80,7 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose, refetchBudgets }) =>
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3" controlId="budget.ControlInput1">
-              <Form.Label>Category</Form.Label>
+              <Form.Label className='modal-text'>Category</Form.Label>
               <Form.Select value={categoryId} onChange={handleCategoryChange}>
                 <option value={0}></option>
                 {filteredCategoryData.map((category: Category) => (
@@ -89,7 +89,7 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose, refetchBudgets }) =>
                 </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="amount.ControlInput2">
-              <Form.Label>Sub-Category Name (optional)</Form.Label>
+              <Form.Label className='modal-text'>Sub-Category Name (optional)</Form.Label>
               <Form.Select value={subcategoryId} onChange={handleSubcategoryChange}>
                 <option></option>
                 {filteredSubcategories.map((subcategory: SubCategory) => (
@@ -98,7 +98,7 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose, refetchBudgets }) =>
                 </Form.Select>
             </Form.Group>
             <Form.Group className="mb-3" controlId="amount.ControlInput2">
-              <Form.Label>Amount</Form.Label>
+              <Form.Label className='modal-text'>Amount</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Enter Amount"
@@ -109,7 +109,7 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose, refetchBudgets }) =>
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-            <Form.Label>Frequency</Form.Label>
+            <Form.Label className='modal-text'>Frequency</Form.Label>
               <Form.Select value={recurring} onChange={handleRecurringChange}>
                 <option value=""></option>
                 <option value="Daily">Daily</option>
@@ -120,7 +120,7 @@ const BudgetModal: React.FC<BudgetModalProps> = ({ onClose, refetchBudgets }) =>
             </Form.Group>
           </Form>
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className='modal-footer'>
           <Button variant="secondary" onClick={onClose}>
             Close
           </Button>

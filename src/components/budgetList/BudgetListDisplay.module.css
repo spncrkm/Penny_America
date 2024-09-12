@@ -1,17 +1,14 @@
-.budgetList {
-    list-style: none;
-    font-family: Poppins, sans-serif;
-    font-size: 12px;
-}
+
 
 .delete_btn {
     border-radius: 8px;
     background-color: rgb(235, 52, 52);
     border-color: white;
+    cursor: pointer;
 }
 
 .delete_btn:hover {
-    background-color: rgba(235, 52, 137, 0.8);
+    background-color: rgb(206, 25, 25);
 }
 
 .accordion {
@@ -22,8 +19,17 @@
     width: 100%;
     padding: 6px;
     z-index: 1000;
+    font-family: Poppins, sans-serif;
+}
+
+.p_text {
+    font-weight: 500;
 }
 
 .accordion_header {
     overflow: hidden;
+}
+
+.accordion-button {
+    padding-left: 20px !important;
 }

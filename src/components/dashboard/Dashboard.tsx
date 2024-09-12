@@ -41,6 +41,14 @@ const Dashboard: React.FC = () => {
   console.log("accountData:", authData)
 
 
+  const changeAmount = (amount: number) => {
+    return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toLocaleString('en-US', { 
+      minimumFractionDigits: 2, 
+      maximumFractionDigits: 2 
+    });
+  };
+
+
 
   useEffect(() => {
     if (isSuccess && authData) {
@@ -117,11 +125,20 @@ const Dashboard: React.FC = () => {
             return tx.category.includes("Payment");
           } else if (selectedAccount.subtype === "credit card") {
             return !tx.category.includes("Payment");
+          } else if (selectedAccount.subtype === "checking") {
+            return !tx.name?.includes("United");
           }
+          
         }
         return true;
       })
   }, [transactions, selectedAccountId, filter, accountGroups]);
+  
+  console.log("filteredTX", filteredTransactions)
+
+  const totalSelectedExpense = filteredTransactions.reduce((sum: number, transaction: Transaction) => sum + transaction.amount, 0).toFixed(2);
+
+  const totalExpenses = transactionsData?.transactions.reduce((sum: number, transaction: Transaction) => sum + transaction.amount, 0).toFixed(2);
 
   const renderChart = () => {
     switch (chartFilter) {
@@ -150,31 +167,43 @@ const Dashboard: React.FC = () => {
     ? selectedAccountCurrent
     : selectedAccountBalance;
 
-  const changeAmount = (amount: number) => {
-    return (amount < 0 ? "-" : "") + "$" + Math.abs(amount).toLocaleString('en-US', { 
-      minimumFractionDigits: 2, 
-      maximumFractionDigits: 2 
-    });
-  };
+  const displayTransactionAmount = selectedAccount?.subtype === "ira" 
+  || selectedAccount?.subtype === "cd"
+  || selectedAccount?.subtype === "401k"
+  || selectedAccount?.subtype === "student"
+  || selectedAccount?.subtype === "mortgage"
+  || selectedAccount?.name === "Plaid Business Credit Card"
+  || selectedAccount?.name === undefined
+    ? ""
+    : `Expenses for ${selectedAccount?.name}`
+
+  console.log(displayTransactionAmount)
+  
 
   if (isLoading) return <div>Loading...</div>
 
 
-  // const mouseOverBalance = (e: MouseEvent) => {
-  //   e.target.style.background = "red";
-  // }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        console.log(entry)
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+        } else {
+            entry.target.classList.remove('show');
+        }
 
-  // const mouseOutBalance = (e: MouseEvent) => {
-  //   e.target.style.background = "";
-  // }
+    });
+});
+
+const hiddenElements = document.querySelectorAll('.hidden');
+hiddenElements.forEach((el) => observer.observe(el));
 
   
 
   return (
+    <div className={style.dashboard_container}>
     <div className={style.dashboard}>
-      {/* <div className={style.sidebar}> */}
         <NavBar />
-      {/* </div> */}
       <main className={style.main__container}>
           <div className={style.balance}>
             <div className={style.icon1}>
@@ -189,13 +218,13 @@ const Dashboard: React.FC = () => {
           <div className={style.icon2}>
             <img src={money} />
             </div>
-            <p>income</p>
+            <p className={style.balance_p}>income</p>
             </div>
           <div className={style.expenses}>
           <div className={style.icon3}>
             <img src={moneySend} />
             </div>
-            <p>expenses</p>
+            <p>Total Expenses from all Accounts:</p> <p>${totalExpenses}</p>
             </div>
           <div className={style.saving__plan}>
             <BudgetListDisplay budgetData={budgetData} categoryData={categoryData} refetchBudget={refetch} />
@@ -216,14 +245,15 @@ const Dashboard: React.FC = () => {
 
           </div>
           </div>
-          <div className={style.bottom_container}>
+          <div className={`${style.bottom_container} ${style.hidden}`}>
           <div className={style.imgcontainer}>
-            <div><img src={piggybank} /></div>
-            <h3>Helping You Save for the Future</h3>
-            <p>Start here, create your account, and let us help you save</p>
-            <div>
+            <div id={style.imgholder}><img src={piggybank} />
+            <div id={style.plaidlink_btn}>
             <PlaidLink />
             </div>
+            </div>
+            <h3 id={style.plaidlink_title}>Helping You Save for the Future</h3>
+            <p>Start here, create your account, and let us help you save</p>
           </div>
           <div className={style.accounts}>
             <div className={style.account_header}>
@@ -240,12 +270,15 @@ const Dashboard: React.FC = () => {
             </div>
           <div className={style.transactions}>
             <div className={style.taheader}>
+              <div id={style.taheader_h3dropdown}>
               <h3>Transactions</h3>
               <select value={filter} onChange={handleFilterChange} className={style.dropdown_date}>
                 <option value="week">Past Week</option>
                 <option value="month">Past Month</option>
                 <option value="year">Past Year</option>
               </select>
+              </div>
+              <p>{displayTransactionAmount ? `${displayTransactionAmount}: $${totalSelectedExpense}` : ""}</p>
               </div>
               {selectedAccountId ? (
                 selectedAccount?.subtype === "cd" ? (
@@ -265,6 +298,7 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       </main>
+    </div>
     </div>
   );
 };

@@ -33,13 +33,3 @@ const useTokenRefresh = (interval: number = 10 * 60 * 1000) => {
 };
 
 export default useTokenRefresh;
-
-// try {
-//     const response = await dispatch(refreshTokenThunk(refreshToken)).unwrap();
-//     if (response) {
-//         dispatch(setTokens({ access: response.access, refresh: response.refresh }));
-//     }
-// } catch (error) {
-//     dispatch(clearTokens());
-//     console.log('Token refresh failed:', error)
-// }

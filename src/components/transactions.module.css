@@ -4,7 +4,7 @@
     padding-right: 10px;
     padding-top: 10px;
     overflow-y: scroll;
-    max-height: 292px;
+    max-height: 300px;
 }
 
 .transaction_container::-webkit-scrollbar {
@@ -31,7 +31,7 @@
 
 .transactions p {
     font-family: Poppins, sans-serif;
-    font-size: 18px;
+    font-size: .85em;
     font-weight: 500;
 }
 

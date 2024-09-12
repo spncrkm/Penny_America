@@ -10,6 +10,7 @@ const Header = () => {
   const handleShow = () => {
     setShow(prev => !prev);
   }
+  
   return (
     <header className={styles.header}>
       <div className={styles.logo}>

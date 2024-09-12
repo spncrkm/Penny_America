@@ -1,34 +1,37 @@
+.dashboard_container {
+    display: block;
+    height: 100vh;
+}
+
 .dashboard {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
-    display: flex;
+    display:flex;
     background-color: #F3F3F6;
-    z-index: -10;
+    position: relative;
 }
 
 .main__container {
     display: grid;
     width: 100%;
     grid-template-columns: repeat(3, minmax(225px, 300px)) minmax(250px, 600px);
-    grid-template-rows: minmax(150px, 200px) minmax(400px, 560px) minmax(300px, 400px);
+    grid-template-rows: minmax(150px, 200px) minmax(270px, 560px) minmax(150px, 400px);
     column-gap: 20px;
     row-gap: 20px;
-    height: 98lvh;
-    z-index: 5;
-}
-
-.sidebar {
-    margin-right: 20px;
+    margin-left: 20px;
+    margin-top: 0;
+    padding-bottom: 20px;
+    padding-top: 0;
     height: 100%;
 }
 
 .budget_chart {
     grid-row: 2;
     grid-column: 1 / 4;
-    display:flex;
+    display:block;
     flex-direction: column;
     box-sizing: border-box;
     align-content:flex-start;
@@ -55,6 +58,7 @@
     justify-content: space-between;
     margin-bottom: 20px;
     border-bottom: 3px solid #F3F4F6;
+    max-height: fit-content;
 }
 
 .chart__container {
@@ -67,11 +71,12 @@
 }
 
 .bottom_container {
-    display: grid;
+    display: flex;
     grid-template-columns: 1fr 2fr 2fr;
     grid-column: 1 / 5;
-    column-gap: 20px;
-    max-height: 300px;
+    column-gap: 40px;
+    justify-content: space-between;
+    align-content: center;
 }
 
 .dropdown_container {
@@ -116,8 +121,8 @@
 
 .balance:hover {
     transform: perspective(5000px) 
-        rotateY(10deg)
-        rotateX(10deg);
+        rotateY(12deg)
+        rotateX(12deg);
     background: linear-gradient(-45deg, #605bc1, #b298d3);
     color: #C7D2FE;
 }
@@ -135,11 +140,12 @@
 
 .text_container p {
     margin: 0;
-    text-shadow: 0 0 .3em;
+    font-weight: 600;
+    text-align: center;
+    font-family: Poppins, sans-serif;
 }
 
 .text_container {
-    /* background: #B598DB; */
     position: relative;
     transform-style: preserve-3d;
 }
@@ -148,7 +154,6 @@
     content: "";
     position: absolute;
     inset: -1rem;
-    /* background: linear-gradient(-45deg, red, blue); */
     transform: translateZ(-50px);
     border-radius: inherit;
 }
@@ -168,11 +173,24 @@
 .income {
     padding: 20px;
     border-radius: 12px;
-    background-color: white;
+    background:rgba(79, 70, 229, 0.20);
     box-shadow: 0px 6px 15px -2px rgba(16, 24, 40, 0.08), 0px 6px 15px -2px rgba(16, 24, 40, 0.08);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.income p {
+    font-weight: 500;
+    font-family: Poppins, sans-serif;
+}
+
+.income:hover {
+    transform: perspective(5000px) 
+        rotateY(12deg)
+        rotateX(12deg);
+    background: linear-gradient(-45deg, #605bc1, #b298d3);
+    color: #C7D2FE;
 }
 
 .expenses {
@@ -183,6 +201,27 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    font-family: Poppins, sans-serif;
+    background:rgba(79, 70, 229, 0.20);
+    box-shadow: 0px 6px 15px -2px rgba(16, 24, 40, 0.08), 0px 6px 15px -2px rgba(16, 24, 40, 0.08);
+    text-align: start;
+    justify-content: space-between;
+    line-height: normal;
+    font-weight: 600;
+
+    transform-style: preserve-3d;
+}
+
+.expenses:hover {
+    transform: perspective(5000px) 
+        rotateY(12deg)
+        rotateX(12deg);
+    background: linear-gradient(-45deg, #605bc1, #b298d3);
+    color: #C7D2FE;
+}
+
+.expenses p {
+    margin: 0;
 }
 
 .saving__plan {
@@ -193,6 +232,7 @@
     background: linear-gradient(-45deg, #B598DB, #C7D2FE);
     place-content: center;
     opacity: 90%;
+    
 }
 
 .pig_watermark {
@@ -204,19 +244,27 @@
 }
 
 .accounts {
+    display: flex;
+    flex-direction: column;
     border-radius: 12px;
     background-color: white;
     box-shadow: 0px 6px 15px -2px rgba(16, 24, 40, 0.08), 0px 6px 15px -2px rgba(16, 24, 40, 0.08);
-    padding-bottom: 20px;
+    width: 50%;
+    
 }
 
 .imgcontainer {
+    display: flex;
+    flex-direction: column;
     border-radius: 12px;
     background: rgba(181, 152, 219, 0.20);
     box-shadow: 0px 6px 15px -2px rgba(16, 24, 40, 0.08), 0px 6px 15px -2px rgba(16, 24, 40, 0.08);
-    padding: 18px;
-    align-items: center;
-    align-content: center;
+    padding: 20px;
+    align-items: start;
+}
+
+#plaidlink_title {
+    text-align: center;
 }
 
 .imgcontainer > div {
@@ -224,10 +272,31 @@
     justify-content: center;
 }
 
+.imgholder {
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.imgholder img {
+    width: 100px;
+}
+
+#plaidlink_btn {
+    display: flex;
+    place-content: center;
+    place-items: center;
+}
+
 .transactions {
+    display: flex;
+    flex-direction: column;
     border-radius: 12px;
     background-color: white;
     box-shadow: 0px 6px 15px -2px rgba(16, 24, 40, 0.08), 0px 6px 15px -2px rgba(16, 24, 40, 0.08);
+    width: 50%;
 }
 
 .taheader {
@@ -239,6 +308,12 @@
     font-weight: 600;
     font-size: 22px;
     padding: 26px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+#taheader_h3dropdown {
     display: flex;
     justify-content: space-between;
 }
@@ -285,18 +360,45 @@
 }
 
 @media screen and (max-width: 1056px) {
-    .sidebar {
-        position:fixed;
-        width: 100vw;
+    .imgcontainer {
+        display: flex;
+    }
+    .imgcontainer p {
+        font-size: 10px;
+    }
+    .imgcontainer img {
+        height: 50px;
+    }
+    #plaidlink_title {
+        font-size: 16px;
+    }
+    .main__container {
+        grid-template-columns: repeat(3, 1fr) 2fr;
+    }
+    .saving__plan {
+        height: auto;
+    }
+    .balance_p {
+        font-size: small;
+    }
+
+    .expenses p{
+        font-size: small;
     }
 }
 
 @media screen and (max-width: 768px) {
+
+    .dashboard_container {
+        display: flex;
+        height: auto;
+    }
     .dashboard {
         grid-gap: 10px;
         padding-top: 0;
         padding-bottom: 10px;
         padding-left: 0;
+        height: 100%;
     }
 
     .main__container {
@@ -305,6 +407,147 @@
         flex-direction: column;
         height: 100%;
         padding-left: 20px;
+        margin: 0;
+    }
+
+    .bottom_container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px;
+        gap: 0;
+    }
+    .imgcontainer {
+        width: 100%;
+    }
+    .accounts {
+        width: 48%;
+    }
+    .account_header h3 {
+        font-size: 20px;
+    }
+    .total_balance p {
+        font-size: small;
+        font-weight: normal;
+    }
+    .transactions {
+        width: 48%;
+        margin: 20px 0;
+    }
+    .dropdown_date {
+        width: 2em;
+        font-size: 14px;
+    }
+    .taheader {
+        padding: 14px;
+    }
+    .taheader p {
+        font-weight: 400;
+        font-size: small;
+    }
+    #taheader_h3dropdown h3 {
+        font-size: 20px;
+    }
+    .no_transactions_message p{
+        font-size: 20px;
+        font-weight: normal;
+    }
+
+    .budget_chart {
+        margin: 0 20px;
+        margin-bottom: 10px;
+        min-height: auto;
+        max-height: 540px;
+        padding-bottom: 1em;
+        animation: appear linear;
+        animation-timeline: view();
+        animation-range: entry 0 cover 40%;
+    }
+
+    .budget_header {
+        min-height: auto;
+    }
+
+    .saving__plan {
+        margin: 0 20px;
+        animation: appear linear;
+        animation-timeline: view();
+        animation-range: entry 0 cover 5%;
+    }
+
+    .dashboard-item {
+        margin-bottom: 20px;
+    }
+
+    .sidebar {
+        display: flex;
+        position:fixed;
+        margin: 0;
+    }
+
+    .income {
+        display: none;
+    }
+
+    .expenses {
+        margin: 0 20px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .accounts {
+        margin: 20px 0;
+        animation: appear linear;
+        animation-timeline: view();
+        animation-range: entry 0;
+    }
+
+    .balance {
+        margin: 0 20px;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .imgcontainer {
+        text-align: center;
+        animation: appear linear;
+        animation-timeline: view();
+        animation-range: entry 0 cover 40%;
+    }
+
+    .chart__container {
+        display: flex;
+        justify-content: center;
+        height: 100%;
+    }
+
+    .transactions {
+        animation: appear linear;
+        animation-timeline: view();
+        animation-range: entry 0;
+        animation: blur(0)
+    }
+
+    .dropdown_date {
+        width: 6em;
+    }
+    
+}
+
+@media screen and (max-width: 430px) {
+    .dashboard {
+        grid-gap: 10px;
+        padding-top: 0;
+        padding-bottom: 10px;
+        padding-left: 0;
+    }
+
+    .main__container {
+        padding-top: 7em;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        margin: 0;
+        padding-left: 0;
     }
 
     .bottom_container {
@@ -313,14 +556,23 @@
         max-height: 1200px;
         padding: 20px;
         flex-direction: column;
+        
     }
 
     .budget_chart {
         height: 500px;
+        margin: 0 20px;
     }
 
     .budget_header {
         min-height: auto;
+    }
+
+    .saving__plan {
+        margin: 0 20px;
+        animation: appear linear;
+        animation-timeline: view();
+        animation-range: entry 0 cover 5%;
     }
 
     .dashboard-item {
@@ -339,16 +591,50 @@
 
     .accounts {
         margin: 20px 0;
+        animation: appear linear;
+        animation-timeline: view();
+        animation-range: entry 0;
+        width: 100%;
     }
+
+    .balance {
+        margin: 0 20px;
+        padding: 20px;
+    }
+
+    .imgcontainer {
+        text-align: center;
+        animation: appear linear;
+        animation-timeline: view();
+        animation-range: entry 0 cover 40%;
+    }
+
+    .chart__container {
+        display: flex;
+        justify-content: center;
+    }
+
+    .transactions {
+        width: 100%;
+        animation: appear linear;
+        animation-timeline: view();
+        animation-range: entry 0;
+    }
+
+
 }
 
-@media screen and (max-width: 430px) {
-    .dashboard {
-        grid-template-columns: 1fr;
-        padding: 10px;
+@keyframes appear {
+    from {
+        opacity: 0;
+        scale: .5;
+        transform: translateX(-100%);
+    }
+    to {
+        opacity: 1;
+        scale: 1;
+        transform: translateX(0);
+        
     }
 
-    .dashboard-item {
-        margin-bottom: 15px;
-    }
 }
