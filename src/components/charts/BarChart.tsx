@@ -178,7 +178,10 @@ const chartData: ChartData[] = prepareChartData(budgetData, transactionsData, ca
 
   return (
     <div className='barchart-container'>
+      <div className='bar-chart'>
+
       <Bar data={dataChart} options={options} />
+      </div>
     </div>
   )
 }
